@@ -37,7 +37,7 @@ export const DISCOVER = ({
 	genre: string
 	pageParam: number
 }) =>
-	`/discover/${mediaType.toLocaleLowerCase()}?include_adult=true&include_video=false&language=en-US&page=1&sort_by=popularity.asc${
+	`/discover/${mediaType.toLocaleLowerCase()}?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.asc${
 		genre.length > 1 ? `&with_genres=${genre}` : ''
 	}&page=${pageParam}&api_key=${API_KEY}`
 

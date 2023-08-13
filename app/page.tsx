@@ -11,16 +11,11 @@ export default async function Home({
 		page: currentPage,
 		results,
 		total_pages,
-	} = mediaType === 'All' || !mediaType
-		? ((await getTrendigs({
-				page,
-				mediaType: 'all',
-		  })) as IPaginatedData<ListResults>)
-		: ((await getDiscovers({
-				genre,
-				mediaType,
-				page,
-		  })) as IPaginatedData<ListResults>)
+	} = (await getDiscovers({
+		genre,
+		mediaType,
+		page,
+	})) as IPaginatedData<ListResults>
 
 	const { results: bannerData } = (await getTrendigs({
 		page: 1,
