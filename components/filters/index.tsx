@@ -3,18 +3,24 @@ import { genre } from '@/types'
 import FilterSelect from './filterSelect'
 import { useState } from 'react'
 import { useUpdateSearchParam } from '@/lib/hooks/useUpdateSearchParam'
+import { useSearchParams } from 'next/navigation'
 
 interface Props {
 	genreData: genre[]
 }
 
-const mediaType = ['All', 'Movie', 'Tv']
+const mediaType = ['Movie', 'Tv']
 
 const Filters = ({ genreData }: Props) => {
 	const genres = genreData.map(({ name }) => name)
+	const searchParams = useSearchParams()
 	const { setSearchParam, deleteSearchParam } = useUpdateSearchParam()
-	const [selectedGenre, setSelectedGenre] = useState('All')
-	const [selectedMedia, setSelectedMedia] = useState('All')
+	const [selectedGenre, setSelectedGenre] = useState(
+		searchParams.get('genre') ?? 'All'
+	)
+	const [selectedMedia, setSelectedMedia] = useState(
+		searchParams.get('mediaType') ?? 'Movie'
+	)
 
 	const onFilterChange = (value: string, type: 'mediaType' | 'genre') => {
 		type === 'mediaType' ? setSelectedMedia(value) : setSelectedGenre(value)
@@ -32,15 +38,13 @@ const Filters = ({ genreData }: Props) => {
 				onChange={onFilterChange}
 				value={selectedMedia}
 			/>
-			{selectedMedia !== 'All' && (
-				<FilterSelect
-					className='ml-4'
-					name='genre'
-					data={['All', ...genres]}
-					onChange={onFilterChange}
-					value={selectedGenre}
-				/>
-			)}
+			<FilterSelect
+				className='ml-4'
+				name='genre'
+				data={['All', ...genres]}
+				onChange={onFilterChange}
+				value={selectedGenre}
+			/>
 		</div>
 	)
 }
