@@ -29,7 +29,7 @@ export const TRENDINGS = ({ media_type = 'all', pageParam }: TrendingsParams) =>
 	`${urlGenerator(`/trending/${media_type}/day`, pageParam)}`
 
 export const DISCOVER = ({
-	mediaType = 'all',
+	mediaType,
 	genre = '',
 	pageParam = 1,
 }: {
@@ -37,7 +37,7 @@ export const DISCOVER = ({
 	genre: string
 	pageParam: number
 }) =>
-	`/discover/${mediaType.toLocaleLowerCase()}?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.asc${
+	`/discover/${mediaType.toLocaleLowerCase()}?include_adult=true&include_video=false&language=en-US&page=1&sort_by=popularity.desc${
 		genre.length > 1 ? `&with_genres=${genre}` : ''
 	}&page=${pageParam}&api_key=${API_KEY}`
 

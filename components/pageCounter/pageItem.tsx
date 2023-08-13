@@ -1,4 +1,5 @@
 'use client'
+import { useUpdateSearchParam } from '@/lib/hooks/useUpdateSearchParam'
 import Link from 'next/link'
 
 interface Props {
@@ -7,8 +8,10 @@ interface Props {
 }
 
 const PageItem = ({ page, active }: Props) => {
+	const { getUpdatedPath } = useUpdateSearchParam()
+	const newPath = getUpdatedPath({ param: 'page', value: page.toString() })
 	return (
-		<Link href={`?page=${page}`} scroll={false}>
+		<Link href={newPath} scroll={false}>
 			<button
 				className={`bg-black transition-all ease-in-out duration-500 ${
 					active

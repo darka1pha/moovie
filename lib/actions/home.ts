@@ -15,17 +15,18 @@ export const getTrendigs = async ({
 
 export const getDiscovers = async ({
 	page,
-	mediaType,
+	mediaType = 'movie',
 	genre,
 }: {
 	page: number
 	mediaType: string
 	genre: string
 }) => {
-	console.log('URL: ', DISCOVER({ mediaType, genre, pageParam: page }))
+	console.log('Media: ', mediaType, ' Genre: ', genre)
 
 	const res = await fetch(
-		BASE_URL + DISCOVER({ mediaType, genre, pageParam: page })
+		BASE_URL + DISCOVER({ mediaType, genre, pageParam: page }),
+		{ cache: 'no-cache' }
 	)
 	return res.json()
 }

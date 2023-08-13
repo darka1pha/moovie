@@ -7,22 +7,26 @@ export default async function Home({
 }: {
 	searchParams: { page: number; mediaType: string; genre: string }
 }) {
-	const {
-		page: currentPage,
-		results,
-		total_pages,
-	} = (await getDiscovers({
-		genre,
-		mediaType,
-		page,
-	})) as IPaginatedData<ListResults>
-
 	const { results: bannerData } = (await getTrendigs({
 		page: 1,
 		mediaType: 'all',
 	})) as IPaginatedData<ListResults>
 
 	const { genres } = (await getMovieGenres()) as Genres
+
+	const genreID = genre
+		? genres.filter((item) => item.name === genre)[0].id
+		: ''
+
+	const {
+		page: currentPage,
+		results,
+		total_pages,
+	} = (await getDiscovers({
+		genre: genreID.toString(),
+		mediaType,
+		page,
+	})) as IPaginatedData<ListResults>
 
 	return (
 		<main>
