@@ -28,6 +28,19 @@ const urlGenerator = (url: string, page?: number | undefined) =>
 export const TRENDINGS = ({ media_type = 'all', pageParam }: TrendingsParams) =>
 	`${urlGenerator(`/trending/${media_type}/day`, pageParam)}`
 
+export const DISCOVER = ({
+	mediaType = 'all',
+	genre = '',
+	pageParam = 1,
+}: {
+	mediaType: string
+	genre: string
+	pageParam: number
+}) =>
+	`/discover/${mediaType.toLocaleLowerCase()}?include_adult=true&include_video=false&language=en-US&page=1&sort_by=popularity.desc${
+		genre.length > 1 ? `&with_genres=${genre}` : ''
+	}&page=${pageParam}&api_key=${API_KEY}`
+
 export const POPULAR_MOVIES = ({ pageParam }: { pageParam: number }) =>
 	`${urlGenerator(`/movie/popular`, pageParam)}`
 

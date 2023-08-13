@@ -2,6 +2,7 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCreative } from 'swiper/modules'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -17,8 +18,18 @@ interface Props {
 const Hero = ({ data }: Props) => {
 	return (
 		<Swiper
-			className='h-[480px]'
-			modules={[Pagination]}
+			className='h-[100vh]'
+			effect={'creative'}
+			creativeEffect={{
+				prev: {
+					shadow: true,
+					translate: [0, 0, -400],
+				},
+				next: {
+					translate: ['100%', 0, 0],
+				},
+			}}
+			modules={[Pagination, EffectCreative]}
 			navigation
 			pagination={{ clickable: true }}
 			onSlideChange={() => console.log('slide change')}>

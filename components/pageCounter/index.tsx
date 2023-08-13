@@ -1,9 +1,9 @@
 'use client'
 
-import usePagination from '@/hooks/usePagination'
+import usePagination from '@/lib/hooks/usePagination'
 import PageItem from './pageItem'
-import { ArrowLeft2, ArrowRight2, Link } from 'iconsax-react'
-import { useRouter } from 'next/navigation'
+import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
+import { useUpdateSearchParam } from '@/lib/hooks/useUpdateSearchParam'
 
 interface Props {
 	totalPages: number
@@ -11,33 +11,21 @@ interface Props {
 }
 
 const PageCounter = ({ currentPage, totalPages }: Props) => {
-	const router = useRouter()
+	const { setSearchParam } = useUpdateSearchParam()
 	const paginationRange = usePagination({
 		currentPage,
 		totalPages,
 		siblingCount: 1,
 	})
 
-	const addNewParams = ({ param }: { param: string | number }) => {
-		const currentParams = new URLSearchParams(window.location.search)
-		currentParams.delete('page')
-		currentParams.set('page', param.toString())
-
-		const newSearchParams = currentParams.toString()
-
-		const newPathname = `${window.location.pathname}?${newSearchParams}`
-
-		router.push(newPathname, { scroll: false })
-	}
-
 	const onNextPage = () => {
 		if (currentPage + 1 <= totalPages) {
-			addNewParams({ param: currentPage + 1 })
+			setSearchParam({ param: 'page', value: (currentPage + 1).toString() })
 		}
 	}
 	const onPrevPage = () => {
 		if (currentPage - 1 >= 1) {
-			addNewParams({ param: currentPage - 1 })
+			setSearchParam({ param: 'page', value: (currentPage - 1).toString() })
 		}
 	}
 	return (
