@@ -37,8 +37,9 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
 				}border-battleGrey flex border-[2px] rounded-full p-1 mr-1`}>
 				<ArrowLeft2 className='text-white' size={20} />
 			</button>
-			{paginationRange?.map((page) => (
+			{paginationRange?.map((page, key) => (
 				<PageItem
+					key={key}
 					active={currentPage === page}
 					page={typeof page === 'number' ? page : '...'}
 				/>

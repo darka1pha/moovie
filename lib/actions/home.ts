@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { TRENDINGS, BASE_URL, MOVIE_GENRES, DISCOVER, TV_GENRES } from '../urls'
 
 export const getTrendigs = async ({
@@ -23,11 +24,20 @@ export const getDiscovers = async ({
 	mediaType: string
 	genre: string
 }) => {
-	const res = await fetch(
-		BASE_URL + DISCOVER({ mediaType, genre, pageParam: page }),
-		{ cache: 'no-cache' }
-	)
-	return res.json()
+	try {
+		const res = await fetch(
+			BASE_URL + DISCOVER({ mediaType, genre, pageParam: page }),
+			{ cache: 'no-cache' }
+		)
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch data')
+		}
+
+		return res.json()
+	} catch (error) {
+		throw new Error('Failed to fetch data')
+	}
 }
 
 export const getGenres = async ({ mediaType }: { mediaType: string }) => {

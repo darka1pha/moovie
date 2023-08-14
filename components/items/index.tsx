@@ -23,6 +23,7 @@ const Items = async ({ genreID, mediaType, page }: Props) => {
 				{results?.map(
 					({ id, original_title, vote_average, poster_path, name }) => (
 						<ItemsCard
+							key={id}
 							original_title={original_title ?? name}
 							poster_path={poster_path}
 							vote_average={vote_average}

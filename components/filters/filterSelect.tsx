@@ -34,8 +34,9 @@ const FilterSelect = ({ data, onChange, value, name, className }: Props) => {
 				className='w-40 z-10 flex flex-col bg-white rounded-xl mt-1 overflow-y-scroll max-h-64 absolute no-scrollbar'
 				initial={{ height: 0 }}
 				animate={isOpen ? { height: 'auto' } : { height: 0 }}>
-				{data.map((value: string) => (
+				{data.map((value: string, key: number) => (
 					<div
+						key={key}
 						onClick={() => {
 							onChange(value, name)
 							setIsOpen(false)

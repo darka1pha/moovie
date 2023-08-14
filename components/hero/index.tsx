@@ -40,10 +40,11 @@ const Hero = ({ data }: Props) => {
 					overview,
 					adult,
 					id,
-					media_type
+					media_type,
 				}) => (
 					<SwiperSlide className='h-full w-96'>
 						<HeroSlide
+							key={id}
 							id={id}
 							mediaType={media_type}
 							adult={adult}
