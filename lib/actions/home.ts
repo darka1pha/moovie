@@ -1,4 +1,4 @@
-import { TRENDINGS, BASE_URL, MOVIE_GENRES, DISCOVER } from '../urls'
+import { TRENDINGS, BASE_URL, MOVIE_GENRES, DISCOVER, TV_GENRES } from '../urls'
 
 export const getTrendigs = async ({
 	page,
@@ -8,7 +8,8 @@ export const getTrendigs = async ({
 	mediaType: 'all' | 'movie' | 'tv'
 }) => {
 	const res = await fetch(
-		BASE_URL + TRENDINGS({ media_type: mediaType, pageParam: page })
+		BASE_URL + TRENDINGS({ media_type: mediaType, pageParam: page }),
+		{ cache: 'force-cache' }
 	)
 	return res.json()
 }
@@ -22,8 +23,6 @@ export const getDiscovers = async ({
 	mediaType: string
 	genre: string
 }) => {
-	console.log('Media: ', mediaType, ' Genre: ', genre)
-
 	const res = await fetch(
 		BASE_URL + DISCOVER({ mediaType, genre, pageParam: page }),
 		{ cache: 'no-cache' }
@@ -31,7 +30,9 @@ export const getDiscovers = async ({
 	return res.json()
 }
 
-export const getMovieGenres = async () => {
-	const res = await fetch(BASE_URL + MOVIE_GENRES)
+export const getGenres = async ({ mediaType }: { mediaType: string }) => {
+	const GENRE_URL =
+		mediaType.toLocaleLowerCase() === 'tv' ? TV_GENRES : MOVIE_GENRES
+	const res = await fetch(BASE_URL + GENRE_URL)
 	return res.json()
 }

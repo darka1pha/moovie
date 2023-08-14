@@ -22,13 +22,6 @@ const Filters = ({ genreData }: Props) => {
 		searchParams.get('mediaType') ?? 'Movie'
 	)
 
-	// console.log(
-	// 	'Media: ',
-	// 	searchParams.get('mediaType'),
-	// 	' Genre: ',
-	// 	searchParams.get('genre')
-	// )
-
 	const onFilterChange = (value: string, type: 'mediaType' | 'genre') => {
 		type === 'mediaType' ? setSelectedMedia(value) : setSelectedGenre(value)
 		setSearchParam({ param: type, value })
