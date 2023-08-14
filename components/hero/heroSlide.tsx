@@ -9,7 +9,7 @@ interface Props {
 	name: string
 	overview: string
 	adult: boolean
-	mediaType: 'tv' | 'movie' | 'person'
+	mediaType: 'tv' | 'movie' | 'person' | undefined
 	id: number
 }
 

@@ -18,7 +18,7 @@ interface Props {
 const Hero = ({ data }: Props) => {
 	return (
 		<Swiper
-			className='h-[100vh]'
+			className='h-[60vh] md:h-[100vh]'
 			effect={'creative'}
 			creativeEffect={{
 				prev: {
@@ -39,8 +39,8 @@ const Hero = ({ data }: Props) => {
 					original_title,
 					overview,
 					adult,
-					media_type,
 					id,
+					media_type
 				}) => (
 					<SwiperSlide className='h-full w-96'>
 						<HeroSlide

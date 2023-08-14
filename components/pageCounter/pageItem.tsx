@@ -17,7 +17,7 @@ const PageItem = ({ page, active }: Props) => {
 					active
 						? 'text-fuelYellow border-fuelYellow'
 						: 'border-battleGrey text-white'
-				} border-[2px] mx-2 p-2 text-xs min-w-[36px] rounded-xl`}>
+				} border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}>
 				{page}
 			</button>
 		</Link>

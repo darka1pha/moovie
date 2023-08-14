@@ -29,7 +29,7 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
 		}
 	}
 	return (
-		<div className='flex paddings items-center justify-center'>
+		<div className='flex paddings items-center justify-center flex-wrap'>
 			<button
 				onClick={onPrevPage}
 				className={`${
