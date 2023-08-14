@@ -6,18 +6,12 @@ interface Props {
 	poster_path: string
 	original_title: string
 	vote_average: number
-	media_type: 'tv' | 'movie' | 'person'
 	id: number
 }
 
-const ItemsCard = ({
-	poster_path,
-	original_title,
-	vote_average,
-	media_type,
-}: Props) => {
+const ItemsCard = ({ poster_path, original_title, vote_average }: Props) => {
 	return (
-		<div className='w-64 h-96 bg-fuelYellow m-5 group cursor-pointer rounded-2xl overflow-hidden relative'>
+		<div className='w-64 h-96 bg-balasticSea m-5 group cursor-pointer rounded-2xl overflow-hidden relative'>
 			<Image
 				quality={100}
 				height={384}
@@ -32,9 +26,6 @@ const ItemsCard = ({
 					<div className='bg-fuelYellow p-2 mr-2 w-fit rounded-xl flex items-center text-xs text-white text-center justify-center'>
 						<Star1 size={15} className='mr-1' />
 						<p>{vote_average?.toFixed(1)}</p>
-					</div>
-					<div className='bg-fuelYellow p-2 w-fit rounded-xl flex items-center text-xs text-white text-center justify-center'>
-						<p>{media_type}</p>
 					</div>
 				</div>
 			</div>

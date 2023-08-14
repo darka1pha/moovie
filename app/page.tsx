@@ -1,6 +1,7 @@
-import { Filters, Hero, Items, PageCounter } from '@/components'
-import { getDiscovers, getMovieGenres, getTrendigs } from '@/lib/actions/home'
+import { Filters, Hero, Items, ItemsLoading, PageCounter } from '@/components'
+import { getDiscovers, getGenres, getTrendigs } from '@/lib/actions/home'
 import { Genres, IPaginatedData, ListResults } from '@/types'
+import { Suspense } from 'react'
 
 export default async function Home({
 	searchParams: { page, mediaType, genre },
@@ -12,31 +13,22 @@ export default async function Home({
 		mediaType: 'all',
 	})) as IPaginatedData<ListResults>
 
-	const { genres } = (await getMovieGenres()) as Genres
+	const { genres } = (await getGenres({
+		mediaType: mediaType ?? 'movie',
+	})) as Genres
 
-	const genreID = genre
-		? genres.filter((item) => item.name === genre)[0].id
-		: ''
-
-	const {
-		page: currentPage,
-		results,
-		total_pages,
-	} = (await getDiscovers({
-		genre: genreID.toString(),
-		mediaType,
-		page,
-	})) as IPaginatedData<ListResults>
+	const genreID =
+		genre && genre.toLocaleLowerCase() !== 'all'
+			? genres.filter((item) => item.name === genre)[0].id
+			: ''
 
 	return (
 		<main>
 			<Hero data={bannerData.slice(0, 6)} />
 			<Filters genreData={genres} />
-			<Items data={results} />
-			<PageCounter
-				currentPage={currentPage}
-				totalPages={total_pages > 500 ? 500 : total_pages}
-			/>
+			<Suspense fallback={<ItemsLoading />}>
+				<Items genreID={genreID.toString()} mediaType={mediaType} page={page} />
+			</Suspense>
 		</main>
 	)
 }

@@ -1,24 +1,41 @@
-import { ListResults } from '@/types'
+import { IPaginatedData, ListResults } from '@/types'
 import ItemsCard from './itemsCard'
+import { PageCounter } from '..'
+import { getDiscovers } from '@/lib/actions/home'
 interface Props {
-	data: ListResults[]
+	genreID: string
+	mediaType: string
+	page: number
 }
-const Items = ({ data }: Props) => {
+const Items = async ({ genreID, mediaType, page }: Props) => {
+	const {
+		page: currentPage,
+		results,
+		total_pages,
+	} = (await getDiscovers({
+		genre: genreID,
+		mediaType,
+		page,
+	})) as IPaginatedData<ListResults>
 	return (
-		<div className='flex flex-wrap justify-center'>
-			{data?.map(
-				({ id, media_type, original_title, vote_average, poster_path, name }) =>
-					media_type !== 'person' && (
+		<>
+			<div className='flex flex-wrap justify-center'>
+				{results?.map(
+					({ id, original_title, vote_average, poster_path, name }) => (
 						<ItemsCard
 							original_title={original_title ?? name}
 							poster_path={poster_path}
-							media_type={media_type}
 							vote_average={vote_average}
 							id={id}
 						/>
 					)
-			)}
-		</div>
+				)}
+			</div>
+			<PageCounter
+				currentPage={currentPage}
+				totalPages={total_pages > 500 ? 500 : total_pages}
+			/>
+		</>
 	)
 }
 
