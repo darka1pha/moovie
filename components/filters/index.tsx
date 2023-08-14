@@ -25,8 +25,10 @@ const Filters = ({ genreData }: Props) => {
 	const onFilterChange = (value: string, type: 'mediaType' | 'genre') => {
 		type === 'mediaType' ? setSelectedMedia(value) : setSelectedGenre(value)
 		setSearchParam({ param: type, value })
-		if (type === 'mediaType' && value === 'All') {
+		setSearchParam({ param: 'page', value: '1' })
+		if (type === 'mediaType') {
 			deleteSearchParam({ param: 'genre' })
+			setSelectedGenre('All')
 		}
 	}
 
