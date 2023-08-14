@@ -14,7 +14,7 @@ const mediaType = ['Movie', 'Tv']
 const Filters = ({ genreData }: Props) => {
 	const genres = genreData.map(({ name }) => name)
 	const searchParams = useSearchParams()
-	const { setSearchParam, deleteSearchParam } = useUpdateSearchParam()
+	const { setSearchParams, deleteSearchParam } = useUpdateSearchParam()
 	const [selectedGenre, setSelectedGenre] = useState(
 		searchParams.get('genre') ?? 'All'
 	)
@@ -23,13 +23,19 @@ const Filters = ({ genreData }: Props) => {
 	)
 
 	const onFilterChange = (value: string, type: 'mediaType' | 'genre') => {
-		type === 'mediaType' ? setSelectedMedia(value) : setSelectedGenre(value)
-		setSearchParam({ param: type, value })
-		setSearchParam({ param: 'page', value: '1' })
 		if (type === 'mediaType') {
+			setSelectedMedia(value)
 			deleteSearchParam({ param: 'genre' })
+			// setSearchParams([{ key: 'mediaType', value: value }])
 			setSelectedGenre('All')
+		} else {
+			setSelectedGenre(value)
+			// setSearchParams([{ key: 'genre', value: value }])
 		}
+		setSearchParams([
+			{ key: type, value },
+			{ key: 'page', value: '1' },
+		])
 	}
 
 	return (

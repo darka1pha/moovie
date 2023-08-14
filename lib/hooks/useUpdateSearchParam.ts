@@ -15,16 +15,16 @@ export const useUpdateSearchParam = (scroll = false) => {
 		router.push(newPathname, { scroll })
 	}
 
-	const setSearchParam = ({
-		param,
-		value,
-	}: {
-		param: string
-		value: string
-	}) => {
+	const setSearchParams = (params: { key: string; value: string }[]) => {
 		const currentParams = new URLSearchParams(window.location.search)
-		currentParams.delete(param)
-		currentParams.set(param, value)
+
+		params.forEach(({ key }) => {
+			currentParams.delete(key)
+		})
+
+		params.forEach(({ key, value }) => {
+			currentParams.set(key, value)
+		})
 
 		const newSearchParams = currentParams.toString()
 
@@ -51,5 +51,5 @@ export const useUpdateSearchParam = (scroll = false) => {
 		return newPathname
 	}
 
-	return { setSearchParam, deleteSearchParam, getUpdatedPath }
+	return { setSearchParams, deleteSearchParam, getUpdatedPath }
 }

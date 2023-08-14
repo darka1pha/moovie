@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PageCounter = ({ currentPage, totalPages }: Props) => {
-	const { setSearchParam } = useUpdateSearchParam()
+	const { setSearchParams } = useUpdateSearchParam()
 	const paginationRange = usePagination({
 		currentPage,
 		totalPages,
@@ -20,12 +20,12 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
 
 	const onNextPage = () => {
 		if (currentPage + 1 <= totalPages) {
-			setSearchParam({ param: 'page', value: (currentPage + 1).toString() })
+			setSearchParams([{ key: 'page', value: (currentPage + 1).toString() }])
 		}
 	}
 	const onPrevPage = () => {
 		if (currentPage - 1 >= 1) {
-			setSearchParam({ param: 'page', value: (currentPage - 1).toString() })
+			setSearchParams([{ key: 'page', value: (currentPage - 1).toString() }])
 		}
 	}
 	return (
