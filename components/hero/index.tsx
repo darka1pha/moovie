@@ -30,9 +30,7 @@ const Hero = ({ data }: Props) => {
 				},
 			}}
 			modules={[Pagination, EffectCreative]}
-			navigation
-			pagination={{ clickable: true }}
-			onSlideChange={() => console.log('slide change')}>
+			navigation>
 			{data.map(
 				({
 					backdrop_path,
