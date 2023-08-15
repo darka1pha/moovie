@@ -12,6 +12,17 @@ export interface ListResults {
 	id: number
 }
 
+export interface Cast {
+	name: string
+	orginal_name: string
+	profile_path: string
+	character: string
+}
+
+export interface CreditsProps {
+	cast: Cast[]
+}
+
 export interface genre {
 	id: number
 	name: string

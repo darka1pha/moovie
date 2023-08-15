@@ -47,11 +47,15 @@ export const POPULAR_MOVIES = ({ pageParam }: { pageParam: number }) =>
 export const POPULAR_TVS = ({ pageParam }: { pageParam: number }) =>
 	`${urlGenerator(`/tv/popular`, pageParam)}`
 
-export const MOVIE_DETAILS = (id: string | string[] | undefined) =>
+export const MOVIE_DETAILS = (id: string | undefined) =>
 	urlGenerator(`/movie/${id}`)
 
-export const TV_DETAILS = (id: string | string[] | undefined) =>
-	urlGenerator(`/tv/${id}`)
+export const MOVIE_CREDITS = (id: string | undefined) =>
+	`/movie/${id}/credits?language=en-US&api_key=${API_KEY}`
+export const TV_CREDITS = (id: string | undefined) =>
+	`/tv/${id}/credits?language=en-US&api_key=${API_KEY}`
+
+export const TV_DETAILS = (id: string | undefined) => urlGenerator(`/tv/${id}`)
 
 export const MULTI_SEARCH = (query: string, pageParam: number) =>
 	`${urlGenerator('/search/multi', pageParam)}&query=${query}`
@@ -62,8 +66,8 @@ export const MOVIE_SEARCH = (query: string, pageParam: number) =>
 export const TV_SEARCH = (query: string, pageParam: number) =>
 	`${urlGenerator('/search/tv', pageParam)}&query=${query}`
 
-export const TV_SIMILARS = (id: string | string[] | undefined) =>
+export const TV_SIMILARS = (id: string | undefined) =>
 	urlGenerator(`/tv/${id}/similar`)
 
-export const MOVIE_SIMILARS = (id: string | string[] | undefined) =>
+export const MOVIE_SIMILARS = (id: string | undefined) =>
 	urlGenerator(`/movie/${id}/similar`)
