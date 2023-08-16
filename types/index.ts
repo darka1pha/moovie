@@ -82,3 +82,21 @@ export interface TvDetails {
 	overview: string
 	status: string
 }
+
+export interface Review {
+	listNumber?: number
+	author: string
+	author_details: {
+		name: string
+		username: string
+		rating: number
+	}
+	content: string
+	created_at: string
+}
+
+export interface ReviewList {
+	id: number
+	page: number
+	results: Review[]
+}

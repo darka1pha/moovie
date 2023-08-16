@@ -52,8 +52,13 @@ export const MOVIE_DETAILS = (id: string | undefined) =>
 
 export const MOVIE_CREDITS = (id: string | undefined) =>
 	`/movie/${id}/credits?language=en-US&api_key=${API_KEY}`
+export const MOVIE_REVIEWS = (id: string | undefined) =>
+	`/movie/${id}/reviews?language=en-US&api_key=${API_KEY}`
+
 export const TV_CREDITS = (id: string | undefined) =>
 	`/tv/${id}/credits?language=en-US&api_key=${API_KEY}`
+export const TV_REVIEWS = (id: string | undefined) =>
+	`/tv/${id}/reviews?language=en-US&api_key=${API_KEY}`
 
 export const TV_DETAILS = (id: string | undefined) => urlGenerator(`/tv/${id}`)
 
