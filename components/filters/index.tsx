@@ -41,12 +41,14 @@ const Filters = ({ genreData }: Props) => {
 	return (
 		<div className='paddings flex overflow-y-auto'>
 			<FilterSelect
+				title='Media Type'
 				name='mediaType'
 				data={mediaType}
 				onChange={onFilterChange}
 				value={selectedMedia}
 			/>
 			<FilterSelect
+				title='Genre'
 				className='ml-4'
 				name='genre'
 				data={['All', ...genres]}

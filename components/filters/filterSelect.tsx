@@ -3,6 +3,7 @@
 import { ArrowUp2, ArrowDown2 } from 'iconsax-react'
 import { HTMLProps, useState } from 'react'
 import { motion } from 'framer-motion'
+import { title } from 'process'
 
 interface Props {
 	data: string[]
@@ -10,9 +11,17 @@ interface Props {
 	onChange: (value: string, type: 'mediaType' | 'genre') => void
 	name: 'mediaType' | 'genre'
 	className?: HTMLProps<HTMLElement>['className']
+	title: string
 }
 
-const FilterSelect = ({ data, onChange, value, name, className }: Props) => {
+const FilterSelect = ({
+	data,
+	onChange,
+	value,
+	name,
+	className,
+	title,
+}: Props) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const handleToggle = () => {
 		setIsOpen(!isOpen)
@@ -20,6 +29,7 @@ const FilterSelect = ({ data, onChange, value, name, className }: Props) => {
 
 	return (
 		<div className={`w-40 ${className}`}>
+			<h3 className='text-white mb-2 text-sm'>{title}</h3>
 			<div
 				onClick={handleToggle}
 				className={`cursor-pointer flex relative bg-white w-full rounded-xl px-2 items-center justify-between h-9`}>

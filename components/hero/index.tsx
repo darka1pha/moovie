@@ -1,12 +1,11 @@
 'use client'
-
-import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCreative } from 'swiper/modules'
+import { EffectFade, Autoplay, Pagination } from 'swiper/modules'
 
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
 import HeroSlide from './heroSlide'
 import { ListResults } from '@/types'
 import { BACKDROP_URL } from '@/lib/urls'
@@ -19,18 +18,10 @@ const Hero = ({ data }: Props) => {
 	return (
 		<Swiper
 			className='h-[60vh] md:h-[100vh]'
-			effect={'creative'}
-			creativeEffect={{
-				prev: {
-					shadow: true,
-					translate: [0, 0, -400],
-				},
-				next: {
-					translate: ['100%', 0, 0],
-				},
-			}}
-			modules={[Pagination, EffectCreative]}
-			navigation>
+			effect={'fade'}
+			modules={[Pagination, EffectFade, Autoplay]}
+			pagination
+			autoplay>
 			{data.map(
 				({
 					backdrop_path,

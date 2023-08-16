@@ -10,6 +10,7 @@ interface Props {
 	original_title: string
 	vote_average: number
 	id: number
+	margin?: string
 }
 
 const ItemsCard = ({
@@ -17,12 +18,16 @@ const ItemsCard = ({
 	original_title,
 	vote_average,
 	id,
+	margin,
 }: Props) => {
 	const searchParams = useSearchParams()
 	const mediaType = searchParams.get('mediaType')?.toLocaleLowerCase()
 	return (
 		<Link href={`/${!mediaType ? 'movie' : mediaType}/${id}`}>
-			<div className='w-64 h-96 bg-balasticSea m-5 group cursor-pointer rounded-2xl overflow-hidden relative'>
+			<div
+				className={`${
+					margin ?? 'm-5'
+				} w-64 h-96 bg-balasticSea group cursor-pointer rounded-2xl overflow-hidden relative`}>
 				<Image
 					quality={100}
 					height={384}
