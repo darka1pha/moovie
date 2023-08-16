@@ -40,7 +40,7 @@ const HeroSlide = ({
 						</div>
 					)}
 					<div className='mt-4 max-w-md'>
-						<p className='text-xs text-white line-clamp-4'>{overview}</p>
+						<p className='text-sm leading-7 text-white line-clamp-4'>{overview}</p>
 					</div>
 					<div className='mt-4'>
 						<Link

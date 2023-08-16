@@ -13,6 +13,9 @@ module.exports = {
 				balasticSea: '#2a292d',
 			},
 		},
+		fontFamily: {
+			popins: ['Poppins', 'sans-serif'],
+		},
 	},
 	plugins: [],
 }

@@ -17,7 +17,9 @@ interface CreditCopmonentProps {
 const Credits = ({ data }: CreditCopmonentProps) => {
 	return (
 		<div className='paddings'>
-			<h2 className='text-white text-3xl mb-5'>Credits</h2>
+			<h3 className='font-bold text-3xl sm:text-4xl mb-5 text-white'>
+				Credits
+			</h3>
 			<Swiper
 				modules={[Navigation]}
 				navigation={true}

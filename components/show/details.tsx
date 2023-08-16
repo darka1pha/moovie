@@ -36,7 +36,7 @@ const Details = ({
 				</DetailItem>
 			</div>
 			<div className='mt-5 ml-2'>
-				<p>{overview}</p>
+				<p className='leading-7'>{overview}</p>
 			</div>
 		</div>
 	)
