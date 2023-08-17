@@ -26,7 +26,7 @@ const Reviews = ({ data }: Props) => {
 	}
 	return (
 		<motion.div className='paddings overflow-hidden'>
-			<h2 className='text-white text-3xl mb-5'>Reviews</h2>
+			<p className='text-white text-3xl mb-5'>Reviews</p>
 			<motion.div
 				layoutId='list'>
 				{results

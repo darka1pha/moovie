@@ -29,7 +29,7 @@ const FilterSelect = ({
 
 	return (
 		<div className={`w-40 ${className}`}>
-			<h3 className='text-white mb-2 text-sm'>{title}</h3>
+			<p className='text-white mb-2 text-sm'>{title}</p>
 			<div
 				onClick={handleToggle}
 				className={`cursor-pointer flex relative bg-white w-full rounded-xl px-2 items-center justify-between h-9`}>

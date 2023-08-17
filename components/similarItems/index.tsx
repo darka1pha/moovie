@@ -19,9 +19,9 @@ const SimilarItems: React.FC<Props> = ({ data }) => {
 	return (
 		<div className='flex flex-col mb-10 text-white paddings'>
 			<div className='mb-2'>
-				<h3 className='font-bold text-3xl sm:text-4xl'>
+				<p className='font-bold text-3xl sm:text-4xl'>
 					Similar {pathname.includes('tv') ? 'Tv Shows' : 'Movies'}
-				</h3>
+				</p>
 			</div>
 			<div className='mt-5'>
 				<Swiper
