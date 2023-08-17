@@ -17,9 +17,7 @@ interface CreditCopmonentProps {
 const Credits = ({ data }: CreditCopmonentProps) => {
 	return (
 		<div className='paddings'>
-			<p className='font-bold text-3xl sm:text-4xl mb-5 text-white'>
-				Credits
-			</p>
+			<p className='font-bold text-3xl sm:text-4xl mb-5 text-white'>Credits</p>
 			<Swiper
 				modules={[Navigation]}
 				navigation={true}
@@ -41,8 +39,9 @@ const Credits = ({ data }: CreditCopmonentProps) => {
 						spaceBetween: 10,
 					},
 				}}>
-				{data.cast.map(
-					({ character, name, orginal_name, profile_path }, key) => (
+				{data.cast
+					.slice(0, 15)
+					.map(({ character, name, orginal_name, profile_path }, key) => (
 						<SwiperSlide key={key}>
 							<CastItem
 								character={character}
@@ -51,8 +50,7 @@ const Credits = ({ data }: CreditCopmonentProps) => {
 								profile_path={profile_path}
 							/>
 						</SwiperSlide>
-					)
-				)}
+					))}
 			</Swiper>
 		</div>
 	)
