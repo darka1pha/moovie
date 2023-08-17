@@ -12,7 +12,7 @@ import {
 
 export const getTvDetails = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + TV_DETAILS(id), { cache: 'force-cache' })
+		const res = await fetch(BASE_URL + TV_DETAILS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -26,9 +26,7 @@ export const getTvDetails = async ({ id }: { id: string }) => {
 
 export const getMovieDetails = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + MOVIE_DETAILS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + MOVIE_DETAILS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -43,9 +41,7 @@ export const getMovieDetails = async ({ id }: { id: string }) => {
 export const getMovieCredits = async ({ id }: { id: string }) => {
 	console.log(BASE_URL + MOVIE_CREDITS(id))
 	try {
-		const res = await fetch(BASE_URL + MOVIE_CREDITS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + MOVIE_CREDITS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -59,9 +55,7 @@ export const getMovieCredits = async ({ id }: { id: string }) => {
 
 export const getTvCredits = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + TV_CREDITS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + TV_CREDITS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -75,9 +69,7 @@ export const getTvCredits = async ({ id }: { id: string }) => {
 
 export const getMovieReviews = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + MOVIE_REVIEWS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + MOVIE_REVIEWS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -91,9 +83,7 @@ export const getMovieReviews = async ({ id }: { id: string }) => {
 
 export const getTvReviews = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + TV_REVIEWS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + TV_REVIEWS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -106,9 +96,7 @@ export const getTvReviews = async ({ id }: { id: string }) => {
 }
 export const getSimilarTvs = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + TV_SIMILARS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + TV_SIMILARS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')
@@ -122,9 +110,7 @@ export const getSimilarTvs = async ({ id }: { id: string }) => {
 
 export const getSimilarMovies = async ({ id }: { id: string }) => {
 	try {
-		const res = await fetch(BASE_URL + MOVIE_SIMILARS(id), {
-			cache: 'force-cache',
-		})
+		const res = await fetch(BASE_URL + MOVIE_SIMILARS(id))
 
 		if (!res.ok) {
 			throw new Error('Failed to fetch data')

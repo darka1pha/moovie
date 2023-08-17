@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation'
 import { TRENDINGS, BASE_URL, MOVIE_GENRES, DISCOVER, TV_GENRES } from '../urls'
 
 export const getTrendigs = async ({
@@ -9,8 +8,7 @@ export const getTrendigs = async ({
 	mediaType: 'all' | 'movie' | 'tv'
 }) => {
 	const res = await fetch(
-		BASE_URL + TRENDINGS({ media_type: mediaType, pageParam: page }),
-		{ cache: 'force-cache' }
+		BASE_URL + TRENDINGS({ media_type: mediaType, pageParam: page })
 	)
 	return res.json()
 }
@@ -26,8 +24,7 @@ export const getDiscovers = async ({
 }) => {
 	try {
 		const res = await fetch(
-			BASE_URL + DISCOVER({ mediaType, genre, pageParam: page }),
-			{ cache: 'no-cache' }
+			BASE_URL + DISCOVER({ mediaType, genre, pageParam: page })
 		)
 
 		if (!res.ok) {
