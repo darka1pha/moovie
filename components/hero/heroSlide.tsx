@@ -45,7 +45,7 @@ const HeroSlide = ({
 					<div className='mt-4'>
 						<Link
 							href={mediaType === 'movie' ? `/movies/${id}` : `/shows/${id}`}>
-							<button className='bg-fuelYellow text-white text-xs rounded-2xl py-2 px-6'>
+							<button aria-label="Watch Now" className='bg-fuelYellow text-white text-xs rounded-2xl py-2 px-6'>
 								Watch now
 							</button>
 						</Link>

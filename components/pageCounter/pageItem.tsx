@@ -13,6 +13,7 @@ const PageItem = ({ page, active }: Props) => {
 	return (
 		<Link href={newPath} scroll={false}>
 			<button
+				aria-label='Page Navigation'
 				className={`bg-black transition-all ease-in-out duration-500 ${
 					active
 						? 'text-fuelYellow border-fuelYellow'

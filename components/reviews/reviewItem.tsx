@@ -36,6 +36,7 @@ const ReviewItem = ({
 			</motion.div>
 			<div className='m-2 border-t-[1px] border-t-battleGrey flex items-center justify-center py-3'>
 				<motion.button
+					aria-label='Load More'
 					onClick={togglehandler}
 					initial={{ rotate: 0 }}
 					animate={isOpen ? { rotate: 180 } : { rotate: 0 }}

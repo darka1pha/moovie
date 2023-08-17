@@ -43,6 +43,7 @@ const Reviews = ({ data }: Props) => {
 					))}
 				<div className='flex justify-center items-center'>
 					<button
+					aria-label="Load More"
 						className='text-white flex'
 						onClick={
 							renderCount < results.length ? handleLoadMore : handleShowLess

@@ -32,6 +32,7 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
 		<div className='flex paddings items-center justify-center flex-wrap'>
 			<button
 				onClick={onPrevPage}
+				aria-label="Prev Page"
 				className={`${
 					currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
 				}border-battleGrey flex border-[2px] rounded-full p-1 mr-1`}>
@@ -45,6 +46,7 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
 				/>
 			))}
 			<button
+			aria-label="Next Page"
 				onClick={onNextPage}
 				className={`${
 					currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'

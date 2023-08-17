@@ -3,9 +3,9 @@ interface Props {
 	id: number
 }
 
-const FilterOption = ({ name, id }: Props) => {
+const FilterOption = ({ name }: Props) => {
 	return (
-		<button className={`bg-fuelYellow text-white px-4 py-1 text-sm rounded-3xl mx-2`}>
+		<button aria-label="Filter Option" className={`bg-fuelYellow text-white px-4 py-1 text-sm rounded-3xl mx-2`}>
 			{name}
 		</button>
 	)

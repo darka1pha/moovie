@@ -11,7 +11,7 @@ export default function GlobalError({
     <html>
       <body>
         <p>Something went wrong!</p>
-        <button onClick={() => reset()}>Try again</button>
+        <button aria-label="reload"  onClick={() => reset()}>Try again</button>
       </body>
     </html>
   )
