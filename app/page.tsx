@@ -1,7 +1,9 @@
 import { Filters, Hero, Items, ItemsLoading, PageCounter } from '@/components'
-import { getDiscovers, getGenres, getTrendigs } from '@/lib/actions/home'
+import { getGenres, getTrendigs } from '@/lib/actions/home'
 import { Genres, IPaginatedData, ListResults } from '@/types'
 import { Suspense } from 'react'
+
+export const revalidate = 86400 //1Day
 
 export default async function Home({
 	searchParams: { page, mediaType, genre },

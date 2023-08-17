@@ -1,5 +1,6 @@
 import { Reviews, SimilarItems, Tvs } from '@/components'
 import Credits from '@/components/show/credits'
+import { getDiscovers } from '@/lib/actions/home'
 import {
 	getSimilarTvs,
 	getTvCredits,
@@ -13,6 +14,35 @@ import {
 	ReviewList,
 	TvDetails,
 } from '@/types'
+
+interface MetadataProps {
+	params: { id: string }
+}
+
+export const generateMetadata = async ({ params: { id } }: MetadataProps) => {
+	const data = (await getTvDetails({ id })) as TvDetails
+	return {
+		title: data.original_name,
+		description: data.overview,
+		alternates: {
+			canonical: `/tv/${id}`,
+		},
+	}
+}
+
+export const generateStaticParams = async () => {
+	const { results } = (await getDiscovers({
+		genre: '',
+		mediaType: 'tv',
+		page: 1,
+	})) as IPaginatedData<ListResults>
+
+	if (!results) return []
+
+	return results.map(({ id }) => ({
+		id: id.toString(),
+	}))
+}
 
 const TvPage = async ({ params: { id } }: { params: { id: string } }) => {
 	const data = (await getTvDetails({ id })) as TvDetails
