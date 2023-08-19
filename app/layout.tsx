@@ -1,3 +1,4 @@
+import { Navbar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
@@ -20,9 +21,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={popins.className}>
+			<body className={`${popins.className}`}>
+				<Navbar />
 				{children}
-				{/* <MobileMenu /> */}
 			</body>
 		</html>
 	)

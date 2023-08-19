@@ -1,7 +1,7 @@
 export interface ListResults {
 	adult: boolean
 	backdrop_path: string | null
-	first_air_date: string
+	release_date: string
 	media_type?: 'tv' | 'movie' | 'person'
 	name: string
 	overview: string
