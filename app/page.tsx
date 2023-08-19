@@ -33,9 +33,9 @@ export default async function Home({
 		<main>
 			<Hero data={bannerData.slice(0, 6)} />
 			<Filters genreData={genres} />
-			<Suspense fallback={<ItemsLoading />}>
+			{/* <Suspense fallback={<ItemsLoading />}> */}
 				<Items genreID={genreID.toString()} mediaType={mediaType} page={page} />
-			</Suspense>
+			{/* </Suspense> */}
 		</main>
 	)
 }

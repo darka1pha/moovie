@@ -23,12 +23,15 @@ const HeroSlide = ({
 }: Props) => {
 	return (
 		<div className='h-full w-full'>
-			<Image
-				fill
-				className='object-cover absolute top-0 right-0 z-10'
-				alt={name}
-				src={imageUrl}
-			/>
+			<div className='absolute top-0 right-0 z-10 w-full h-full'>
+				<Image
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					fill
+					className='object-cover'
+					alt={name}
+					src={imageUrl}
+				/>
+			</div>
 			<div className='absolute w-full h-full bg-black/40 z-20'>
 				<div className='flex flex-col justify-center h-full px-10'>
 					<div>
@@ -40,12 +43,16 @@ const HeroSlide = ({
 						</div>
 					)}
 					<div className='mt-4 max-w-md'>
-						<p className='text-sm leading-7 text-white line-clamp-4'>{overview}</p>
+						<p className='text-sm leading-7 text-white line-clamp-4'>
+							{overview}
+						</p>
 					</div>
 					<div className='mt-4'>
 						<Link
 							href={mediaType === 'movie' ? `/movies/${id}` : `/shows/${id}`}>
-							<button aria-label="Watch Now" className='bg-fuelYellow text-white text-xs rounded-2xl py-2 px-6'>
+							<button
+								aria-label='Watch Now'
+								className='bg-fuelYellow text-white text-xs rounded-2xl py-2 px-6'>
 								Watch now
 							</button>
 						</Link>

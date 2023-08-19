@@ -31,9 +31,8 @@ const Hero = ({ data }: Props) => {
 					id,
 					media_type,
 				}) => (
-					<SwiperSlide className='h-full w-96'>
+					<SwiperSlide key={id} className='h-full w-96'>
 						<HeroSlide
-							key={id}
 							id={id}
 							mediaType={media_type}
 							adult={adult}
