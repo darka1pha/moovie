@@ -1,9 +1,14 @@
 import { Filters, Hero, Items, ItemsLoading, PageCounter } from '@/components'
 import { getGenres, getTrendigs } from '@/lib/actions/home'
 import { Genres, IPaginatedData, ListResults } from '@/types'
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 export const revalidate = 86400 //1Day
+
+export const metadata: Metadata = {
+	description: 'Explore the latest movies and tv shows.',
+}
 
 export default async function Home({
 	searchParams: { page, mediaType, genre },

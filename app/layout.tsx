@@ -11,7 +11,6 @@ const popins = Poppins({
 export const metadata: Metadata = {
 	metadataBase: new URL('https://www.moovie-nine.vercel.app'),
 	title: { default: 'Moovie', template: '%s | Moovie' },
-	description: 'Explore the latest movies and tv shows.',
 }
 
 export default function RootLayout({
