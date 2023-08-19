@@ -38,7 +38,7 @@ const Hero = ({ data }: Props) => {
 							mediaType={media_type}
 							adult={adult}
 							overview={overview}
-							imageUrl={BACKDROP_URL({ quality: 'original' }) + backdrop_path}
+							imageUrl={BACKDROP_URL({ quality: 'w1280' }) + backdrop_path}
 							name={original_title}
 						/>
 					</SwiperSlide>

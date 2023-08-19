@@ -33,7 +33,7 @@ const ItemsCard = ({
 					height={384}
 					width={256}
 					className='object-cover h-full w-full'
-					src={POSTER_URL({ quality: 'original' }) + poster_path}
+					src={POSTER_URL({ quality: 'w300' }) + poster_path}
 					alt={original_title}
 				/>
 				<div className='absolute p-3 backdrop-blur-sm bg-black/50 -bottom-full right-0 h-fit w-full transition-all ease-in-out group-hover:bottom-0 duration-500'>
