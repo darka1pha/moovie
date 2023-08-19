@@ -39,7 +39,6 @@ export const getMovieDetails = async ({ id }: { id: string }) => {
 }
 
 export const getMovieCredits = async ({ id }: { id: string }) => {
-	console.log(BASE_URL + MOVIE_CREDITS(id))
 	try {
 		const res = await fetch(BASE_URL + MOVIE_CREDITS(id))
 
