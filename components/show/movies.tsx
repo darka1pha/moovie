@@ -19,7 +19,7 @@ const Tvs = ({ data }: { data: MovieDetails }) => {
 	return (
 		<div className={`flex flex-col relative p-8 md:p-16`}>
 			<div
-				className='bg-no-repeat bg-cover bg-fixed bg-center will-change-transform absolute top-0 left-0 h-full w-full'
+				className='bg-no-repeat bg-cover bg-fixed bg-center will-change-scroll absolute top-0 left-0 h-full w-full'
 				style={{
 					backgroundImage: `url(${BACKDROP_URL({
 						quality: 'w780',
