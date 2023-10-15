@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 	title: { default: 'Moovie', template: '%s | Moovie' },
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
 	children,
 }: {
