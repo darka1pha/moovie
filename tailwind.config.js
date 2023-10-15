@@ -17,5 +17,5 @@ module.exports = {
 			popins: ['Poppins', 'sans-serif'],
 		},
 	},
-	plugins: [],
+	plugins: [require("daisyui")],
 }
