@@ -1,7 +1,12 @@
-import supabase from '@/lib/supabase/serverActionComponent'
+import { Database } from '@/types/supabase'
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 export const addFavorites = async (formData: FormData) => {
 	'use server'
+
+	const supabase = createServerActionClient<Database>({ cookies })
+
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()
@@ -20,5 +25,5 @@ export const addFavorites = async (formData: FormData) => {
 		user_id: String(user?.id),
 	})
 
-  console.log(error?.details)
+	console.log(error?.details)
 }

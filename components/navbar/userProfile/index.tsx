@@ -1,8 +1,11 @@
-import supabase from '@/lib/supabase/serverComponent'
+import { Database } from '@/types/supabase'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { User } from 'iconsax-react'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 const UserProfile = async () => {
+	const supabase = createServerComponentClient<Database>({ cookies })
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()

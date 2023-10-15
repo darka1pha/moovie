@@ -1,4 +1,4 @@
-import { Bookmark, Heart, Star1 } from 'iconsax-react'
+import { Heart, Star1 } from 'iconsax-react'
 import DetailItem from './detailItem'
 import { addFavorites } from '@/app/actions/favorites'
 
