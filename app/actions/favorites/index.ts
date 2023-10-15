@@ -10,7 +10,7 @@ export const addFavorites = async (formData: FormData) => {
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()
-	const itemId = formData.get('ItemId') as string
+	const itemId = formData.get('itemId') as string
 	const mediaType = formData.get('mediaType') as string
 	const name = formData.get('name') as string
 	const rate = formData.get('rate') as string

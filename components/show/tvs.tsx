@@ -36,6 +36,7 @@ const Tvs = ({ data, id }: { data: TvDetails; id: string }) => {
 					/>
 				</div>
 				<Details
+					posterUrl={poster_path}
 					id={id}
 					mediaType='tv'
 					rate={vote_average}

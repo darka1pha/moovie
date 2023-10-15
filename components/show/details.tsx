@@ -10,9 +10,11 @@ interface Props {
 	duration: number
 	mediaType: 'movie' | 'tv'
 	id: string
+	posterUrl: string | null
 }
 
 const Details = ({
+	posterUrl,
 	name,
 	overview,
 	genres,
@@ -30,6 +32,7 @@ const Details = ({
 					<input type='hidden' name='rate' value={rate} />
 					<input type='hidden' name='itemId' value={id} />
 					<input type='hidden' name='mediaType' value={mediaType} />
+					<input type='hidden' name='posterUrl' value={posterUrl || ''} />
 					<button className='btn rounded-full h-14 w-14'>
 						<Heart size={26} className='text-fuelYellow' />
 					</button>

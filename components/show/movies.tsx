@@ -38,6 +38,7 @@ const Movies = ({ data, id }: { data: MovieDetails; id: string }) => {
 					/>
 				</div>
 				<Details
+					posterUrl={poster_path}
 					id={id}
 					mediaType='movie'
 					rate={vote_average}
