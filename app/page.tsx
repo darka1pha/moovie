@@ -1,8 +1,7 @@
-import { Filters, Hero, Items, ItemsLoading, PageCounter } from '@/components'
+import { Filters, Hero, Items } from '@/components'
 import { getGenres, getTrendigs } from '@/lib/actions/home'
 import { Genres, IPaginatedData, ListResults } from '@/types'
 import { Metadata } from 'next'
-import { Suspense } from 'react'
 
 export const revalidate = 86400 //1Day
 
@@ -34,7 +33,7 @@ export default async function Home({
 			<Hero data={bannerData.slice(0, 6)} />
 			<Filters genreData={genres} />
 			{/* <Suspense fallback={<ItemsLoading />}> */}
-				<Items genreID={genreID.toString()} mediaType={mediaType} page={page} />
+			<Items genreID={genreID.toString()} mediaType={mediaType} page={page} />
 			{/* </Suspense> */}
 		</main>
 	)
