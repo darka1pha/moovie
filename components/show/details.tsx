@@ -1,4 +1,4 @@
-import { Star1 } from 'iconsax-react'
+import { Bookmark, Heart, Star1 } from 'iconsax-react'
 import DetailItem from './detailItem'
 
 interface Props {
@@ -18,7 +18,12 @@ const Details = ({
 }: Props) => {
 	return (
 		<div className='flex flex-col flex-1 text-white'>
+			<div className='flex justify-between'>
 			<h1 className=' text-2xl font-bold'>{name}</h1>
+			<button className='btn rounded-full h-14 w-14'>
+				<Heart size={26} className='text-fuelYellow'/>
+			</button>
+			</div>
 			<div className='flex flex-wrap mt-5'>
 				<DetailItem name={'Rate'}>
 					<div className='flex items-center'>
