@@ -13,7 +13,7 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          itrem_id: string | null
+          item_id: string | null
           media_type: string | null
           name: string | null
           poster_url: string | null
@@ -23,7 +23,7 @@ export interface Database {
         Insert: {
           created_at?: string
           id?: number
-          itrem_id?: string | null
+          item_id?: string | null
           media_type?: string | null
           name?: string | null
           poster_url?: string | null
@@ -33,7 +33,7 @@ export interface Database {
         Update: {
           created_at?: string
           id?: number
-          itrem_id?: string | null
+          item_id?: string | null
           media_type?: string | null
           name?: string | null
           poster_url?: string | null

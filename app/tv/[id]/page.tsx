@@ -53,7 +53,7 @@ const TvPage = async ({ params: { id } }: { params: { id: string } }) => {
 	})) as IPaginatedData<ListResults>
 	return (
 		<div>
-			<Tvs data={data} />
+			<Tvs id={id} data={data} />
 			<Credits data={credits} />
 			{reviews.results.length > 0 && <Reviews data={reviews} />}
 			<SimilarItems data={similars} />

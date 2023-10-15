@@ -1,5 +1,6 @@
 import { Bookmark, Heart, Star1 } from 'iconsax-react'
 import DetailItem from './detailItem'
+import { addFavorites } from '@/app/actions/favorites'
 
 interface Props {
 	name: string
@@ -7,6 +8,8 @@ interface Props {
 	genres: { name: string }[]
 	rate: number
 	duration: number
+	mediaType: 'movie' | 'tv'
+	id: string
 }
 
 const Details = ({
@@ -15,14 +18,22 @@ const Details = ({
 	genres,
 	rate,
 	duration,
+	mediaType,
+	id,
 }: Props) => {
 	return (
 		<div className='flex flex-col flex-1 text-white'>
 			<div className='flex justify-between'>
-			<h1 className=' text-2xl font-bold'>{name}</h1>
-			<button className='btn rounded-full h-14 w-14'>
-				<Heart size={26} className='text-fuelYellow'/>
-			</button>
+				<h1 className=' text-2xl font-bold'>{name}</h1>
+				<form action={addFavorites} method='post'>
+					<input type='hidden' name='name' value={name} />
+					<input type='hidden' name='rate' value={rate} />
+					<input type='hidden' name='itemId' value={id} />
+					<input type='hidden' name='mediaType' value={mediaType} />
+					<button className='btn rounded-full h-14 w-14'>
+						<Heart size={26} className='text-fuelYellow' />
+					</button>
+				</form>
 			</div>
 			<div className='flex flex-wrap mt-5'>
 				<DetailItem name={'Rate'}>

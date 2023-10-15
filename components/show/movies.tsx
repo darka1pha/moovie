@@ -3,7 +3,7 @@ import Details from './details'
 import { MovieDetails } from '@/types'
 import { BACKDROP_URL, POSTER_URL } from '@/lib/urls'
 
-const Tvs = ({ data }: { data: MovieDetails }) => {
+const Movies = ({ data, id }: { data: MovieDetails; id: string }) => {
 	const {
 		backdrop_path,
 		original_title,
@@ -38,6 +38,8 @@ const Tvs = ({ data }: { data: MovieDetails }) => {
 					/>
 				</div>
 				<Details
+					id={id}
+					mediaType='movie'
 					rate={vote_average}
 					name={title ?? original_title}
 					overview={overview}
@@ -49,4 +51,4 @@ const Tvs = ({ data }: { data: MovieDetails }) => {
 	)
 }
 
-export default Tvs
+export default Movies
