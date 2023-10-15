@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import UserProfile from './userProfile'
 
 const Navbar = () => {
 	return (
@@ -15,6 +16,7 @@ const Navbar = () => {
 					/>
 				</div>
 			</Link>
+			<UserProfile />
 		</div>
 	)
 }
