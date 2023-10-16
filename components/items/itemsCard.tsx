@@ -11,6 +11,7 @@ interface Props {
 	vote_average: number
 	id: number
 	margin?: string
+	media?: string
 }
 
 const ItemsCard = ({
@@ -19,9 +20,10 @@ const ItemsCard = ({
 	vote_average,
 	id,
 	margin,
+	media
 }: Props) => {
 	const searchParams = useSearchParams()
-	const mediaType = searchParams.get('mediaType')?.toLocaleLowerCase()
+	const mediaType = media ?? searchParams.get('mediaType')?.toLocaleLowerCase()
 	return (
 		<Link href={`/${!mediaType ? 'movie' : mediaType}/${id}`}>
 			<div

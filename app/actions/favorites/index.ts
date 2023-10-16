@@ -1,11 +1,10 @@
 import { Database } from '@/types/supabase'
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+import {
+	createClientComponentClient,
+} from '@supabase/auth-helpers-nextjs'
 
-export const addFavorites = async (formData: FormData) => {
-	'use server'
-
-	const supabase = createServerActionClient<Database>({ cookies })
+export const favoritesAction = async (formData: FormData) => {
+	const supabase = createClientComponentClient<Database>()
 
 	const {
 		data: { user },
@@ -15,15 +14,21 @@ export const addFavorites = async (formData: FormData) => {
 	const name = formData.get('name') as string
 	const rate = formData.get('rate') as string
 	const posterUrl = formData.get('posterUrl') as string
-	const { error } = await supabase.from('favorites').insert({
-		media_type: mediaType,
-		item_id: itemId,
-		name: name,
-		poster_url: posterUrl,
-		rate,
-		created_at: new Date(Date.now()).toLocaleString(),
-		user_id: String(user?.id),
-	})
-
-	console.log(error?.details)
+	const liked = formData.get('liked') as string
+	if (liked === 'liked') {
+		const { error } = await supabase.from('favorites').insert({
+			media_type: mediaType,
+			item_id: itemId,
+			name: name,
+			poster_url: posterUrl,
+			rate,
+			created_at: new Date(Date.now()).toLocaleString(),
+			user_id: String(user?.id),
+		})
+	} else {
+		const { error } = await supabase
+			.from('favorites')
+			.delete()
+			.eq('item_id', itemId)
+	}
 }
