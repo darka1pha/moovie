@@ -21,6 +21,7 @@ const HeroSlide = ({
 	mediaType,
 	id,
 }: Props) => {
+	console.log(mediaType)
 	return (
 		<div className='h-full w-full'>
 			<div className='absolute top-0 right-0 z-10 w-full h-full'>
@@ -49,7 +50,7 @@ const HeroSlide = ({
 					</div>
 					<div className='mt-4'>
 						<Link
-							href={mediaType === 'movie' ? `/movies/${id}` : `/shows/${id}`}>
+							href={mediaType === 'movie' ? `/movie/${id}` : `/tv/${id}`}>
 							<button
 								aria-label='Watch Now'
 								className='bg-fuelYellow text-white text-xs rounded-2xl py-2 px-6'>
