@@ -1,10 +1,12 @@
 import { Database } from '@/types/supabase'
-import {
-	createClientComponentClient,
-} from '@supabase/auth-helpers-nextjs'
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { revalidatePath } from 'next/cache'
+import { cookies } from 'next/headers'
 
 export const favoritesAction = async (formData: FormData) => {
-	const supabase = createClientComponentClient<Database>()
+	'use server'
+
+	const supabase = createServerActionClient<Database>({ cookies })
 
 	const {
 		data: { user },
@@ -15,7 +17,7 @@ export const favoritesAction = async (formData: FormData) => {
 	const rate = formData.get('rate') as string
 	const posterUrl = formData.get('posterUrl') as string
 	const liked = formData.get('liked') as string
-	if (liked === 'liked') {
+	if (liked !== 'liked') {
 		const { error } = await supabase.from('favorites').insert({
 			media_type: mediaType,
 			item_id: itemId,
@@ -31,4 +33,5 @@ export const favoritesAction = async (formData: FormData) => {
 			.delete()
 			.eq('item_id', itemId)
 	}
+	revalidatePath(`${mediaType}/${itemId}`)
 }
