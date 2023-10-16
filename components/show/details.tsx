@@ -28,6 +28,9 @@ const Details = async ({
 	id,
 }: Props) => {
 	const supabase = createServerComponentClient<Database>({ cookies })
+	const {
+		data: { user },
+	} = await supabase.auth.getUser()
 	const { data } = await supabase
 		.from('favorites')
 		.select('*')
@@ -38,19 +41,21 @@ const Details = async ({
 		<div className='flex flex-col flex-1 text-white'>
 			<div className='flex justify-between'>
 				<h1 className=' text-2xl font-bold'>{name}</h1>
-				<form action={favoritesAction}>
-					<input type='hidden' name='name' value={name} />
-					<input type='hidden' name='rate' value={rate} />
-					<input type='hidden' name='itemId' value={id} />
-					<input type='hidden' name='mediaType' value={mediaType} />
-					<input type='hidden' name='posterUrl' value={posterUrl || ''} />
-					<input
-						type='hidden'
-						name='liked'
-						value={data ? 'liked' : 'not-liked'}
-					/>
-					<LikeButton data={data} />
-				</form>
+				{user && (
+					<form action={favoritesAction}>
+						<input type='hidden' name='name' value={name} />
+						<input type='hidden' name='rate' value={rate} />
+						<input type='hidden' name='itemId' value={id} />
+						<input type='hidden' name='mediaType' value={mediaType} />
+						<input type='hidden' name='posterUrl' value={posterUrl || ''} />
+						<input
+							type='hidden'
+							name='liked'
+							value={data ? 'liked' : 'not-liked'}
+						/>
+						<LikeButton data={data} />
+					</form>
+				)}
 			</div>
 			<div className='flex flex-wrap mt-5'>
 				<DetailItem name={'Rate'}>

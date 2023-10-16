@@ -6,7 +6,7 @@ const SubmitButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
 	const { pending } = useFormStatus()
 
 	return (
-		<button aria-disabled={pending} type='submit' {...props}>
+		<button disabled={pending} aria-disabled={pending} type='submit' {...props}>
 			{pending ? (
 				<span className='loading loading-ring loading-sm' />
 			) : (

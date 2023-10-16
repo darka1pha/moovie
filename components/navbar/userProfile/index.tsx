@@ -1,3 +1,5 @@
+import { signOutAction } from '@/app/actions/auth/sign-out'
+import SubmitButton from '@/components/submitButton'
 import { Database } from '@/types/supabase'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { User } from 'iconsax-react'
@@ -25,16 +27,16 @@ const UserProfile = async () => {
 						<li>
 							<Link href={'/favorites'}>Favorites</Link>
 						</li>
-						<li className='bg-red-500 text-white rounded-md hover:bg-red-600 transition-all'>
-							<form action='/api/auth/sign-out' method='post'>
-								<button className='hover:text-white'>Logout</button>
+						<li className='bg-red-500 text-white flex justify-center items-center hover:text-white rounded-md'>
+							<form className='w-full h-full flex p-0' action={signOutAction}>
+								<SubmitButton className='w-full h-full p-2'>Logout</SubmitButton>
 							</form>
 						</li>
 					</>
 				) : (
 					<>
 						<li>
-							<Link href={'/login'}>Login</Link>
+							<Link href={'/auth/sign-in'}>Sign in</Link>
 						</li>
 					</>
 				)}

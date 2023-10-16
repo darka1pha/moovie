@@ -18,7 +18,10 @@ const LikeButton = ({
 }) => {
 	const { pending } = useFromStatus()
 	return (
-		<button className='btn rounded-full h-14 w-14'>
+		<button
+			disabled={pending}
+			aria-disabled={pending}
+			className='btn rounded-full h-14 w-14'>
 			{pending ? (
 				<span className='loading loading-ring loading-sm' />
 			) : (
