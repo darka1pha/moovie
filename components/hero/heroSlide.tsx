@@ -21,7 +21,6 @@ const HeroSlide = ({
 	mediaType,
 	id,
 }: Props) => {
-	console.log(mediaType)
 	return (
 		<div className='h-full w-full'>
 			<div className='absolute top-0 right-0 z-10 w-full h-full'>
