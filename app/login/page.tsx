@@ -1,3 +1,4 @@
+import SubmitButton from '@/components/submitButton'
 import Messages from './messages'
 
 export default function Login() {
@@ -26,10 +27,15 @@ export default function Login() {
 					placeholder='••••••••'
 					required
 				/>
-				<button className='bg-fuelYellow text-white hover:opacity-90 transition-all p-2 rounded-lg'>Sign In</button>
-				<button className='bg-transparent hover:opacity-90 transition-all text-white border-[1px] border-fuelYellow p-2 rounded-lg' formAction='/api/auth/sign-up'>
+				<SubmitButton
+					className='bg-fuelYellow text-white hover:opacity-90 transition-all p-2 rounded-lg'>
+					Sign In
+				</SubmitButton>
+				<SubmitButton
+					className='bg-transparent hover:opacity-90 transition-all text-white border-[1px] border-fuelYellow p-2 rounded-lg'
+					formAction='/api/auth/sign-up'>
 					Sign Up
-				</button>
+				</SubmitButton>
 				<Messages />
 			</form>
 		</div>
