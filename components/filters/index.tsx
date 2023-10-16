@@ -26,11 +26,9 @@ const Filters = ({ genreData }: Props) => {
 		if (type === 'mediaType') {
 			setSelectedMedia(value)
 			deleteSearchParam({ param: 'genre' })
-			// setSearchParams([{ key: 'mediaType', value: value }])
 			setSelectedGenre('All')
 		} else {
 			setSelectedGenre(value)
-			// setSearchParams([{ key: 'genre', value: value }])
 		}
 		setSearchParams([
 			{ key: type, value },

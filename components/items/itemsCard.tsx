@@ -20,7 +20,7 @@ const ItemsCard = ({
 	vote_average,
 	id,
 	margin,
-	media
+	media,
 }: Props) => {
 	const searchParams = useSearchParams()
 	const mediaType = media ?? searchParams.get('mediaType')?.toLocaleLowerCase()
