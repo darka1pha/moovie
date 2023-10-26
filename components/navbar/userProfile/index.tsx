@@ -4,18 +4,29 @@ import { Database } from '@/types/supabase'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { User } from 'iconsax-react'
 import { cookies } from 'next/headers'
+import Image from 'next/image'
 import Link from 'next/link'
+import Avatar from './avatar'
 
 const UserProfile = async () => {
 	const supabase = createServerComponentClient<Database>({ cookies })
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()
+
+	const { data } = await supabase
+		.from('profiles')
+		.select()
+		.eq('id', user?.id!)
+		.single()
+
+	const { data: avatarPublicUrl } = supabase.storage
+		.from('avatars')
+		.getPublicUrl(data?.avatar_url!)
+
 	return (
 		<div className='dropdown dropdown-end z-20'>
-			<label tabIndex={0} className='btn m-1 rounded-full'>
-				<User className='text-fuelYellow' size={24} />
-			</label>
+			<Avatar avatar_url={avatarPublicUrl.publicUrl} />
 			<ul
 				tabIndex={0}
 				className='dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-white'>
@@ -29,7 +40,9 @@ const UserProfile = async () => {
 						</li>
 						<li className='bg-red-500 text-white flex justify-center items-center hover:text-white rounded-md'>
 							<form className='w-full h-full flex p-0' action={signOutAction}>
-								<SubmitButton className='w-full h-full p-2'>Logout</SubmitButton>
+								<SubmitButton className='w-full h-full p-2'>
+									Logout
+								</SubmitButton>
 							</form>
 						</li>
 					</>
