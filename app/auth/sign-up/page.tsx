@@ -30,7 +30,7 @@ export default function SignUp() {
 				/>
 				<div className='flex mb-6'>
 					<p>already have an account?</p>&nbsp;
-					<Link href={'/sign-in'} className='text-fuelYellow underline'>
+					<Link href={'/auth/sign-in'} className='text-fuelYellow underline'>
 						Sign in
 					</Link>
 				</div>

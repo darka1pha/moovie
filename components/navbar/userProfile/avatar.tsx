@@ -1,13 +1,22 @@
 'use client'
 
 import { Database, Tables } from '@/types/supabase'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { User } from 'iconsax-react'
+import {
+	User,
+	createClientComponentClient,
+} from '@supabase/auth-helpers-nextjs'
+import { User as UserIcon } from 'iconsax-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-const Avatar = ({ avatar_url }: { avatar_url: string }) => {
+const Avatar = ({
+	avatar_url,
+	user,
+}: {
+	avatar_url: string | null
+	user: User | null
+}) => {
 	const [avatarUrl, setAvatarUrl] = useState(avatar_url)
 	const supabase = createClientComponentClient<Database>()
 	const router = useRouter()
@@ -39,7 +48,7 @@ const Avatar = ({ avatar_url }: { avatar_url: string }) => {
 		<label
 			tabIndex={0}
 			className='btn h-12 w-12 m-1 rounded-full overflow-hidden flex items-center justify-center'>
-			{avatarUrl ? (
+			{avatarUrl && user ? (
 				<Image
 					fill
 					className='h-full w-full object-cover rounded-full border-2 border-fuelYellow'
@@ -47,7 +56,7 @@ const Avatar = ({ avatar_url }: { avatar_url: string }) => {
 					src={avatarUrl}
 				/>
 			) : (
-				<User className='text-fuelYellow' size={24} />
+				<UserIcon className='text-fuelYellow' size={24} />
 			)}
 		</label>
 	)

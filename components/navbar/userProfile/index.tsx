@@ -2,9 +2,7 @@ import { signOutAction } from '@/app/actions/auth/sign-out'
 import SubmitButton from '@/components/submitButton'
 import { Database } from '@/types/supabase'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { User } from 'iconsax-react'
 import { cookies } from 'next/headers'
-import Image from 'next/image'
 import Link from 'next/link'
 import Avatar from './avatar'
 
@@ -26,7 +24,14 @@ const UserProfile = async () => {
 
 	return (
 		<div className='dropdown dropdown-end z-20'>
-			<Avatar avatar_url={avatarPublicUrl.publicUrl} />
+			<Avatar
+				user={user}
+				avatar_url={
+					!data
+						? null
+						: avatarPublicUrl.publicUrl
+				}
+			/>
 			<ul
 				tabIndex={0}
 				className='dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-white'>
