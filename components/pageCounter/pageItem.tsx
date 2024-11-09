@@ -1,41 +1,41 @@
-'use client'
-import getUpdatedPath from '@/lib/getUpdatedPath'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+"use client";
+import updateSearchParams from "@/lib/updateSearchParams";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Link } from "../link";
 
 interface Props {
-	page: number | string
-	active: boolean
+	page: number | string;
+	active: boolean;
 }
 
 const PageItem = ({ page, active }: Props) => {
-	const router = useRouter()
-	const onPageClick = () => {
-		router.prefetch(getUpdatedPath({ param: 'page', value: page.toString() }))
-		router.push(getUpdatedPath({ param: 'page', value: page.toString() }))
-	}
-	return page === '...' ? (
-		<button
-			aria-label='Page Navigation'
-			className={`bg-black transition-all ease-in-out duration-500 ${
-				active
-					? 'text-fuelYellow border-fuelYellow'
-					: 'border-battleGrey text-white'
-			} border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}>
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+	return page === "..." ? (
+		<span
+			aria-label="pages dot"
+			className={`bg-black transition-all ease-in-out duration-500 border-battleGrey text-white text-center border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}
+		>
 			{page}
-		</button>
+		</span>
 	) : (
-		<button
-			onClick={onPageClick}
-			aria-label='Page Navigation'
-			className={`bg-black transition-all ease-in-out duration-500 ${
+		<Link
+			href={updateSearchParams({
+				params: [{ key: "page", value: page.toString() }],
+				pathname,
+				searchParams,
+			})}
+			scroll={false}
+			aria-label="Page Navigation"
+			className={`bg-black text-center transition-all ease-in-out duration-500 ${
 				active
-					? 'text-fuelYellow border-fuelYellow'
-					: 'border-battleGrey text-white'
-			} border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}>
+					? "text-fuelYellow border-fuelYellow"
+					: "border-battleGrey text-white"
+			} border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}
+		>
 			{page}
-		</button>
-	)
-}
+		</Link>
+	);
+};
 
-export default PageItem
+export default PageItem;

@@ -1,60 +1,64 @@
-'use client'
+"use client";
 
-import usePagination from '@/lib/hooks/usePagination'
-import PageItem from './pageItem'
-import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
-import { useUpdateSearchParam } from '@/lib/hooks/useUpdateSearchParam'
+import usePagination from "@/lib/hooks/usePagination";
+import PageItem from "./pageItem";
+import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
+import { usePathname, useSearchParams } from "next/navigation";
+import updateSearchParams from "@/lib/updateSearchParams";
+import { Link } from "../link";
 
 interface Props {
-	totalPages: number
-	currentPage: number
+	totalPages: number;
+	currentPage: number;
 }
 
 const PageCounter = ({ currentPage, totalPages }: Props) => {
-	const { setSearchParams } = useUpdateSearchParam()
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 	const paginationRange = usePagination({
 		currentPage,
 		totalPages,
 		siblingCount: 1,
-	})
-
-	const onNextPage = () => {
-		if (currentPage + 1 <= totalPages) {
-			setSearchParams([{ key: 'page', value: (currentPage + 1).toString() }])
-		}
-	}
-	const onPrevPage = () => {
-		if (currentPage - 1 >= 1) {
-			setSearchParams([{ key: 'page', value: (currentPage - 1).toString() }])
-		}
-	}
+	});
 	return (
-		<div className='flex paddings items-center justify-center flex-wrap'>
-			<button
-				onClick={onPrevPage}
+		<div className="flex paddings items-center justify-center flex-wrap">
+			<Link
+				href={updateSearchParams({
+					params: [{ key: "page", value: (currentPage - 1).toString() }],
+					pathname,
+					searchParams,
+				})}
 				aria-label="Prev Page"
+				scroll={false}
 				className={`${
-					currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
-				}border-battleGrey flex border-[2px] rounded-full p-1 mr-1`}>
-				<ArrowLeft2 className='text-white' size={20} />
-			</button>
+					currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+				}border-battleGrey flex border-[2px] rounded-full p-1 mr-1`}
+			>
+				<ArrowLeft2 color="white" size={20} />
+			</Link>
 			{paginationRange?.map((page, key) => (
 				<PageItem
 					key={key}
 					active={currentPage === page}
-					page={typeof page === 'number' ? page : '...'}
+					page={typeof page === "number" ? page : "..."}
 				/>
 			))}
-			<button
-			aria-label="Next Page"
-				onClick={onNextPage}
+			<Link
+				href={updateSearchParams({
+					params: [{ key: "page", value: (currentPage + 1).toString() }],
+					pathname,
+					searchParams,
+				})}
+				aria-label="Next Page"
+				scroll={false}
 				className={`${
-					currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'
-				}border-battleGrey flex border-[2px] rounded-full p-1 ml-1`}>
-				<ArrowRight2 className='text-white' size={20} />
-			</button>
+					currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
+				}border-battleGrey flex border-[2px] rounded-full p-1 ml-1`}
+			>
+				<ArrowRight2 color="white" size={20} />
+			</Link>
 		</div>
-	)
-}
+	);
+};
 
-export default PageCounter
+export default PageCounter;
