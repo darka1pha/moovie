@@ -1,5 +1,5 @@
 'use client';
-import { POSTER_URL } from '@/lib/urls';
+import { POSTER_URL } from '@/lib/services/actions/urls';
 import { Star1 } from 'iconsax-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,14 +43,12 @@ const ItemsCard = ({
       />
       <div className='absolute p-3 backdrop-blur-sm bg-black/50 -bottom-full right-0 h-fit w-full transition-all ease-in-out group-hover:bottom-0 duration-500'>
         <p className='text-white text-sm'>{original_title}</p>
-        <div className='flex mt-2'>
-          <div className='bg-fuelYellow p-2 mr-2 w-fit rounded-xl flex items-center text-xs text-white text-center justify-center'>
-            <Star1
-              size={15}
-              className='mr-1'
-            />
-            <p>{vote_average?.toFixed(1)}</p>
-          </div>
+        <div className='bg-fuelYellow p-2 mt-2 mr-2 gap-2 w-fit rounded-xl flex items-center text-xs text-white text-center justify-center'>
+          <Star1
+            size={15}
+            color='white'
+          />
+          <p className='leading-3'>{vote_average?.toFixed(1)}</p>
         </div>
       </div>
     </Link>

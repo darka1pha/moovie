@@ -1,5 +1,5 @@
 'use client';
-import updateSearchParams from '@/lib/updateSearchParams';
+import updateSearchParams from '@/lib/utils/updateSearchParams';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 

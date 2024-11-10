@@ -4,7 +4,7 @@ import usePagination from '@/lib/hooks/usePagination';
 import PageItem from './pageItem';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import updateSearchParams from '@/lib/updateSearchParams';
+import updateSearchParams from '@/lib/utils/updateSearchParams';
 import Link from 'next/link';
 
 interface Props {
