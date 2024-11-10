@@ -22,17 +22,15 @@ const HeroSlide = ({
   id,
 }: Props) => {
   return (
-    <div className='h-full w-full'>
-      <div className='absolute top-0 right-0 z-10 w-full h-full'>
-        <Image
-          priority
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-          fill
-          alt={name}
-          className='object-cover'
-          src={imageUrl}
-        />
-      </div>
+    <>
+      <Image
+        priority
+        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+        fill
+        className='object-cover'
+        src={imageUrl}
+        alt={name ?? `${id} poster`}
+      />
       <div className='absolute w-full h-full bg-black/60 z-20'>
         <div className='flex flex-col justify-center h-full px-10'>
           <div>
@@ -60,7 +58,7 @@ const HeroSlide = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
