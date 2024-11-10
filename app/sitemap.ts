@@ -1,20 +1,17 @@
-import { getDiscovers } from '@/lib/services/actions/home';
-import { IPaginatedData, ListResults } from '@/types';
+import { getDiscovers } from '@/lib/services/actions';
 
-const URL = 'https://moovie.vercel.app';
+const URL = 'https://moovie.darkalpha.ir';
 
 export default async function sitemap() {
-  const { results: movies } = (await getDiscovers({
+  const { results: movies } = await getDiscovers({
     genre: '',
-    page: 1,
     mediaType: 'movie',
-  })) as IPaginatedData<ListResults>;
+  });
 
-  const { results: tvs } = (await getDiscovers({
+  const { results: tvs } = await getDiscovers({
     genre: '',
-    page: 1,
     mediaType: 'tv',
-  })) as IPaginatedData<ListResults>;
+  });
 
   const posts = [
     ...movies.map(({ id }) => ({
