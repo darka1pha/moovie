@@ -1,116 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
-	@variants responsive {
-		/* Hide scrollbar for Chrome, Safari and Opera */
-		.no-scrollbar::-webkit-scrollbar {
-			display: none;
-		}
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
 
-		/* Hide scrollbar for IE, Edge and Firefox */
-		.no-scrollbar {
-			-ms-overflow-style: none; /* IE and Edge */
-			scrollbar-width: none; /* Firefox */
-		}
-	}
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-	font-family: Inter;
-	background-color: #0d0c11;
+  background-color: #0d0c11;
 }
 
 .flexCenter {
-	@apply flex justify-center items-center;
+  @apply flex justify-center items-center;
 }
 
 .flexBetween {
-	@apply flex justify-between items-center;
+  @apply flex justify-between items-center;
 }
 
 .flexStart {
-	@apply flex items-center justify-start;
+  @apply flex items-center justify-start;
 }
 
 .text-small {
-	@apply text-sm font-medium;
+  @apply text-sm font-medium;
 }
 
 .paddings {
-	@apply lg:px-20 py-6 px-5;
+  @apply lg:px-20 py-6 px-5;
 }
 
 ::-webkit-scrollbar {
-	width: 5px;
-	height: 4px;
+  width: 5px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #888;
-	border-radius: 12px;
+  background: #888;
+  border-radius: 12px;
 }
 
 .swiper-pagination-bullet-active {
-	background-color: #efae28 !important;
-	width: 20px !important;
-	border-radius: 10px !important;
+  background-color: #efae28 !important;
+  width: 20px !important;
+  border-radius: 10px !important;
 }
 
 .swiper-pagination-bullet {
-	transition: all ease-in 300ms;
+  transition: all ease-in 300ms;
 }
 
 .swiper-button-prev {
-	background-image: url(/icons/arrow-left.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #ffffff;
-	border-radius: 50%;
-	height: 48px !important;
-	width: 48px !important;
-	background-size: 30px;
-	backdrop-filter: blur(3px);
+  background-image: url(/icons/arrow-left.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  height: 48px !important;
+  width: 48px !important;
+  background-size: 30px;
+  backdrop-filter: blur(3px);
 }
 
 .swiper-button-prev::after {
-	display: none;
+  display: none;
 }
 
 .swiper-button-next {
-	background-image: url(/icons/arrow-right.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #ffffff;
-	border-radius: 50%;
-	height: 48px !important;
-	width: 48px !important;
-	background-size: 30px;
-	backdrop-filter: blur(3px);
+  background-image: url(/icons/arrow-right.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  height: 48px !important;
+  width: 48px !important;
+  background-size: 30px;
+  backdrop-filter: blur(3px);
 }
 
 .swiper-button-next::after {
-	display: none;
+  display: none;
 }
 
 .noSelect {
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .noSelect:focus {
-	outline: none !important;
+  outline: none !important;
 }

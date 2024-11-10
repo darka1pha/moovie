@@ -1,31 +1,32 @@
-import { Navbar } from '@/components'
-import './globals.css'
-import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Navbar } from '@/components';
+import './globals.css';
+import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 
 const popins = Poppins({
-	subsets: ['latin'],
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-popins',
+});
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://www.moovie-nine.vercel.app'),
-	title: { default: 'Moovie', template: '%s | Moovie' },
-}
+  metadataBase: new URL('https://www.moovie-nine.vercel.app'),
+  title: { default: 'Moovie', template: '%s | Moovie' },
+};
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode
+  children: React.ReactNode;
 }) {
-	return (
-		<html lang='en'>
-			<body className={`${popins.className} noSelect`}>
-				<Navbar />
-				{children}
-			</body>
-		</html>
-	)
+  return (
+    <html lang='en'>
+      <body className={`${popins.className} noSelect`}>
+        <Navbar />
+        {children}
+      </body>
+    </html>
+  );
 }
