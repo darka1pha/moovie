@@ -16,7 +16,7 @@ interface MetadataProps {
 
 export const generateMetadata = async ({ params }: MetadataProps) => {
   const { id } = await params;
-  const data = (await getTvDetails({ id })) as TvDetails;
+  const data = await getTvDetails({ id });
   return {
     title: data.original_name,
     description: data.overview,

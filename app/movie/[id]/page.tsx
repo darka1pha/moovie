@@ -8,15 +8,13 @@ import {
   getSimilarMovies,
 } from '@/lib/services/actions';
 
-import { IPaginatedData, ListResults, MovieDetails } from '@/types';
-
 interface MetadataProps {
   params: Promise<{ id: string }>;
 }
 
 export const generateMetadata = async ({ params }: MetadataProps) => {
   const { id } = await params;
-  const data = (await getMovieDetails({ id })) as MovieDetails;
+  const data = await getMovieDetails({ id });
   return {
     title: data.original_title,
     description: data.overview,
