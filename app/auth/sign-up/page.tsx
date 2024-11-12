@@ -1,7 +1,7 @@
 import SubmitButton from '@/components/submitButton';
 import Messages from '../messages';
-import { signUpAction } from '../../../lib/services/actions/auth/sign-up';
 import Link from 'next/link';
+import { signUpAction } from '@/lib/services/actions/auth/sign-up';
 
 export default function SignUp() {
   return (
