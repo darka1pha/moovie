@@ -1,6 +1,6 @@
 import ItemsCard from './itemsCard';
 import { PageCounter } from '..';
-import { getDiscovers } from '@/lib/services/actions';
+import { getDiscovers } from '@/lib/services/actions/home';
 interface Props {
   genreID: string;
   mediaType: string;

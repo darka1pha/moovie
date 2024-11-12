@@ -1,4 +1,4 @@
-import { getDiscovers } from '@/lib/services/actions';
+import { getDiscovers } from '@/lib/services/actions/home';
 
 const URL = 'https://moovie.darkalpha.ir';
 

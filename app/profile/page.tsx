@@ -1,6 +1,6 @@
 import { AvatarContainer } from '@/components';
 import SubmitButton from '@/components/submitButton';
-import { updateProfileAction } from '@/lib/services/actions';
+import { updateProfileAction } from '@/lib/services/actions/profile';
 import { Database } from '@/types/supabase';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

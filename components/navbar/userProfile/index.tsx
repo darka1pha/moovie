@@ -28,7 +28,7 @@ const UserProfile = async () => {
       />
       <ul
         tabIndex={0}
-        className='dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-white'
+        className='dropdown-content z-[1] menu p-2 border-2 border-fuelYellow rounded-box w-52 bg-black '
       >
         {user ? (
           <>

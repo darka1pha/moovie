@@ -84,7 +84,7 @@ export interface TvDetails {
 }
 
 export interface Review {
-  listNumber?: number;
+  delay?: number;
   author: string;
   author_details: {
     name: string;

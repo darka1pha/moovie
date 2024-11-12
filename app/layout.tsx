@@ -22,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={`${popins.className} noSelect`}>
+    <html
+      className='bg-[#0d0c11]'
+      lang='en'
+    >
+      <body className={`${popins.className} noSelect min-h-screen`}>
         <Navbar />
         {children}
       </body>

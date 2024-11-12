@@ -1,12 +1,12 @@
 import { Movies, Reviews, SimilarItems } from '@/components';
 import Credits from '@/components/show/credits';
+import { getDiscovers } from '@/lib/services/actions/home';
 import {
-  getDiscovers,
   getMovieCredits,
   getMovieDetails,
   getMovieReviews,
   getSimilarMovies,
-} from '@/lib/services/actions';
+} from '@/lib/services/actions/shows';
 
 interface MetadataProps {
   params: Promise<{ id: string }>;

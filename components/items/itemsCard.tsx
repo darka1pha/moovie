@@ -52,8 +52,9 @@ const ItemsCard = ({
               <Star1
                 size={15}
                 className='mr-1'
+                color='white'
               />
-              <p>{vote_average?.toFixed(1)}</p>
+              <p className='leading-3'>{vote_average?.toFixed(1)}</p>
             </div>
           </div>
         </div>

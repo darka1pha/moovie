@@ -1,14 +1,12 @@
 import { Reviews, SimilarItems, Tvs } from '@/components';
 import Credits from '@/components/show/credits';
+import { getDiscovers } from '@/lib/services/actions/home';
 import {
-  getDiscovers,
   getSimilarTvs,
   getTvCredits,
   getTvDetails,
   getTvReviews,
-} from '@/lib/services/actions';
-
-import { IPaginatedData, ListResults, TvDetails } from '@/types';
+} from '@/lib/services/actions/shows';
 
 interface MetadataProps {
   params: Promise<{ id: string }>;
