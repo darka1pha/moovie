@@ -1,10 +1,7 @@
 "use client";
 
-import { Database, Tables } from "@/types/supabase";
-import {
-	User,
-	createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { User as UserIcon } from "iconsax-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -18,7 +15,7 @@ const Avatar = ({
 	user: User | null;
 }) => {
 	const [avatarUrl, setAvatarUrl] = useState(avatar_url);
-	const supabase = createClientComponentClient<Database>();
+	const supabase = createClient();
 	const router = useRouter();
 	useEffect(() => {
 		const channel = supabase

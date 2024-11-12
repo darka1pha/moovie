@@ -1,38 +1,38 @@
-import { Filters, Hero, Items, ItemsLoading } from '@/components';
-import { getGenres, getTrendigs } from '@/lib/services/actions/home';
-import { Suspense } from 'react';
+import { Filters, Hero, Items, ItemsLoading } from "@/components";
+import { getGenres, getTrendigs } from "@/app/actions/home";
+import { Suspense } from "react";
 
 export default async function Home({
-  searchParams,
+	searchParams,
 }: {
-  searchParams: Promise<{ page: number; media_type: string; genre: string }>;
+	searchParams: Promise<{ page: number; media_type: string; genre: string }>;
 }) {
-  const { page, media_type, genre } = await searchParams;
-  const { results: bannerData } = await getTrendigs({
-    page: 1,
-    mediaType: 'all',
-  });
+	const { page, media_type, genre } = await searchParams;
+	const { results: bannerData } = await getTrendigs({
+		page: 1,
+		mediaType: "all",
+	});
 
-  const { genres } = await getGenres({
-    mediaType: media_type ?? 'movie',
-  });
+	const { genres } = await getGenres({
+		mediaType: media_type ?? "movie",
+	});
 
-  const genreID =
-    genre && genre.toLocaleLowerCase() !== 'all'
-      ? genres.filter((item) => item.name === genre)[0].id
-      : '';
+	const genreID =
+		genre && genre.toLocaleLowerCase() !== "all"
+			? genres.filter((item) => item.name === genre)[0].id
+			: "";
 
-  return (
-    <main>
-      <Hero data={bannerData.slice(0, 6)} />
-      <Filters genreData={genres} />
-      <Suspense fallback={<ItemsLoading />}>
-        <Items
-          genreID={genreID.toString()}
-          mediaType={media_type}
-          page={page}
-        />
-      </Suspense>
-    </main>
-  );
+	return (
+		<main>
+			<Hero data={bannerData.slice(0, 6)} />
+			<Filters genreData={genres} />
+			<Suspense fallback={<ItemsLoading />}>
+				<Items
+					genreID={genreID.toString()}
+					mediaType={media_type}
+					page={page}
+				/>
+			</Suspense>
+		</main>
+	);
 }
