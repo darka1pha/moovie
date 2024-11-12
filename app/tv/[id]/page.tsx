@@ -8,6 +8,7 @@ import {
   getTvReviews,
 } from '@/lib/services/actions/shows';
 import { POSTER_URL } from '@/lib/services/actions/urls';
+import { url } from 'inspector';
 
 interface MetadataProps {
   params: Promise<{ id: string }>;
@@ -25,6 +26,7 @@ export const generateMetadata = async ({ params }: MetadataProps) => {
     openGraph: {
       title: data?.original_name,
       description: data?.overview,
+      url: `/tv/${id}`,
       images: [
         {
           url: `${POSTER_URL({ quality: 'w500' })}${data.poster_path}`,
@@ -34,6 +36,7 @@ export const generateMetadata = async ({ params }: MetadataProps) => {
     twitter: {
       title: data?.original_name,
       description: data?.overview,
+      url: `/tv/${id}`,
       images: [
         {
           url: `${POSTER_URL({ quality: 'w500' })}${data.poster_path}`,

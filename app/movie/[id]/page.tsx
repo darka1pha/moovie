@@ -25,6 +25,7 @@ export const generateMetadata = async ({ params }: MetadataProps) => {
     openGraph: {
       title: data?.original_title,
       description: data?.overview,
+      url: `/movie/${id}`,
       images: [
         {
           url: `${POSTER_URL({ quality: 'w500' })}${data.poster_path}`,
@@ -34,6 +35,7 @@ export const generateMetadata = async ({ params }: MetadataProps) => {
     twitter: {
       title: data?.original_title,
       description: data?.overview,
+      url: `/movie/${id}`,
       images: [
         {
           url: `${POSTER_URL({ quality: 'w500' })}${data.poster_path}`,

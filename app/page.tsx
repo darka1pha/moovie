@@ -1,11 +1,6 @@
 import { Filters, Hero, Items, ItemsLoading } from '@/components';
 import { getGenres, getTrendigs } from '@/lib/services/actions/home';
-import { Metadata } from 'next';
 import { Suspense } from 'react';
-
-export const metadata: Metadata = {
-  description: 'Explore the latest movies and tv shows.',
-};
 
 export default async function Home({
   searchParams,
