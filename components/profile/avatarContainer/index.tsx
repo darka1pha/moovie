@@ -44,7 +44,6 @@ const AvatarContainer = ({ url }: { url: string }) => {
       .finally(() => {
         setImageUploading(false);
       });
-    console.log({ data, error });
     await supabase
       .from('profiles')
       .update({ avatar_url: data?.path })
