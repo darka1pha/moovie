@@ -1,12 +1,10 @@
 import { AvatarContainer } from '@/components';
 import SubmitButton from '@/components/submitButton';
 import { updateProfileAction } from '@/lib/services/actions/profile';
-import { Database } from '@/types/supabase';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 const Profile = async () => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -46,7 +44,7 @@ const Profile = async () => {
           htmlFor='username'
           className='mb-2'
         >
-          Full Name
+          Username
         </label>
         <input
           name='username'
