@@ -1,10 +1,10 @@
 import { Star1 } from 'iconsax-react';
 import DetailItem from './detailItem';
 import { favoritesAction } from '@/lib/services/actions/favorites';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { Database } from '@/types/supabase';
 import LikeButton from './likeButton';
+import { createClient } from '@/lib/supabase/server';
 
 interface Props {
   name: string;
@@ -27,7 +27,7 @@ const Details = async ({
   mediaType,
   id,
 }: Props) => {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
