@@ -43,7 +43,7 @@ const FilterSelect = ({
 					onClick={handleToggle}
 					className={`cursor-pointer flex relative bg-white w-full rounded-xl px-2 items-center justify-between h-9`}
 				>
-					<p className="text-battleGrey text-sm">{value}</p>
+					<p className="text-black text-sm">{value}</p>
 					{isOpen ? (
 						<ArrowUp2 color="black" size={15} />
 					) : (
