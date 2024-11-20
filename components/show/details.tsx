@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 import { Star1 } from "iconsax-react";
 import DetailItem from "./detailItem";
 import { favoritesAction } from "@/app/actions/favorites";
 import LikeButton from "./likeButton";
 import { createClient } from "@/lib/supabase/server";
+=======
+import { Star1 } from 'iconsax-react';
+import DetailItem from './detailItem';
+import { favoritesAction } from '@/lib/services/actions/favorites';
+import { cookies } from 'next/headers';
+import { Database } from '@/types/supabase';
+import LikeButton from './likeButton';
+import { createClient } from '@/lib/supabase/server';
+>>>>>>> 9c0b93ef198e6e853e954ec2cfbbc33641daa190
 
 interface Props {
 	name: string;
@@ -25,6 +35,7 @@ const Details = async ({
 	mediaType,
 	id,
 }: Props) => {
+<<<<<<< HEAD
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -34,6 +45,17 @@ const Details = async ({
 		.select("*")
 		.eq("item_id", id)
 		.single();
+=======
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data } = await supabase
+    .from('favorites')
+    .select('*')
+    .eq('item_id', id)
+    .single();
+>>>>>>> 9c0b93ef198e6e853e954ec2cfbbc33641daa190
 
 	return (
 		<div className="flex flex-col flex-1 text-white">

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"name": "moovie",
 	"version": "0.1.0",
 	"private": true,
@@ -31,4 +32,39 @@
 		"daisyui": "^3.9.2",
 		"supabase": "^1.106.1"
 	}
+=======
+  "name": "moovie",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.38.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "10.4.14",
+    "dompurify": "^3.2.0",
+    "framer-motion": "^10.15.1",
+    "iconsax-react": "^0.0.8",
+    "linkedom": "^0.18.5",
+    "next": "15.0.4-canary.3",
+    "postcss": "8.4.27",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swiper": "^10.0.4",
+    "tailwindcss": "^3.4.14",
+    "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "daisyui": "^3.9.2",
+    "supabase": "^1.106.1"
+  }
+>>>>>>> 9c0b93ef198e6e853e954ec2cfbbc33641daa190
 }
