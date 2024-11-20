@@ -1,18 +1,10 @@
-<<<<<<< HEAD
 import { Star1 } from "iconsax-react";
 import DetailItem from "./detailItem";
-import { favoritesAction } from "@/app/actions/favorites";
+import { favoritesAction } from "@/lib/services/actions/favorites";
+import { cookies } from "next/headers";
+import { Database } from "@/types/supabase";
 import LikeButton from "./likeButton";
 import { createClient } from "@/lib/supabase/server";
-=======
-import { Star1 } from 'iconsax-react';
-import DetailItem from './detailItem';
-import { favoritesAction } from '@/lib/services/actions/favorites';
-import { cookies } from 'next/headers';
-import { Database } from '@/types/supabase';
-import LikeButton from './likeButton';
-import { createClient } from '@/lib/supabase/server';
->>>>>>> 9c0b93ef198e6e853e954ec2cfbbc33641daa190
 
 interface Props {
 	name: string;
@@ -35,7 +27,6 @@ const Details = async ({
 	mediaType,
 	id,
 }: Props) => {
-<<<<<<< HEAD
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -45,17 +36,6 @@ const Details = async ({
 		.select("*")
 		.eq("item_id", id)
 		.single();
-=======
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const { data } = await supabase
-    .from('favorites')
-    .select('*')
-    .eq('item_id', id)
-    .single();
->>>>>>> 9c0b93ef198e6e853e954ec2cfbbc33641daa190
 
 	return (
 		<div className="flex flex-col flex-1 text-white">
@@ -80,7 +60,7 @@ const Details = async ({
 			<div className="flex flex-wrap mt-5">
 				<DetailItem name={"Rate"}>
 					<div className="flex items-center">
-						<Star1 className="text-fuelYellow" size={18} />
+						<Star1 color="rgb(239 174 40)" size={18} />
 						<p className="text-white text-sm ml-2">{rate.toFixed(1)}</p>
 					</div>
 				</DetailItem>
