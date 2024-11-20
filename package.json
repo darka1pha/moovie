@@ -6,9 +6,11 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"analyze": "npx cross-env ANALYZE=true next build"
 	},
 	"dependencies": {
+		"@next/bundle-analyzer": "^15.0.3",
 		"@supabase/ssr": "^0.5.2",
 		"@supabase/supabase-js": "^2.46.1",
 		"@tailwindcss/line-clamp": "^0.4.4",

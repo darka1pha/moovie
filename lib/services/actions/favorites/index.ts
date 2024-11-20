@@ -16,8 +16,6 @@ export const favoritesAction = async (formData: FormData) => {
 	const posterUrl = formData.get("posterUrl") as string;
 	const liked = formData.get("liked") as string;
 
-	console.log({ itemId, mediaType, name, rate, posterUrl, liked });
-
 	if (liked !== "liked") {
 		const { data, error } = await supabase.from("favorites").insert({
 			media_type: mediaType,
@@ -28,13 +26,11 @@ export const favoritesAction = async (formData: FormData) => {
 			created_at: new Date(Date.now()).toLocaleString(),
 			user_id: String(user?.id),
 		});
-		console.log({ data, error });
 	} else {
 		const { error } = await supabase
 			.from("favorites")
 			.delete()
 			.eq("item_id", itemId);
-		console.log(error);
 	}
 	revalidatePath(`${mediaType}/${itemId}`);
 };

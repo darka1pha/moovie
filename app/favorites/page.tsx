@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 const Favorites = async () => {
 	const supabase = await createClient();
 	const { data } = await supabase.from("favorites").select("*");
-	console.log(data);
 	return (
 		<div className="min-h-[calc(100vh-80px)] p-5">
 			<h1 className="font-bold text-white text-2xl">Favorites</h1>

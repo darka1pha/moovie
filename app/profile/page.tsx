@@ -19,7 +19,6 @@ const Profile = async () => {
 	const { data: avatarPublicUrl } = supabase.storage
 		.from("avatars")
 		.getPublicUrl(data?.avatar_url!);
-	console.log(avatarPublicUrl);
 
 	return (
 		<div className="p-4 min-h-screen">
