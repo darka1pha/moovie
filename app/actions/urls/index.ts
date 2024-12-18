@@ -1,7 +1,11 @@
 import { TrendingsParams } from '@/types';
-const API_KEY = '917e390fb30e6e519915e41532377965';
 
-interface PosterUrl {
+const API_KEY = '917e390fb30e6e519915e41532377965';
+export const BASE_URL = 'https://api.themoviedb.org/3';
+const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/';
+
+// Interfaces for Image Quality
+interface ImageUrl {
   quality: 'w92' | 'w154' | 'w185' | 'w300' | 'w500' | 'original';
 }
 
@@ -9,70 +13,77 @@ interface BackdropUrl {
   quality: 'w300' | 'w780' | 'w1280' | 'original';
 }
 
-export const BASE_URL = 'https://api.themoviedb.org/3';
+// Helper to append API key and optional query parameters
+const appendApiKey = (url: string, params: Record<string, any> = {}) => {
+  const searchParams = new URLSearchParams({ api_key: API_KEY, ...params });
+  return `${url}?${searchParams.toString()}`;
+};
 
-const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/';
-
-export const MOVIE_GENRES = `/genre/movie/list?language=en&api_key=${API_KEY}`;
-export const TV_GENRES = `/genre/tv/list?language=en&api_key=${API_KEY}`;
-
-export const POSTER_URL = ({ quality }: PosterUrl) =>
+// Image URLs
+export const POSTER_URL = ({ quality }: ImageUrl) =>
   `${IMAGES_BASE_URL}${quality}`;
-
 export const BACKDROP_URL = ({ quality }: BackdropUrl) =>
   `${IMAGES_BASE_URL}${quality}`;
 
-const urlGenerator = (url: string, page?: number | undefined) =>
-  page ? `${url}?api_key=${API_KEY}&page=${page}` : `${url}?api_key=${API_KEY}`;
+// Genre Endpoints
+export const MOVIE_GENRES = appendApiKey('/genre/movie/list', {
+  language: 'en',
+});
+export const TV_GENRES = appendApiKey('/genre/tv/list', { language: 'en' });
 
+// Trending
 export const TRENDINGS = ({ media_type = 'all', pageParam }: TrendingsParams) =>
-  `${urlGenerator(`/trending/${media_type}/day`, pageParam)}`;
+  appendApiKey(`/trending/${media_type}/day`, { page: pageParam });
 
+// Discover
 export const DISCOVER = ({
   mediaType,
   genre = '',
   pageParam = 1,
 }: {
   mediaType: string;
-  genre: string;
+  genre?: string;
   pageParam?: number;
 }) =>
-  `/discover/${mediaType.toLocaleLowerCase()}?include_adult=true&include_video=false&language=en-US&sort_by=popularity.desc${
-    genre.length > 1 ? `&with_genres=${genre}` : ''
-  }${pageParam ? `&page=${pageParam}` : ''}&api_key=${API_KEY}`;
+  appendApiKey(`/discover/${mediaType.toLowerCase()}`, {
+    include_adult: 'true',
+    include_video: 'false',
+    language: 'en-US',
+    sort_by: 'popularity.desc',
+    page: pageParam,
+    ...(genre && { with_genres: genre }),
+  });
 
+// Popular
 export const POPULAR_MOVIES = ({ pageParam }: { pageParam: number }) =>
-  `${urlGenerator(`/movie/popular`, pageParam)}`;
+  appendApiKey('/movie/popular', { page: pageParam });
 
 export const POPULAR_TVS = ({ pageParam }: { pageParam: number }) =>
-  `${urlGenerator(`/tv/popular`, pageParam)}`;
+  appendApiKey('/tv/popular', { page: pageParam });
 
-export const MOVIE_DETAILS = (id: string | undefined) =>
-  urlGenerator(`/movie/${id}`);
+// Movie Details and Related Data
+export const MOVIE_DETAILS = (id: string) => appendApiKey(`/movie/${id}`);
+export const MOVIE_CREDITS = (id: string) =>
+  appendApiKey(`/movie/${id}/credits`, { language: 'en-US' });
+export const MOVIE_REVIEWS = (id: string) =>
+  appendApiKey(`/movie/${id}/reviews`, { language: 'en-US' });
+export const MOVIE_SIMILARS = (id: string) =>
+  appendApiKey(`/movie/${id}/similar`);
 
-export const MOVIE_CREDITS = (id: string | undefined) =>
-  `/movie/${id}/credits?language=en-US&api_key=${API_KEY}`;
-export const MOVIE_REVIEWS = (id: string | undefined) =>
-  `/movie/${id}/reviews?language=en-US&api_key=${API_KEY}`;
+// TV Details and Related Data
+export const TV_DETAILS = (id: string) => appendApiKey(`/tv/${id}`);
+export const TV_CREDITS = (id: string) =>
+  appendApiKey(`/tv/${id}/credits`, { language: 'en-US' });
+export const TV_REVIEWS = (id: string) =>
+  appendApiKey(`/tv/${id}/reviews`, { language: 'en-US' });
+export const TV_SIMILARS = (id: string) => appendApiKey(`/tv/${id}/similar`);
 
-export const TV_CREDITS = (id: string | undefined) =>
-  `/tv/${id}/credits?language=en-US&api_key=${API_KEY}`;
-export const TV_REVIEWS = (id: string | undefined) =>
-  `/tv/${id}/reviews?language=en-US&api_key=${API_KEY}`;
-
-export const TV_DETAILS = (id: string | undefined) => urlGenerator(`/tv/${id}`);
-
+// Search
 export const MULTI_SEARCH = (query: string, pageParam: number) =>
-  `${urlGenerator('/search/multi', pageParam)}&query=${query}`;
+  appendApiKey('/search/multi', { query, page: pageParam });
 
 export const MOVIE_SEARCH = (query: string, pageParam: number) =>
-  `${urlGenerator('/search/movie', pageParam)}&query=${query}`;
+  appendApiKey('/search/movie', { query, page: pageParam });
 
 export const TV_SEARCH = (query: string, pageParam: number) =>
-  `${urlGenerator('/search/tv', pageParam)}&query=${query}`;
-
-export const TV_SIMILARS = (id: string | undefined) =>
-  urlGenerator(`/tv/${id}/similar`);
-
-export const MOVIE_SIMILARS = (id: string | undefined) =>
-  urlGenerator(`/movie/${id}/similar`);
+  appendApiKey('/search/tv', { query, page: pageParam });

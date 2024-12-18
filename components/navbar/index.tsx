@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import UserProfile from './userProfile';
 import goldIcon from '../../public/icons/gold-icon.png';
 
 const Navbar = () => {
@@ -14,7 +13,7 @@ const Navbar = () => {
           />
         </div>
       </Link>
-      <UserProfile />
+      {/* <UserProfile /> */}
     </div>
   );
 };
