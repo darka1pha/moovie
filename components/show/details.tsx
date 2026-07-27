@@ -1,17 +1,16 @@
+// components/show/details.tsx
 import { Star1 } from "iconsax-react";
 import DetailItem from "./detailItem";
-import { favoritesAction } from "@/lib/services/actions/favorites";
-import { cookies } from "next/headers";
-import { Database } from "@/types/supabase";
-import LikeButton from "./likeButton";
+import { favoritesAction } from "@/app/actions/favorites";
 import { createClient } from "@/lib/supabase/server";
+import LikeButton from "./likeButton";
 
 interface Props {
 	name: string;
 	overview: string;
 	genres: { name: string }[];
 	rate: number;
-	duration: number;
+	duration?: number;
 	mediaType: "movie" | "tv";
 	id: string;
 	posterUrl: string | null;
@@ -31,16 +30,21 @@ const Details = async ({
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-	const { data } = await supabase
-		.from("favorites")
-		.select("*")
-		.eq("item_id", id)
-		.single();
+
+	// maybeSingle: an item with no favorite row is the normal, expected case
+	const { data } = user
+		? await supabase
+			.from("favorites")
+			.select("*")
+			.eq("item_id", id)
+			.eq("user_id", user.id)
+			.maybeSingle()
+		: { data: null };
 
 	return (
 		<div className="flex flex-col flex-1 text-white">
-			<div className="flex justify-between">
-				<h1 className=" text-2xl font-bold">{name}</h1>
+			<div className="flex justify-between items-start gap-4">
+				<h1 className="text-2xl font-bold">{name}</h1>
 				{user && (
 					<form action={favoritesAction}>
 						<input type="hidden" name="name" value={name} />
@@ -53,23 +57,29 @@ const Details = async ({
 							name="liked"
 							value={data ? "liked" : "not-liked"}
 						/>
-						<LikeButton data={data} />
+						<LikeButton data={data} name={name} />
 					</form>
 				)}
 			</div>
 			<div className="flex flex-wrap mt-5">
-				<DetailItem name={"Rate"}>
+				<DetailItem name="Rate">
 					<div className="flex items-center">
-						<Star1 color="rgb(239 174 40)" size={18} />
-						<p className="text-white text-sm ml-2">{rate.toFixed(1)}</p>
+						<Star1 aria-hidden="true" color="rgb(239 174 40)" size={18} />
+						<p className="text-white text-sm ml-2">
+							<span className="sr-only">Rating: </span>
+							{rate.toFixed(1)}
+							<span aria-hidden="true"> / 10</span>
+						</p>
 					</div>
 				</DetailItem>
-				<DetailItem name={"Duration"}>
-					<p className=" text-sm ml-2">{`${duration} Minutes`}</p>
+				<DetailItem name="Duration">
+					<p className="text-sm ml-2">
+						{duration ? `${duration} Minutes` : "N/A"}
+					</p>
 				</DetailItem>
-				<DetailItem name={"Genres"}>
-					<p className=" text-sm ml-2">
-						{genres.map(({ name }) => name).join(", ")}
+				<DetailItem name="Genres">
+					<p className="text-sm ml-2">
+						{genres.length ? genres.map(({ name }) => name).join(", ") : "N/A"}
 					</p>
 				</DetailItem>
 			</div>

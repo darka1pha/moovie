@@ -1,3 +1,4 @@
+// app/page.tsx
 import { Filters, Hero, Items, ItemsLoading } from "@/components";
 import { getGenres, getTrendigs } from "@/app/actions/home";
 import { Suspense } from "react";
@@ -19,11 +20,11 @@ export default async function Home({
 
 	const genreID =
 		genre && genre.toLocaleLowerCase() !== "all"
-			? genres.filter((item) => item.name === genre)[0].id
+			? genres.find((item) => item.name === genre)?.id ?? ""
 			: "";
 
 	return (
-		<main>
+		<>
 			<Hero data={bannerData.slice(0, 6)} />
 			<Filters genreData={genres} />
 			<Suspense fallback={<ItemsLoading />}>
@@ -33,6 +34,6 @@ export default async function Home({
 					page={page}
 				/>
 			</Suspense>
-		</main>
+		</>
 	);
 }

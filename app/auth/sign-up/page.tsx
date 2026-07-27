@@ -1,4 +1,7 @@
+// app/auth/sign-up/page.tsx
 import SubmitButton from "@/components/submitButton";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Messages from "../messages";
 import Link from "next/link";
 import { signUpAction } from "@/app/actions/auth/sign-up";
@@ -10,34 +13,29 @@ export default function SignUp() {
 				className="flex-1 flex flex-col w-full sm:max-w-md justify-center gap-2"
 				action={signUpAction}
 			>
-				<label className="text-md text-white" htmlFor="email">
-					Email
-				</label>
-				<input
-					className="rounded-md px-4 py-2 bg-inherit border mb-4 text-white"
+				<Label htmlFor="email">Email</Label>
+				<Input
+					id="email"
 					name="email"
 					placeholder="you@example.com"
+					className="mb-4"
 					required
 				/>
-				<label className="text-md text-white" htmlFor="password">
-					Password
-				</label>
-				<input
-					className="rounded-md px-4 py-2 bg-inherit border text-white"
+				<Label htmlFor="password">Password</Label>
+				<Input
+					id="password"
 					type="password"
 					name="password"
 					placeholder="••••••••"
 					required
 				/>
-				<div className="flex mb-6">
-					<p>already have an account?</p>&nbsp;
-					<Link href={"/auth/sign-in"} className="text-fuelYellow underline">
+				<div className="flex mb-6 mt-4 text-white text-sm">
+					<p>Already have an account?</p>&nbsp;
+					<Link href="/auth/sign-in" className="text-fuelYellow underline">
 						Sign in
 					</Link>
 				</div>
-				<SubmitButton className="bg-fuelYellow text-white hover:opacity-90 transition-all p-2 rounded-lg">
-					Sign Up
-				</SubmitButton>
+				<SubmitButton>Sign Up</SubmitButton>
 				<Messages />
 			</form>
 		</div>

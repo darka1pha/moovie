@@ -1,3 +1,4 @@
+// lib/services/fetchData.ts
 "use server";
 import { BASE_URL } from "../../app/actions/urls";
 
@@ -9,29 +10,29 @@ export async function fetchData<T>(
 	url: string,
 	options: FetchOptions = {}
 ): Promise<T> {
-	const { headers = {} } = options;
+	const { headers = {}, ...rest } = options;
 	const requestUrl = BASE_URL + url;
 	const defaultHeaders = {
 		"Content-Type": "application/json",
 		...headers,
 	};
 
-	const fetchOptions = {
-		...options,
-		headers: defaultHeaders,
-	};
-
 	try {
-		const response = await fetch(requestUrl, fetchOptions);
+		const response = await fetch(requestUrl, {
+			...rest,
+			headers: defaultHeaders,
+		});
 
 		if (!response.ok) {
-			throw new Error(`Request failed with status: ${response.status}`);
+			const body = await response.text().catch(() => "");
+			throw new Error(
+				`Request failed with status: ${response.status}${body ? ` — ${body}` : ""}`
+			);
 		}
-		// Assuming the response is JSON, but you can customize it based on your API
-		const data: T = await response.json();
-		return data;
+
+		return (await response.json()) as T;
 	} catch (error) {
-		console.error("Error during fetch:", error);
+		console.error(`Error fetching ${requestUrl}:`, error);
 		throw error;
 	}
 }

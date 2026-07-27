@@ -1,24 +1,33 @@
+// components/submitButton/index.tsx
 "use client";
 import { ButtonHTMLAttributes } from "react";
 import { useFormStatus } from "react-dom";
+import { Button, ButtonProps } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { cn } from "@/lib/utils";
 
-const SubmitButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+interface Props extends ButtonProps { }
+
+const SubmitButton = ({ className, children, ...props }: Props) => {
 	const { pending } = useFormStatus();
 
 	return (
-		<button
-			className="flex justify-center items-center"
+		<Button
+			type="submit"
 			disabled={pending}
 			aria-disabled={pending}
-			type="submit"
+			className={cn("relative", className)}
 			{...props}
 		>
 			{pending ? (
-				<span className="loading h-full loading-dots loading-sm" />
+				<>
+					<Spinner size="sm" aria-hidden="true" />
+					<span className="sr-only">Submitting…</span>
+				</>
 			) : (
-				props.children
+				children
 			)}
-		</button>
+		</Button>
 	);
 };
 

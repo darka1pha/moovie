@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { MobileMenu, Navbar } from "@/components";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -27,8 +27,11 @@ export default function RootLayout({
 	return (
 		<html className="bg-[#0d0c11]" lang="en">
 			<body className={`${popins.className} noSelect min-h-screen`}>
-				<Navbar />
-				{children}
+				{/* <Navbar /> */}
+				<main id="main-content">
+					{children}
+				</main>
+				<MobileMenu />
 			</body>
 		</html>
 	);

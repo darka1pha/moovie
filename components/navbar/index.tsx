@@ -1,20 +1,25 @@
+// components/navbar/index.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import goldIcon from '../../public/icons/gold-icon.png';
+import UserProfile from './userProfile';
 
 const Navbar = () => {
   return (
-    <div className='h-20 bg-black/30 w-full flex items-center px-10 justify-between'>
-      <Link href={'/'}>
+    <nav
+      aria-label="Main navigation"
+      className='h-20 bg-black/30 w-full flex items-center px-10 justify-between sticky top-0 z-30 backdrop-blur-md'
+    >
+      <Link href={'/'} aria-label="Moovie home">
         <div className='w-48'>
           <Image
-            src={goldIcon}
-            alt='icon'
+            src={'/icons/gold-icon.png'}
+            alt='Moovie'
+            priority
           />
         </div>
       </Link>
-      {/* <UserProfile /> */}
-    </div>
+      <UserProfile />
+    </nav>
   );
 };
 

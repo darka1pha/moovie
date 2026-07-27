@@ -1,3 +1,4 @@
+// components/pageCounter/index.tsx
 'use client';
 
 import usePagination from '@/lib/hooks/usePagination';
@@ -20,25 +21,50 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
     totalPages,
     siblingCount: 1,
   });
-  return (
-    <div className='flex paddings items-center justify-center flex-wrap'>
+
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === totalPages;
+
+  const NavLink = ({
+    direction,
+    disabled,
+    page,
+  }: {
+    direction: 'prev' | 'next';
+    disabled: boolean;
+    page: number;
+  }) => {
+    const className = `border-battleGrey flex border-[2px] rounded-full p-1 transition-all duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow ${direction === 'prev' ? 'mr-1' : 'ml-1'
+      } ${disabled ? 'opacity-40 pointer-events-none cursor-not-allowed' : 'cursor-pointer hover:border-fuelYellow'}`;
+    const Icon = direction === 'prev' ? ArrowLeft2 : ArrowRight2;
+
+    if (disabled) {
+      return (
+        <span aria-disabled="true" aria-label={`${direction === 'prev' ? 'Previous' : 'Next'} page (disabled)`} className={className}>
+          <Icon color="white" size={20} aria-hidden="true" />
+        </span>
+      );
+    }
+
+    return (
       <Link
         href={updateSearchParams({
-          params: [{ key: 'page', value: (currentPage - 1).toString() }],
+          params: [{ key: 'page', value: page.toString() }],
           pathname,
           searchParams,
         })}
-        aria-label='Prev Page'
+        aria-label={direction === 'prev' ? 'Go to previous page' : 'Go to next page'}
         scroll={false}
-        className={`${
-          currentPage === 1 ? 'cursor-not-allowed' : 'cursor-pointer'
-        }border-battleGrey flex border-[2px] rounded-full p-1 mr-1`}
+        className={className}
       >
-        <ArrowLeft2
-          color='white'
-          size={20}
-        />
+        <Icon color="white" size={20} aria-hidden="true" />
       </Link>
+    );
+  };
+
+  return (
+    <nav aria-label="Pagination" className='flex paddings items-center justify-center flex-wrap'>
+      <NavLink direction="prev" disabled={isFirst} page={currentPage - 1} />
       {paginationRange?.map((page, key) => (
         <PageItem
           key={key}
@@ -46,24 +72,8 @@ const PageCounter = ({ currentPage, totalPages }: Props) => {
           page={typeof page === 'number' ? page : '...'}
         />
       ))}
-      <Link
-        href={updateSearchParams({
-          params: [{ key: 'page', value: (currentPage + 1).toString() }],
-          pathname,
-          searchParams,
-        })}
-        aria-label='Next Page'
-        scroll={false}
-        className={`${
-          currentPage === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'
-        }border-battleGrey flex border-[2px] rounded-full p-1 ml-1`}
-      >
-        <ArrowRight2
-          color='white'
-          size={20}
-        />
-      </Link>
-    </div>
+      <NavLink direction="next" disabled={isLast} page={currentPage + 1} />
+    </nav>
   );
 };
 
