@@ -1,6 +1,6 @@
 'use client';
 import { Review } from '@/types';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowDown2, Star1 } from 'iconsax-react';
 import { useState } from 'react';
 import DOMPurifyContent from '../dumpurifyContent';
@@ -55,10 +55,9 @@ const ReviewItem = ({
         animate={{ opacity: 1, height: isOpen ? 'auto' : 0 }}
         transition={{ duration: 0.3 }}
         // animate={isOpen ? { height: 'auto' } : { height: '2rem' }}
-        className={`overflow-hidden text-white text-sm leading-relaxed ${
-          isOpen ? '' : 'line-clamp-1'
-        }`}
-        // transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+        className={`overflow-hidden text-white text-sm leading-relaxed ${isOpen ? '' : 'line-clamp-1'
+          }`}
+      // transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
       >
         <DOMPurifyContent content={content} />
       </motion.div>

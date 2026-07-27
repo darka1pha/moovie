@@ -10,28 +10,28 @@
 		"analyze": "npx cross-env ANALYZE=true next build"
 	},
 	"dependencies": {
-		"@next/bundle-analyzer": "^15.0.3",
-		"@supabase/ssr": "^0.5.2",
-		"@supabase/supabase-js": "^2.46.1",
+		"@next/bundle-analyzer": "^16.2.12",
+		"@supabase/ssr": "^0.12.3",
+		"@supabase/supabase-js": "^2.110.8",
 		"@tailwindcss/line-clamp": "^0.4.4",
-		"@types/node": "^22.9.0",
-		"@types/react": "^18.3.12",
-		"@types/react-dom": "^18.3.1",
-		"autoprefixer": "10.4.14",
-		"dompurify": "^3.2.0",
-		"framer-motion": "^10.15.1",
+		"@types/node": "^26.1.1",
+		"@types/react": "^19.2.17",
+		"@types/react-dom": "^19.2.3",
+		"autoprefixer": "10.5.4",
+		"dompurify": "^3.4.12",
 		"iconsax-react": "^0.0.8",
 		"linkedom": "^0.18.5",
-		"next": "15.0.4-canary.3",
-		"postcss": "8.4.27",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"swiper": "^10.0.4",
-		"tailwindcss": "^3.4.14",
-		"typescript": "5.1.6"
+		"motion": "^12.42.2",
+		"next": "16.2.12",
+		"postcss": "8.5.23",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
+		"swiper": "^14.0.6",
+		"tailwindcss": "^4.3.3",
+		"typescript": "7.0.2"
 	},
 	"devDependencies": {
-		"daisyui": "^3.9.2",
-		"supabase": "^1.106.1"
+		"daisyui": "^5.7.4",
+		"supabase": "^2.109.1"
 	}
 }

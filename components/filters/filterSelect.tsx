@@ -2,7 +2,7 @@
 
 import { ArrowUp2, ArrowDown2 } from "iconsax-react";
 import { HTMLProps, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface Props {
 	data: string[];

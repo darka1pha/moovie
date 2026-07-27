@@ -2,7 +2,7 @@
 import { ReviewList } from '@/types';
 import ReviewItem from './reviewItem';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowDown2 } from 'iconsax-react';
 
 interface Props {
