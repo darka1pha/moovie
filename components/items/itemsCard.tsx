@@ -48,7 +48,7 @@ const ItemsCard = ({
 						sizes="256px"
 						className="object-cover h-full w-full transition-transform duration-500 ease-out group-hover:scale-105"
 						src={POSTER_URL({ quality: "w300" }) + poster_path}
-						alt=""
+						alt={original_title}
 					/>
 				) : (
 					<div className="h-full w-full flex items-center justify-center bg-balasticSea text-battleGrey text-sm px-4 text-center">

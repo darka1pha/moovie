@@ -1,4 +1,3 @@
-// lib/services/fetchData.ts
 "use server";
 import { BASE_URL } from "../../app/actions/urls";
 

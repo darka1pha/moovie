@@ -1,14 +1,15 @@
 export interface ListResults {
   adult: boolean;
   backdrop_path: string | null;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
   media_type?: 'tv' | 'movie' | 'person';
-  name: string;
+  name?: string;
   overview: string;
   poster_path: string;
   vote_average: number;
   genre_ids: Array<number>;
-  original_title: string;
+  original_title?: string;
   id: number;
 }
 

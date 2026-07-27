@@ -17,7 +17,7 @@ interface Props {
 const Hero = ({ data }: Props) => {
 	return (
 		<Swiper
-			className="h-[60vh] md:h-[100vh]"
+			className="h-[60vh] md:h-screen"
 			effect={"fade"}
 			modules={[Pagination, EffectFade, Autoplay]}
 			pagination
@@ -27,6 +27,7 @@ const Hero = ({ data }: Props) => {
 				({
 					backdrop_path,
 					original_title,
+					name,
 					overview,
 					adult,
 					id,
@@ -39,7 +40,7 @@ const Hero = ({ data }: Props) => {
 							adult={adult}
 							overview={overview}
 							imageUrl={BACKDROP_URL({ quality: "w1280" }) + backdrop_path}
-							name={original_title}
+							name={original_title ?? name!}
 						/>
 					</SwiperSlide>
 				)

@@ -1,9 +1,21 @@
 import ItemsCard from "@/components/items/itemsCard";
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 const Favorites = async () => {
 	const supabase = await createClient();
-	const { data } = await supabase.from("favorites").select("*");
+
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
+	if (!user) redirect("/auth/sign-in");
+
+	const { data } = await supabase
+		.from("favorites")
+		.select("*")
+		.eq("user_id", user.id);
+
 	return (
 		<div className="min-h-[calc(100vh-80px)] p-5">
 			<h1 className="font-bold text-white text-2xl">Favorites</h1>
@@ -19,6 +31,11 @@ const Favorites = async () => {
 					/>
 				))}
 			</div>
+			{data?.length === 0 && (
+				<p className="text-battleGrey text-center mt-10">
+					You haven&apos;t added any favorites yet.
+				</p>
+			)}
 		</div>
 	);
 };

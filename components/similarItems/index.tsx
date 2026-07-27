@@ -4,7 +4,7 @@ import React from 'react'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Navigation } from 'swiper/modules'
 import ItemsCard from '../items/itemsCard'
 import { IPaginatedData, ListResults } from '@/types'
@@ -16,11 +16,14 @@ interface Props {
 const SimilarItems: React.FC<Props> = ({ data }) => {
 	const { results } = data
 	const pathname = usePathname()
+	const isTv = pathname.includes('tv')
+	const media = isTv ? 'tv' : 'movie'
+
 	return (
 		<div className='flex flex-col mb-10 text-white paddings'>
 			<div className='mb-2'>
 				<p className='font-bold text-3xl sm:text-4xl'>
-					Similar {pathname.includes('tv') ? 'Tv Shows' : 'Movies'}
+					Similar {isTv ? 'Tv Shows' : 'Movies'}
 				</p>
 			</div>
 			<div className='mt-5'>
@@ -51,10 +54,11 @@ const SimilarItems: React.FC<Props> = ({ data }) => {
 							<SwiperSlide key={id}>
 								<ItemsCard
 									margin='mx-auto'
-									original_title={original_title ?? name}
+									original_title={original_title ?? name!}
 									poster_path={poster_path}
 									vote_average={vote_average}
 									id={id}
+									media={media}
 								/>
 							</SwiperSlide>
 						)
