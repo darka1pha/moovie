@@ -1,32 +1,22 @@
 import { TrendingsParams } from '@/types';
+export { POSTER_URL, BACKDROP_URL, getPosterUrl, getBackdropUrl } from '@/lib/tmdb/image';
 
-const API_KEY = process.env.TMDB_API_KEY as string;
 export const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/';
 
-if (!API_KEY) {
-  throw new Error(
-    'TMDB_API_KEY is not set. Add it to your .env.local file (server-only, no NEXT_PUBLIC_ prefix).'
-  );
-}
-
-interface ImageUrl {
-  quality: 'w92' | 'w154' | 'w185' | 'w300' | 'w500' | 'original';
-}
-
-interface BackdropUrl {
-  quality: 'w300' | 'w780' | 'w1280' | 'original';
-}
-
-const appendApiKey = (url: string, params: Record<string, any> = {}) => {
-  const searchParams = new URLSearchParams({ api_key: API_KEY, ...params });
-  return `${url}?${searchParams.toString()}`;
+const getApiKey = (): string => {
+  const key = process.env.TMDB_API_KEY;
+  if (!key && process.env.NODE_ENV === 'production') {
+    console.warn(
+      'Warning: TMDB_API_KEY is not set. Requests to TMDB API will fail.'
+    );
+  }
+  return key || '';
 };
 
-export const POSTER_URL = ({ quality }: ImageUrl) =>
-  `${IMAGES_BASE_URL}${quality}`;
-export const BACKDROP_URL = ({ quality }: BackdropUrl) =>
-  `${IMAGES_BASE_URL}${quality}`;
+const appendApiKey = (url: string, params: Record<string, any> = {}) => {
+  const searchParams = new URLSearchParams({ api_key: getApiKey(), ...params });
+  return `${url}?${searchParams.toString()}`;
+};
 
 export const MOVIE_GENRES = appendApiKey('/genre/movie/list', {
   language: 'en',
@@ -39,26 +29,59 @@ export const TRENDINGS = ({ media_type = 'all', pageParam }: TrendingsParams) =>
 export const DISCOVER = ({
   mediaType,
   genre = '',
+  year = '',
+  sortBy = 'popularity.desc',
+  minRating = '',
   pageParam = 1,
 }: {
   mediaType: string;
   genre?: string;
+  year?: string;
+  sortBy?: string;
+  minRating?: string;
   pageParam?: number;
-}) =>
-  appendApiKey(`/discover/${mediaType.toLowerCase()}`, {
+}) => {
+  const isTv = mediaType.toLowerCase() === 'tv';
+  const queryParams: Record<string, any> = {
     include_adult: 'true',
     include_video: 'false',
     language: 'en-US',
-    sort_by: 'popularity.desc',
+    sort_by: sortBy || 'popularity.desc',
     page: pageParam,
-    ...(genre && { with_genres: genre }),
-  });
+  };
 
-export const POPULAR_MOVIES = ({ pageParam }: { pageParam: number }) =>
+  if (genre) {
+    queryParams.with_genres = genre;
+  }
+  if (year) {
+    if (isTv) {
+      queryParams.first_air_date_year = year;
+    } else {
+      queryParams.primary_release_year = year;
+    }
+  }
+  if (minRating) {
+    queryParams['vote_average.gte'] = minRating;
+    queryParams['vote_count.gte'] = 50; // ensure meaningful ratings
+  }
+
+  return appendApiKey(`/discover/${mediaType.toLowerCase()}`, queryParams);
+};
+
+export const POPULAR_MOVIES = ({ pageParam = 1 }: { pageParam?: number }) =>
   appendApiKey('/movie/popular', { page: pageParam });
 
-export const POPULAR_TVS = ({ pageParam }: { pageParam: number }) =>
+export const TOP_RATED_MOVIES = ({ pageParam = 1 }: { pageParam?: number }) =>
+  appendApiKey('/movie/top_rated', { page: pageParam });
+
+export const UPCOMING_MOVIES = ({ pageParam = 1 }: { pageParam?: number }) =>
+  appendApiKey('/movie/upcoming', { page: pageParam });
+
+export const POPULAR_TVS = ({ pageParam = 1 }: { pageParam?: number }) =>
   appendApiKey('/tv/popular', { page: pageParam });
+
+export const TOP_RATED_TVS = ({ pageParam = 1 }: { pageParam?: number }) =>
+  appendApiKey('/tv/top_rated', { page: pageParam });
 
 export const MOVIE_DETAILS = (id: string) => appendApiKey(`/movie/${id}`);
 export const MOVIE_CREDITS = (id: string) =>

@@ -2,22 +2,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import UserProfile from './userProfile';
+import NavLinks from './navLinks';
 
 const Navbar = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className='h-20 bg-black/30 w-full flex items-center px-10 justify-between sticky top-0 z-30 backdrop-blur-md'
+      className='h-20 bg-[#0d0c11]/85 border-b border-white/5 w-full flex items-center px-6 sm:px-10 justify-between sticky top-0 z-30 backdrop-blur-xl shadow-xl'
     >
-      <Link href={'/'} aria-label="Moovie home">
-        <div className='w-48'>
+      <div className="flex items-center gap-8">
+        <Link href={'/'} aria-label="Moovie home" className="flex items-center transition-transform hover:scale-105 active:scale-95 duration-200">
           <Image
             src={'/icons/gold-icon.png'}
             alt='Moovie'
+            width={140}
+            height={38}
             priority
+            className="w-auto h-9 object-contain"
           />
-        </div>
-      </Link>
+        </Link>
+        <NavLinks />
+      </div>
       <UserProfile />
     </nav>
   );

@@ -1,6 +1,5 @@
 // components/show/details.tsx
-import { Star1 } from "iconsax-react";
-import DetailItem from "./detailItem";
+import { Star1, Clock, Category2 } from "iconsax-react";
 import { favoritesAction } from "@/app/actions/favorites";
 import { createClient } from "@/lib/supabase/server";
 import LikeButton from "./likeButton";
@@ -31,7 +30,6 @@ const Details = async ({
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	// maybeSingle: an item with no favorite row is the normal, expected case
 	const { data } = user
 		? await supabase
 			.from("favorites")
@@ -41,10 +39,17 @@ const Details = async ({
 			.maybeSingle()
 		: { data: null };
 
+	const ratingValue = typeof rate === "number" && rate > 0 ? rate.toFixed(1) : "N/A";
+
 	return (
 		<div className="flex flex-col flex-1 text-white">
 			<div className="flex justify-between items-start gap-4">
-				<h1 className="text-2xl font-bold">{name}</h1>
+				<div>
+					<span className="inline-block px-3 py-1 mb-2 text-xs font-semibold uppercase tracking-wider text-fuelYellow bg-fuelYellow/10 rounded-full border border-fuelYellow/30">
+						{mediaType === "movie" ? "Movie" : "TV Series"}
+					</span>
+					<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">{name}</h1>
+				</div>
 				{user && (
 					<form action={favoritesAction}>
 						<input type="hidden" name="name" value={name} />
@@ -61,30 +66,43 @@ const Details = async ({
 					</form>
 				)}
 			</div>
-			<div className="flex flex-wrap mt-5">
-				<DetailItem name="Rate">
-					<div className="flex items-center">
-						<Star1 aria-hidden="true" color="rgb(239 174 40)" size={18} />
-						<p className="text-white text-sm ml-2">
-							<span className="sr-only">Rating: </span>
-							{rate.toFixed(1)}
-							<span aria-hidden="true"> / 10</span>
-						</p>
+
+			<div className="flex flex-wrap items-center gap-3 mt-6">
+				{/* Rating badge */}
+				<div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-fuelYellow/10 border border-fuelYellow/30 text-fuelYellow">
+					<Star1 aria-hidden="true" variant="Bold" color="#efae28" size={18} />
+					<span className="text-sm font-bold text-white">{ratingValue}</span>
+					<span className="text-xs text-battleGrey">/ 10</span>
+				</div>
+
+				{/* Duration badge */}
+				{duration ? (
+					<div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm">
+						<Clock size={16} className="text-battleGrey" aria-hidden="true" />
+						<span>{duration} min</span>
 					</div>
-				</DetailItem>
-				<DetailItem name="Duration">
-					<p className="text-sm ml-2">
-						{duration ? `${duration} Minutes` : "N/A"}
-					</p>
-				</DetailItem>
-				<DetailItem name="Genres">
-					<p className="text-sm ml-2">
-						{genres.length ? genres.map(({ name }) => name).join(", ") : "N/A"}
-					</p>
-				</DetailItem>
+				) : null}
+
+				{/* Genre badges */}
+				{genres && genres.length > 0 && (
+					<div className="flex flex-wrap items-center gap-2">
+						{genres.map(({ name: genreName }) => (
+							<span
+								key={genreName}
+								className="px-3 py-1 rounded-xl bg-balasticSea border border-white/10 text-xs font-medium text-battleGrey hover:text-white transition-colors"
+							>
+								{genreName}
+							</span>
+						))}
+					</div>
+				)}
 			</div>
-			<div className="mt-5 ml-2">
-				<p className="leading-7">{overview}</p>
+
+			<div className="mt-8">
+				<h2 className="text-lg font-semibold text-white mb-2">Overview</h2>
+				<p className="text-neutral-300 leading-relaxed text-base sm:text-lg max-w-4xl">
+					{overview || "No overview available for this title."}
+				</p>
 			</div>
 		</div>
 	);

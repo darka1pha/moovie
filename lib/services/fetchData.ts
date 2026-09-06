@@ -3,6 +3,10 @@ import { BASE_URL } from "../../app/actions/urls";
 
 interface FetchOptions extends RequestInit {
 	method?: "GET" | "POST" | "PUT" | "DELETE";
+	next?: {
+		revalidate?: number | false;
+		tags?: string[];
+	};
 }
 
 export async function fetchData<T>(

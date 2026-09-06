@@ -1,86 +1,148 @@
-// components/reviews/reviewItem.tsx
 'use client';
+
 import { Review } from '@/types';
 import { motion } from 'motion/react';
-import { ArrowDown2, Star1 } from 'iconsax-react';
+import { ChevronDown, Star, Quote, User } from 'lucide-react';
 import { useId, useState } from 'react';
-import DOMPurifyContent from '../dumpurifyContent';
+import DOMPurifyContent from '../dompurifyContent';
+import Image from 'next/image';
+import { getReviewerAvatarUrl } from '@/lib/tmdb/image';
 
 const ReviewItem = ({
   author,
   author_details,
   content,
   created_at,
-  delay,
+  delay = 0,
 }: Review) => {
-  const { name, rating, username } = author_details;
+  const { name, rating, username, avatar_path } = author_details || {};
   const [isOpen, setIsOpen] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
   const contentId = useId();
-  const toggleHandler = () => setIsOpen((prev) => !prev);
+
+  const displayName = name || author || 'Community Reviewer';
+  const displayUsername = username || author?.toLowerCase().replace(/\s+/g, '');
+  const avatarUrl = getReviewerAvatarUrl(avatar_path);
+
+  const initials = displayName
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase() || 'U';
+
+  const formattedDate = created_at
+    ? new Date(created_at).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : '';
+
+  // Check if review is long enough to warrant a toggle button
+  const isLongReview = content && content.length > 280;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 200 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -200 }}
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.3, delay }}
-      className='flex flex-col px-4 py-3 border-2 border-battleGrey rounded-lg my-5 bg-darkGrey shadow-lg'
+      className="relative flex flex-col p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#181720]/90 to-[#111016]/90 border border-white/10 hover:border-white/15 backdrop-blur-xl shadow-xl transition-all group overflow-hidden mb-4"
     >
-      <div className='flex items-start justify-between w-full mb-3'>
-        <div>
-          <div className='flex items-center'>
-            <p className='text-white font-medium text-base mr-2'>
-              {name || author}
-            </p>
-            {rating && (
-              <div className='flex items-center bg-yellow-600/10 px-2 py-1 rounded-md ml-2'>
-                <Star1 color='rgb(239, 174, 40)' size={16} aria-hidden="true" />
-                <p className='text-yellow-500 text-sm ml-1 font-semibold'>
-                  <span className="sr-only">Rating: </span>
-                  {rating}/10
-                </p>
+      {/* Subtle Background Watermark Quote */}
+      <Quote
+        size={80}
+        aria-hidden="true"
+        className="absolute -top-3 -right-3 text-white/[0.03] group-hover:text-fuelYellow/[0.05] transition-colors pointer-events-none rotate-12"
+      />
+
+      {/* Header: Reviewer Info & Rating */}
+      <div className="flex items-start justify-between gap-4 mb-4 relative z-10">
+        <div className="flex items-center gap-3">
+          {/* Avatar with fallback */}
+          <div className="relative w-11 h-11 rounded-full overflow-hidden flex-shrink-0 bg-balasticSea border border-white/10 shadow-sm flex items-center justify-center">
+            {avatarUrl && !avatarError ? (
+              <Image
+                src={avatarUrl}
+                alt={displayName}
+                fill
+                sizes="44px"
+                className="object-cover"
+                onError={() => setAvatarError(true)}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-tr from-fuelYellow/30 to-white/10 flex items-center justify-center text-fuelYellow font-bold text-xs tracking-wider">
+                {initials}
               </div>
             )}
           </div>
-          {username && <p className='text-battleGrey text-sm'>@{username}</p>}
+
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-white font-bold text-sm sm:text-base tracking-tight">
+                {displayName}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-neutral-400 mt-0.5">
+              {displayUsername && <span>@{displayUsername}</span>}
+              {displayUsername && formattedDate && <span className="text-neutral-600">•</span>}
+              {formattedDate && <span>{formattedDate}</span>}
+            </div>
+          </div>
         </div>
-        <p className='text-white text-sm opacity-75'>
-          {new Date(created_at).toLocaleDateString('en-US', {
-            dateStyle: 'long',
-          })}
-        </p>
+
+        {/* Rating Badge */}
+        {typeof rating === 'number' && rating > 0 && (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-fuelYellow/10 border border-fuelYellow/25 text-fuelYellow shadow-sm flex-shrink-0">
+            <Star size={13} className="fill-fuelYellow text-fuelYellow" aria-hidden="true" />
+            <span className="text-xs font-bold tracking-tight">
+              <span className="sr-only">Rating: </span>
+              {rating.toFixed(1)}
+              <span className="text-[10px] text-neutral-400 font-normal ml-0.5">/ 10</span>
+            </span>
+          </div>
+        )}
       </div>
-      <motion.div
-        id={contentId}
-        initial={false}
-        animate={{ opacity: 1, height: isOpen ? 'auto' : 0 }}
-        transition={{ duration: 0.3 }}
-        className={`overflow-hidden text-white text-sm leading-relaxed ${isOpen ? '' : 'line-clamp-1'
+
+      {/* Content Container */}
+      <div className="relative relative z-10">
+        <div
+          id={contentId}
+          className={`text-neutral-300 text-sm leading-relaxed transition-all duration-300 ${
+            !isOpen && isLongReview ? 'line-clamp-3 sm:line-clamp-4' : ''
           }`}
-      >
-        <DOMPurifyContent content={content} />
-      </motion.div>
-      <div className='border-t border-t-battleGrey mt-3 flex justify-center pt-2'>
-        <motion.button
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls={contentId}
-          onClick={toggleHandler}
-          whileTap={{ scale: 0.95 }}
-          className='flex items-center justify-center p-2 rounded-full hover:bg-white/10 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow'
         >
-          <span className='mr-2 text-white'>
-            {!isOpen ? 'Show more' : 'Show less'}
-          </span>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ArrowDown2 color='white' size={26} aria-hidden="true" />
-          </motion.div>
-        </motion.button>
+          <DOMPurifyContent content={content} />
+        </div>
+
+        {/* Bottom Fade Gradient for collapsed long reviews */}
+        {!isOpen && isLongReview && (
+          <div className="absolute -bottom-1 left-0 right-0 h-10 bg-gradient-to-t from-[#121117] to-transparent pointer-events-none" />
+        )}
       </div>
-    </motion.div>
+
+      {/* Read More / Show Less Button */}
+      {isLongReview && (
+        <div className="mt-3 pt-3 border-t border-white/5 flex justify-start relative z-10">
+          <button
+            type="button"
+            aria-expanded={isOpen}
+            aria-controls={contentId}
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-fuelYellow hover:text-white transition-colors cursor-pointer py-1 px-2 rounded-lg hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow"
+          >
+            <span>{isOpen ? 'Show less' : 'Read full review'}</span>
+            <ChevronDown
+              size={14}
+              aria-hidden="true"
+              className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        </div>
+      )}
+    </motion.article>
   );
 };
 

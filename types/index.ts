@@ -4,6 +4,7 @@ export interface ListResults {
   release_date?: string;
   first_air_date?: string;
   media_type?: 'tv' | 'movie' | 'person';
+  title?: string;
   name?: string;
   overview: string;
   poster_path: string;
@@ -14,10 +15,14 @@ export interface ListResults {
 }
 
 export interface Cast {
+  id?: number;
   name: string;
-  orginal_name: string;
-  profile_path: string;
+  original_name?: string;
+  orginal_name?: string;
+  profile_path: string | null;
   character: string;
+  order?: number;
+  known_for_department?: string;
 }
 
 export interface CreditsProps {
@@ -86,14 +91,17 @@ export interface TvDetails {
 
 export interface Review {
   delay?: number;
+  id?: string;
   author: string;
-  author_details: {
-    name: string;
-    username: string;
-    rating: number;
+  author_details?: {
+    name?: string;
+    username?: string;
+    avatar_path?: string | null;
+    rating?: number | null;
   };
   content: string;
   created_at: string;
+  url?: string;
 }
 
 export interface ReviewList {

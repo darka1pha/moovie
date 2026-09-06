@@ -46,23 +46,26 @@ const UserProfile = async () => {
 			>
 				<Avatar user={user} avatar_url={avatarPublicUrl} />
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
-				<DropdownMenuItem render={<Link href="/profile" />}>
-					<UserIcon size={16} className="mr-2" aria-hidden="true" />
-					Profile
+			<DropdownMenuContent align="end" className="w-48">
+				<DropdownMenuItem asChild>
+					<Link href="/profile" className="flex items-center w-full cursor-pointer">
+						<UserIcon size={16} className="mr-2" aria-hidden="true" />
+						<span>Profile</span>
+					</Link>
 				</DropdownMenuItem>
-				<DropdownMenuItem render={<Link href="/favorites" />}>
-					<Heart size={16} className="mr-2" aria-hidden="true" />
-					Favorites
+				<DropdownMenuItem asChild>
+					<Link href="/favorites" className="flex items-center w-full cursor-pointer">
+						<Heart size={16} className="mr-2" aria-hidden="true" />
+						<span>Favorites</span>
+					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<form action={signOutAction}>
-					<DropdownMenuItem
-						variant="destructive"
-						render={<button type="submit" className="w-full" />}
-					>
-						<LogOut size={16} className="mr-2" aria-hidden="true" />
-						Logout
+					<DropdownMenuItem asChild variant="destructive">
+						<button type="submit" className="flex items-center w-full cursor-pointer">
+							<LogOut size={16} className="mr-2" aria-hidden="true" />
+							<span>Logout</span>
+						</button>
 					</DropdownMenuItem>
 				</form>
 			</DropdownMenuContent>

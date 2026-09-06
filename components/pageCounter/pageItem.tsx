@@ -17,9 +17,9 @@ const PageItem = ({ page, active }: Props) => {
     return (
       <span
         aria-hidden="true"
-        className="bg-black border-battleGrey text-white text-center border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl"
+        className="text-neutral-500 font-bold px-2.5 py-1 select-none flex items-center justify-center text-xs tracking-widest"
       >
-        {page}
+        •••
       </span>
     );
   }
@@ -34,10 +34,11 @@ const PageItem = ({ page, active }: Props) => {
       scroll={false}
       aria-label={`Go to page ${page}`}
       aria-current={active ? 'page' : undefined}
-      className={`bg-black text-center transition-all ease-in-out duration-200 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow ${active
-        ? 'text-fuelYellow border-fuelYellow'
-        : 'border-battleGrey text-white'
-        } border-[2px] mx-2 my-1 p-2 text-xs min-w-[36px] rounded-xl`}
+      className={`h-10 min-w-[40px] px-3.5 flex items-center justify-center rounded-xl text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow ${
+        active
+          ? 'bg-fuelYellow text-black font-bold shadow-lg shadow-fuelYellow/25 scale-105 border border-fuelYellow'
+          : 'bg-white/5 hover:bg-white/15 text-neutral-300 hover:text-white border border-white/5 hover:border-white/20 active:scale-95'
+      }`}
     >
       {page}
     </Link>

@@ -1,4 +1,5 @@
-import { MobileMenu, Navbar } from "@/components";
+import Navbar from "@/components/navbar";
+import MobileMenu from "@/components/mobileMenu";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -25,8 +26,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html className="bg-[#0d0c11]" lang="en">
-			<body className={`${popins.className} noSelect min-h-screen`}>
+		<html className={`bg-[#0d0c11] ${popins.variable}`} lang="en">
+			<body className={`${popins.className} min-h-screen bg-[#0d0c11] text-white antialiased selection:bg-fuelYellow selection:text-black`}>
 				<Navbar />
 				<main id="main-content">
 					{children}

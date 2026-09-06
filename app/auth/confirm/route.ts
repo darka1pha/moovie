@@ -28,7 +28,8 @@ export async function GET(request: NextRequest) {
 		}
 	}
 
-	// return the user to an error page with some instructions
-	redirectTo.pathname = "/error";
+	// return the user to sign-in with a user-friendly error message
+	redirectTo.pathname = "/auth/sign-in";
+	redirectTo.searchParams.set("error", "Email verification failed or link has expired. Please try signing in again.");
 	return NextResponse.redirect(redirectTo);
 }

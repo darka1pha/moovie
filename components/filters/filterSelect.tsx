@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from "motion/react";
 interface Props {
 	data: string[];
 	value: string;
-	onChange: (value: string, type: "media_type" | "genre") => void;
-	name: "media_type" | "genre";
+	onChange: (value: string, name: string) => void;
+	name: string;
 	className?: HTMLProps<HTMLElement>["className"];
 	title: string;
 }
@@ -42,7 +42,7 @@ const FilterSelect = ({
 		const handleEscape = (e: KeyboardEvent) => {
 			if (e.key === "Escape") {
 				close();
-				containerRef.current?.querySelector("button")?.focus();
+				containerRef.current?.querySelector("button")?.focus({ preventScroll: true });
 			}
 		};
 
@@ -79,8 +79,8 @@ const FilterSelect = ({
 	};
 
 	return (
-		<div ref={containerRef} className={`w-40 ${className ?? ""} relative z-20`}>
-			<p className="text-white mb-2 text-sm" id={`${buttonId}-label`}>
+		<div ref={containerRef} className={`w-44 ${className ?? ""} relative ${isOpen ? "z-50" : "z-10"}`}>
+			<p className="text-battleGrey mb-1.5 text-xs font-semibold uppercase tracking-wider" id={`${buttonId}-label`}>
 				{title}
 			</p>
 			<button
@@ -92,13 +92,13 @@ const FilterSelect = ({
 				aria-labelledby={`${buttonId}-label ${buttonId}`}
 				onClick={() => setIsOpen((prev) => !prev)}
 				onKeyDown={handleTriggerKeyDown}
-				className="cursor-pointer flex w-full rounded-xl px-2 items-center justify-between h-9 bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow"
+				className="cursor-pointer flex w-full rounded-xl px-3 items-center justify-between h-10 bg-balasticSea border border-white/10 text-white text-sm hover:border-fuelYellow/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuelYellow shadow-sm capitalize"
 			>
-				<span className="text-black text-sm">{value}</span>
+				<span className="truncate">{value}</span>
 				{isOpen ? (
-					<ArrowUp2 color="black" size={15} aria-hidden="true" />
+					<ArrowUp2 color="#efae28" size={15} aria-hidden="true" />
 				) : (
-					<ArrowDown2 color="black" size={15} aria-hidden="true" />
+					<ArrowDown2 color="#efae28" size={15} aria-hidden="true" />
 				)}
 			</button>
 			<AnimatePresence>
@@ -109,34 +109,40 @@ const FilterSelect = ({
 						aria-labelledby={`${buttonId}-label`}
 						tabIndex={-1}
 						onKeyDown={handleListKeyDown}
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: "auto" }}
-						exit={{ opacity: 0, height: 0 }}
-						transition={{ duration: 0.2, ease: "easeOut" }}
-						className="w-40 flex flex-col bg-white rounded-xl mt-1 overflow-y-auto max-h-64 absolute no-scrollbar shadow-lg"
+						initial={{ opacity: 0, y: -4, scale: 0.98 }}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={{ opacity: 0, y: -4, scale: 0.98 }}
+						transition={{ duration: 0.15, ease: "easeOut" }}
+						className="w-full flex flex-col bg-[#1a191e]/98 backdrop-blur-2xl border border-white/15 rounded-xl mt-1.5 overflow-y-auto max-h-64 absolute top-full left-0 no-scrollbar shadow-2xl p-1 z-[100]"
 						ref={(el) => {
-							// focus the listbox once open so arrow keys work immediately
-							if (el && isOpen) el.focus();
+							if (el && isOpen) el.focus({ preventScroll: true });
 						}}
 					>
-						{data.map((item, index) => (
-							<li
-								key={item}
-								role="option"
-								aria-selected={item === value}
-								onClick={() => {
-									onChange(item, name);
-									close();
-								}}
-								onMouseEnter={() => setActiveIndex(index)}
-								className={`text-balasticSea text-sm m-2 p-1 rounded transition-colors duration-150 cursor-pointer ${index === activeIndex
-									? "bg-blue-500 text-white"
-									: "hover:bg-blue-500 hover:text-white"
-									}`}
-							>
-								{item}
-							</li>
-						))}
+						{data.map((item, index) => {
+							const isSelected = item.toLowerCase() === value.toLowerCase();
+							const isHighlighted = index === activeIndex;
+
+							return (
+								<li
+									key={item}
+									role="option"
+									aria-selected={isSelected}
+									onClick={() => {
+										onChange(item, name);
+										close();
+									}}
+									onMouseEnter={() => setActiveIndex(index)}
+									className={`text-sm px-3 py-2 rounded-lg transition-colors cursor-pointer capitalize ${isSelected
+										? "bg-fuelYellow text-black font-semibold"
+										: isHighlighted
+											? "bg-white/10 text-white"
+											: "text-neutral-300 hover:bg-white/5 hover:text-white"
+										}`}
+								>
+									{item}
+								</li>
+							);
+						})}
 					</motion.ul>
 				)}
 			</AnimatePresence>

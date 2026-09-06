@@ -3,15 +3,28 @@ import { getDiscovers } from "@/app/actions/home";
 const URL = "https://moovie.darkalpha.ir";
 
 export default async function sitemap() {
-	const { results: movies } = await getDiscovers({
-		genre: "",
-		mediaType: "movie",
-	});
+	let movies: any[] = [];
+	let tvs: any[] = [];
 
-	const { results: tvs } = await getDiscovers({
-		genre: "",
-		mediaType: "tv",
-	});
+	try {
+		const moviesRes = await getDiscovers({
+			genre: "",
+			mediaType: "movie",
+		});
+		movies = moviesRes?.results || [];
+	} catch {
+		movies = [];
+	}
+
+	try {
+		const tvsRes = await getDiscovers({
+			genre: "",
+			mediaType: "tv",
+		});
+		tvs = tvsRes?.results || [];
+	} catch {
+		tvs = [];
+	}
 
 	const posts = [
 		...movies.map(({ id }) => ({

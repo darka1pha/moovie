@@ -6,6 +6,26 @@
   --color-battleGrey: #848485;
   --color-balasticSea: #2a292d;
   --font-popins: var(--font-popins), sans-serif;
+
+  --color-background: #0d0c11;
+  --color-foreground: #ffffff;
+  --color-card: #16151a;
+  --color-card-foreground: #ffffff;
+  --color-popover: #16151a;
+  --color-popover-foreground: #ffffff;
+  --color-primary: #efae28;
+  --color-primary-foreground: #000000;
+  --color-secondary: #2a292d;
+  --color-secondary-foreground: #ffffff;
+  --color-muted: #1f1e24;
+  --color-muted-foreground: #848485;
+  --color-accent: #26252b;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-input: rgba(255, 255, 255, 0.15);
+  --color-ring: #efae28;
 }
 
 @layer base {
@@ -17,12 +37,19 @@
 
   body {
     background-color: #0d0c11;
+    color: #ffffff;
+    font-family: var(--font-popins), sans-serif;
   }
 
   /* v4 defaults buttons to cursor: default; restore the pointer */
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid #efae28;
+    outline-offset: 2px;
   }
 }
 
@@ -60,28 +87,79 @@
     -ms-user-select: none;
     user-select: none;
   }
-  .noSelect:focus {
-    outline: none !important;
+
+  .animate-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-shimmer::after {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.05) 20%,
+      rgba(255, 255, 255, 0.12) 60%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 4px;
+  width: 6px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0c11;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #2a292d;
   border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3e3d43;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #efae28 !important;
-  width: 20px !important;
+  width: 24px !important;
   border-radius: 10px !important;
 }
 
 .swiper-pagination-bullet {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  opacity: 1 !important;
   transition: all ease-in 300ms;
 }
 
@@ -89,12 +167,18 @@
   background-image: url(/icons/arrow-left.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 50%;
-  height: 48px !important;
-  width: 48px !important;
-  background-size: 30px;
-  backdrop-filter: blur(3px);
+  height: 44px !important;
+  width: 44px !important;
+  background-size: 24px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-out;
+}
+.swiper-button-prev:hover {
+  background-color: #ffffff;
+  transform: scale(1.05);
 }
 .swiper-button-prev::after {
   display: none;
@@ -104,12 +188,18 @@
   background-image: url(/icons/arrow-right.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 50%;
-  height: 48px !important;
-  width: 48px !important;
-  background-size: 30px;
-  backdrop-filter: blur(3px);
+  height: 44px !important;
+  width: 44px !important;
+  background-size: 24px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-out;
+}
+.swiper-button-next:hover {
+  background-color: #ffffff;
+  transform: scale(1.05);
 }
 .swiper-button-next::after {
   display: none;
