@@ -3,7 +3,8 @@ import { favoritesAction } from "@/app/actions/favorites";
 import { createClient } from "@/lib/supabase/server";
 import LikeButton from "./likeButton";
 import WatchTrailerButton from "@/components/trailerModal/watchTrailerButton";
-import { VideosResponse } from "@/types";
+import WatchProviders from "./watchProviders";
+import { VideosResponse, WatchProvidersResponse } from "@/types";
 
 interface Props {
 	name: string;
@@ -15,6 +16,7 @@ interface Props {
 	id: string;
 	posterUrl: string | null;
 	videos?: VideosResponse | null;
+	watchProviders?: WatchProvidersResponse | null;
 }
 
 const Details = async ({
@@ -27,6 +29,7 @@ const Details = async ({
 	mediaType,
 	id,
 	videos,
+	watchProviders,
 }: Props) => {
 	const supabase = await createClient();
 	const {
@@ -118,6 +121,8 @@ const Details = async ({
 					{overview || "No overview available for this title."}
 				</p>
 			</div>
+
+			<WatchProviders providers={watchProviders} title={name} />
 		</div>
 	);
 };

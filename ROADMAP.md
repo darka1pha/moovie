@@ -49,16 +49,19 @@ This document outlines the strategic roadmap, planned architectural enhancements
   - `components/navbar/searchTrigger.tsx`
   - `app/actions/search/index.ts`
 
-#### 3. 📡 "Where to Watch" (Streaming Availability)
+#### 3. 📡 "Where to Watch" (Streaming Availability) ✅ (Completed)
 - **Goal**: Answer *"Where can I stream this right now?"* for any movie or TV series.
 - **Scope**:
-  - Integrate TMDB `/movie/{id}/watch/providers` and `/tv/{id}/watch/providers`.
-  - Display categorized providers: **Stream** (Subscription e.g. Netflix, Disney+, Prime, Max), **Rent** (Apple TV, Google Play), and **Buy**.
-  - Default to user's locale with a country selector dropdown (US, UK, CA, etc.).
-  - Provider logo badges with direct deep-links (provided by JustWatch via TMDB).
+  - [x] Integrate TMDB `/movie/{id}/watch/providers` and `/tv/{id}/watch/providers`.
+  - [x] Display categorized providers: **Stream** (Subscription e.g. Netflix, Disney+, Prime, Max), **Free / Ads**, **Rent** (Apple TV, Google Play), and **Buy**.
+  - [x] Dynamic country selector dropdown with flags supporting 100+ countries, defaulting to US / available region.
+  - [x] High-res provider logo badges with direct deep-links powered by JustWatch.
+  - [x] JustWatch attribution badge conforming to TMDB API guidelines.
 - **Target Components**:
-  - `components/show/watchProviders/index.tsx`
-  - `app/actions/shows/index.ts` (`getWatchProviders`)
+  - `components/show/watchProviders.tsx`
+  - `app/actions/shows/index.ts` (`getMovieWatchProviders`, `getTvWatchProviders`, `getShowWatchProviders`)
+  - `components/show/details.tsx` & `components/show/showHero.tsx`
+  - `app/movie/[id]/page.tsx` & `app/tv/[id]/page.tsx`
 
 ---
 

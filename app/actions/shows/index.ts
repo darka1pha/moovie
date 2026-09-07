@@ -6,6 +6,7 @@ import {
 	ReviewList,
 	TvDetails,
 	VideosResponse,
+	WatchProvidersResponse,
 } from "@/types";
 import { fetchData } from "../../../lib/services/fetchData";
 import {
@@ -14,11 +15,13 @@ import {
 	MOVIE_REVIEWS,
 	MOVIE_SIMILARS,
 	MOVIE_VIDEOS,
+	MOVIE_WATCH_PROVIDERS,
 	TV_CREDITS,
 	TV_DETAILS,
 	TV_REVIEWS,
 	TV_SIMILARS,
 	TV_VIDEOS,
+	TV_WATCH_PROVIDERS,
 } from "../urls";
 
 export const getTvDetails = async ({ id }: { id: string }) => {
@@ -82,3 +85,27 @@ export const getShowVideos = async ({
 	}
 	return getMovieVideos({ id });
 };
+
+export const getMovieWatchProviders = async ({ id }: { id: string }) => {
+	const res = await fetchData<WatchProvidersResponse>(MOVIE_WATCH_PROVIDERS(id));
+	return res;
+};
+
+export const getTvWatchProviders = async ({ id }: { id: string }) => {
+	const res = await fetchData<WatchProvidersResponse>(TV_WATCH_PROVIDERS(id));
+	return res;
+};
+
+export const getShowWatchProviders = async ({
+	id,
+	mediaType,
+}: {
+	id: string;
+	mediaType: "movie" | "tv";
+}) => {
+	if (mediaType === "tv") {
+		return getTvWatchProviders({ id });
+	}
+	return getMovieWatchProviders({ id });
+};
+

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Details from "./details";
 import { BACKDROP_URL, POSTER_URL } from "@/lib/tmdb/image";
-import { VideosResponse } from "@/types";
+import { VideosResponse, WatchProvidersResponse } from "@/types";
 import WatchTrailerButton from "@/components/trailerModal/watchTrailerButton";
 
 interface ShowHeroProps {
@@ -15,6 +15,7 @@ interface ShowHeroProps {
 	duration?: number;
 	genres: Array<{ name: string }>;
 	videos?: VideosResponse | null;
+	watchProviders?: WatchProvidersResponse | null;
 }
 
 const ShowHero = async ({
@@ -28,6 +29,7 @@ const ShowHero = async ({
 	duration,
 	genres,
 	videos,
+	watchProviders,
 }: ShowHeroProps) => {
 	const backdropUrl = backdropPath
 		? `${BACKDROP_URL({ quality: "w1280" })}${backdropPath}`
@@ -85,6 +87,7 @@ const ShowHero = async ({
 						genres={genres}
 						posterUrl={posterPath}
 						videos={videos}
+						watchProviders={watchProviders}
 					/>
 				</div>
 			</div>

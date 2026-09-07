@@ -80,6 +80,7 @@ export interface TvDetails {
   genres: Array<{
     name: string;
   }>;
+  name?: string;
   original_name: string;
   poster_path: string | null;
   vote_average: number;
@@ -127,3 +128,24 @@ export interface VideosResponse {
   id: number;
   results: VideoResult[];
 }
+
+export interface WatchProvider {
+  logo_path: string;
+  provider_id: number;
+  provider_name: string;
+  display_priority: number;
+}
+
+export interface CountryWatchProviders {
+  link: string;
+  flatrate?: WatchProvider[];
+  rent?: WatchProvider[];
+  buy?: WatchProvider[];
+  ads?: WatchProvider[];
+  free?: WatchProvider[];
+}
+
+export interface WatchProvidersResponse {
+  id: number;
+  results: Record<string, CountryWatchProviders>;
+}

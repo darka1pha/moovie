@@ -1,13 +1,14 @@
-import { MovieDetails, VideosResponse } from "@/types";
+import { MovieDetails, VideosResponse, WatchProvidersResponse } from "@/types";
 import ShowHero from "./showHero";
 
 interface MoviesProps {
 	data: MovieDetails;
 	id: string;
 	videos?: VideosResponse | null;
+	watchProviders?: WatchProvidersResponse | null;
 }
 
-const Movies = async ({ data, id, videos }: MoviesProps) => {
+const Movies = async ({ data, id, videos, watchProviders }: MoviesProps) => {
 	const displayTitle = data.title ?? data.original_title ?? "Untitled";
 
 	return (
@@ -22,6 +23,7 @@ const Movies = async ({ data, id, videos }: MoviesProps) => {
 			duration={data.runtime}
 			genres={data.genres || []}
 			videos={videos}
+			watchProviders={watchProviders}
 		/>
 	);
 };
