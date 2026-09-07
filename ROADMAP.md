@@ -35,16 +35,17 @@ This document outlines the strategic roadmap, planned architectural enhancements
   - `components/trailerModal/index.tsx` & `components/trailerModal/watchTrailerButton.tsx`
   - `components/hero/heroSlide.tsx` & `components/show/showHero.tsx`
 
-#### 2. ⚡ Global Spotlight Search (`⌘K` / `Ctrl+K`)
+#### 2. ⚡ Global Spotlight Search (`⌘K` / `Ctrl+K`) ✅ (Completed)
 - **Goal**: Instant discovery with live keyboard-accessible command bar.
 - **Scope**:
-  - Global hotkey listener (`Ctrl+K` on Windows/Linux, `⌘K` on macOS).
-  - Search trigger icon in Navbar and Mobile Menu.
-  - Debounced autocomplete querying TMDB `/search/multi`.
-  - Rich result rows showing poster thumbnail, title, release year, media badge (`Movie` vs `TV`), and rating.
-  - Full keyboard navigation (Arrow Up/Down, Enter to navigate, Esc to dismiss).
+  - [x] Global hotkey listener (`Ctrl+K` on Windows/Linux, `⌘K` on macOS).
+  - [x] Search trigger button in Navbar with OS-adaptive keyboard badge (`Ctrl K` / `⌘K`).
+  - [x] Debounced autocomplete (260ms) querying TMDB `/search/multi`.
+  - [x] Instant trending & popular suggestions when query is empty.
+  - [x] Rich result rows showing poster thumbnail, title, release year, media badge (`Movie` vs `TV Series`), star rating, and overview.
+  - [x] Full keyboard navigation (Arrow Up/Down, Enter to navigate, Tab to filter, Esc to dismiss).
 - **Target Components**:
-  - `components/searchModal/index.tsx`
+  - `components/searchModal/index.tsx` & `components/searchModal/searchContext.tsx`
   - `components/navbar/searchTrigger.tsx`
   - `app/actions/search/index.ts`
 

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UserProfile from './userProfile';
 import NavLinks from './navLinks';
+import SearchTrigger from './searchTrigger';
 
 const Navbar = () => {
   return (
@@ -23,7 +24,10 @@ const Navbar = () => {
         </Link>
         <NavLinks />
       </div>
-      <UserProfile />
+      <div className="flex items-center gap-3 sm:gap-4">
+        <SearchTrigger />
+        <UserProfile />
+      </div>
     </nav>
   );
 };

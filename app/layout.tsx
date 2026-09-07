@@ -1,5 +1,7 @@
 import Navbar from "@/components/navbar";
 import MobileMenu from "@/components/mobileMenu";
+import { SearchProvider } from "@/components/searchModal/searchContext";
+import SearchModal from "@/components/searchModal";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -28,11 +30,14 @@ export default function RootLayout({
 	return (
 		<html className={`bg-[#0d0c11] ${popins.variable}`} lang="en">
 			<body cz-shortcut-listen="true" className={`${popins.className} min-h-screen bg-[#0d0c11] text-white antialiased selection:bg-fuelYellow selection:text-black`}>
-				<Navbar />
-				<main id="main-content">
-					{children}
-				</main>
-				<MobileMenu />
+				<SearchProvider>
+					<Navbar />
+					<main id="main-content">
+						{children}
+					</main>
+					<MobileMenu />
+					<SearchModal />
+				</SearchProvider>
 			</body>
 		</html>
 	);
