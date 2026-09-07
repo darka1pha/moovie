@@ -407,7 +407,7 @@ export const SearchModal: React.FC = () => {
 										{/* Star Rating */}
 										{rating && (
 											<span className="inline-flex items-center gap-1 text-xs text-neutral-300">
-												<Star size={11} className="text-fuelYellow fill-fuelYellow" />
+												<Star size={11} fill="currentColor" className="text-fuelYellow" />
 												<span>{rating}</span>
 											</span>
 										)}

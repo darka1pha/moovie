@@ -46,7 +46,7 @@ const LikeButton = ({
 				<Heart
 					variant={isLiked ? "Bold" : "Outline"}
 					size={26}
-					color="rgb(239 174 40)"
+					color="var(--accent-color)"
 				/>
 			)}
 		</Button>

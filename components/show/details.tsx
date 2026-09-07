@@ -87,7 +87,7 @@ const Details = async ({
 			<div className="flex flex-wrap items-center gap-3 mt-6">
 				{/* Rating badge */}
 				<div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-fuelYellow/10 border border-fuelYellow/30 text-fuelYellow">
-					<Star1 aria-hidden="true" variant="Bold" color="#efae28" size={18} />
+					<Star1 aria-hidden="true" variant="Bold" color="var(--accent-color)" size={18} />
 					<span className="text-sm font-bold text-white">{ratingValue}</span>
 					<span className="text-xs text-battleGrey">/ 10</span>
 				</div>

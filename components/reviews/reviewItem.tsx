@@ -96,7 +96,7 @@ const ReviewItem = ({
         {/* Rating Badge */}
         {typeof rating === 'number' && rating > 0 && (
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-fuelYellow/10 border border-fuelYellow/25 text-fuelYellow shadow-sm flex-shrink-0">
-            <Star size={13} className="fill-fuelYellow text-fuelYellow" aria-hidden="true" />
+            <Star size={13} fill="currentColor" className="text-fuelYellow" aria-hidden="true" />
             <span className="text-xs font-bold tracking-tight">
               <span className="sr-only">Rating: </span>
               {rating.toFixed(1)}

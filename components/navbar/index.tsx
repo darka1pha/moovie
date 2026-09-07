@@ -6,6 +6,8 @@ import NavLinks from './navLinks';
 import SearchTrigger from './searchTrigger';
 import RouletteTrigger from '@/components/roulette/rouletteTrigger';
 
+import ThemeTrigger from './themeTrigger';
+
 const Navbar = () => {
   return (
     <nav
@@ -13,7 +15,7 @@ const Navbar = () => {
       className='h-20 bg-[#0d0c11]/85 border-b border-white/5 w-full flex items-center px-6 sm:px-10 justify-between sticky top-0 z-30 backdrop-blur-xl shadow-xl'
     >
       <div className="flex items-center gap-8">
-        <Link href={'/'} aria-label="Moovie home" className="flex items-center transition-transform hover:scale-105 active:scale-95 duration-200">
+        <Link href={'/'} aria-label="Moovie home" className="flex items-center">
           <Image
             src={'/icons/gold-icon.png'}
             alt='Moovie'
@@ -26,6 +28,7 @@ const Navbar = () => {
         <NavLinks />
       </div>
       <div className="flex items-center gap-2.5 sm:gap-3.5">
+        <ThemeTrigger />
         <RouletteTrigger />
         <SearchTrigger />
         <UserProfile />

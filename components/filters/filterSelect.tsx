@@ -96,9 +96,9 @@ const FilterSelect = ({
 			>
 				<span className="truncate">{value}</span>
 				{isOpen ? (
-					<ArrowUp2 color="#efae28" size={15} aria-hidden="true" />
+					<ArrowUp2 color="var(--accent-color)" size={15} aria-hidden="true" />
 				) : (
-					<ArrowDown2 color="#efae28" size={15} aria-hidden="true" />
+					<ArrowDown2 color="var(--accent-color)" size={15} aria-hidden="true" />
 				)}
 			</button>
 			<AnimatePresence>

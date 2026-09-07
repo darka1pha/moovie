@@ -58,7 +58,7 @@ const Avatar = ({
 					src={avatarUrl}
 				/>
 			) : (
-				<UserIcon size={20} color="rgb(239 174 40)" aria-hidden="true" />
+				<UserIcon size={20} color="var(--accent-color)" aria-hidden="true" />
 			)}
 		</div>
 	);

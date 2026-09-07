@@ -1,23 +1,68 @@
 /* app/globals.css */
 @import 'tailwindcss';
 
+:root {
+  --accent-color: #efae28;
+  --accent-color-rgb: 239, 174, 40;
+  --bg-color: #0d0c11;
+  --card-bg-color: #16151a;
+  --popover-bg-color: #16151a;
+  --muted-bg-color: #1f1e24;
+}
+
+html[data-theme-accent="yellow"] {
+  --accent-color: #efae28;
+  --accent-color-rgb: 239, 174, 40;
+}
+
+html[data-theme-accent="cyan"] {
+  --accent-color: #00f0ff;
+  --accent-color-rgb: 0, 240, 255;
+}
+
+html[data-theme-accent="crimson"] {
+  --accent-color: #e50914;
+  --accent-color-rgb: 229, 9, 20;
+}
+
+html[data-theme-accent="emerald"] {
+  --accent-color: #10b981;
+  --accent-color-rgb: 16, 185, 129;
+}
+
+html[data-theme-accent="violet"] {
+  --accent-color: #a855f7;
+  --accent-color-rgb: 168, 85, 247;
+}
+
+html[data-amoled="true"] {
+  --bg-color: #000000;
+  --card-bg-color: #050505;
+  --popover-bg-color: #080808;
+  --muted-bg-color: #0d0d0d;
+}
+
+html[data-amoled="true"] body {
+  background-color: #000000 !important;
+}
+
 @theme {
-  --color-fuelYellow: #efae28;
+  --color-fuelYellow: var(--accent-color);
   --color-battleGrey: #848485;
   --color-balasticSea: #2a292d;
   --font-popins: var(--font-popins), sans-serif;
 
-  --color-background: #0d0c11;
+  --color-background: var(--bg-color);
   --color-foreground: #ffffff;
-  --color-card: #16151a;
+  --color-card: var(--card-bg-color);
   --color-card-foreground: #ffffff;
-  --color-popover: #16151a;
+  --color-popover: var(--popover-bg-color);
   --color-popover-foreground: #ffffff;
-  --color-primary: #efae28;
+  --color-primary: var(--accent-color);
   --color-primary-foreground: #000000;
   --color-secondary: #2a292d;
   --color-secondary-foreground: #ffffff;
-  --color-muted: #1f1e24;
+  --color-muted: var(--muted-bg-color);
   --color-muted-foreground: #848485;
   --color-accent: #26252b;
   --color-accent-foreground: #ffffff;
@@ -25,7 +70,7 @@
   --color-destructive-foreground: #ffffff;
   --color-border: rgba(255, 255, 255, 0.12);
   --color-input: rgba(255, 255, 255, 0.15);
-  --color-ring: #efae28;
+  --color-ring: var(--accent-color);
 }
 
 @layer base {
@@ -36,9 +81,10 @@
   }
 
   body {
-    background-color: #0d0c11;
+    background-color: var(--bg-color, #0d0c11);
     color: #ffffff;
     font-family: var(--font-popins), sans-serif;
+    transition: background-color 0.25s ease;
   }
 
   /* v4 defaults buttons to cursor: default; restore the pointer */
@@ -48,7 +94,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #efae28;
+    outline: 2px solid var(--accent-color, #efae28);
     outline-offset: 2px;
   }
 }
@@ -152,7 +198,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #efae28 !important;
+  background-color: var(--accent-color, #efae28) !important;
   width: 24px !important;
   border-radius: 10px !important;
 }

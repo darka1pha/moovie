@@ -354,7 +354,7 @@ export const RouletteModal: React.FC<RouletteModalProps> = ({
 											)}
 											{result.vote_average > 0 && (
 												<span className="inline-flex items-center gap-1 text-xs font-bold text-fuelYellow">
-													<Star size={12} className="fill-fuelYellow text-fuelYellow" />
+													<Star size={12} fill="currentColor" className="text-fuelYellow" />
 													<span>{result.vote_average.toFixed(1)}</span>
 												</span>
 											)}

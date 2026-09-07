@@ -330,7 +330,7 @@ export const PersonView: React.FC<PersonViewProps> = ({ person, credits }) => {
 										{/* Rating Badge */}
 										{item.vote_average > 0 && (
 											<div className="absolute top-2 right-2 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-lg flex items-center gap-1 text-[11px] font-bold text-fuelYellow border border-fuelYellow/30">
-												<Star size={10} className="fill-fuelYellow text-fuelYellow" />
+												<Star size={10} fill="currentColor" className="text-fuelYellow" />
 												<span>{item.vote_average.toFixed(1)}</span>
 											</div>
 										)}

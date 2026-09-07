@@ -86,7 +86,7 @@ const Reviews = ({ data }: Props) => {
         <div className="flex items-center gap-3 flex-wrap">
           {avgRating && (
             <div className="flex items-center gap-2 bg-gradient-to-r from-fuelYellow/15 to-transparent border border-fuelYellow/25 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-fuelYellow shadow-sm">
-              <Star size={14} className="fill-fuelYellow text-fuelYellow" aria-hidden="true" />
+              <Star size={14} fill="currentColor" className="text-fuelYellow" aria-hidden="true" />
               <span>Avg Score: <strong>{avgRating}</strong> / 10</span>
               <span className="text-[10px] text-neutral-400 font-normal">({reviewsWithRating.length} rated)</span>
             </div>

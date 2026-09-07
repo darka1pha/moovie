@@ -131,22 +131,39 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ---
 
-### ⚙️ Phase 4: Polish, Theme & Native Performance
+### ⚙️ Phase 4: Polish, Theme & Native Performance ✅ (Completed)
 
-#### 10. 📱 PWA (Progressive Web App) & Offline Caching
+#### 10. 📱 PWA (Progressive Web App) & Offline Caching ✅ (Completed)
 - **Goal**: Native installable app experience on desktop, Android, and iOS.
 - **Scope**:
-  - Add `public/manifest.json` with app icons, splash screens, and theme color `#121117`.
-  - Implement a lightweight service worker (`public/sw.js`) for static asset caching.
-  - Install prompt button in mobile menu.
+  - [x] Add `public/manifest.json` with high-res icons (192px, 512px, maskable, SVG), shortcuts, and theme color `#121117`.
+  - [x] Implement lightweight service worker (`public/sw.js`) with cache-first static assets, stale-while-revalidate for TMDB images, and offline fallback (`public/offline.html`).
+  - [x] Native install prompt banner with smooth animations and iOS "Add to Home Screen" instructions modal (`components/pwa/installPrompt.tsx`).
+  - [x] PWA registrar component mounted in root layout (`components/pwa/pwaRegistrar.tsx`).
+  - [x] Native PWA installation card inside user settings (`components/profile/themeSettingsCard.tsx`).
+- **Target Components**:
+  - `public/manifest.json`, `public/sw.js`, `public/offline.html`
+  - `components/pwa/pwaRegistrar.tsx`, `components/pwa/installPrompt.tsx`
+  - `app/layout.tsx`
 
-#### 11. 🎨 Theme Accent Customizer
-- **Goal**: Give users personalized control over visual aesthetics.
+#### 11. 🎨 Theme Accent Customizer ✅ (Completed)
+- **Goal**: Give users personalized control over visual aesthetics with real-time feedback.
 - **Scope**:
-  - Accent color picker in user settings / navbar:
-    - 🟡 **Fuel Yellow** (Default)
+  - [x] 5 curated cinema accent color presets:
+    - 🟡 **Fuel Yellow** (Default: `#efae28`)
     - 🔵 **Cyberpunk Cyan** (`#00f0ff`)
     - 🔴 **Cinema Crimson / Netflix Red** (`#e50914`)
     - 🟢 **Emerald Matrix** (`#10b981`)
     - 🟣 **Neon Violet** (`#a855f7`)
-  - Pure AMOLED Black toggle for OLED screens.
+  - [x] Pure AMOLED Black toggle (`#000000`) for OLED panels and infinite contrast.
+  - [x] CSS variables architecture in `app/globals.css` dynamically mapped to Tailwind CSS v4 `@theme`.
+  - [x] Zero-flash inline script in `app/layout.tsx` `<head>` for instant loading from `localStorage`.
+  - [x] Interactive Theme Customizer modal with live interface preview card (`components/theme/themeCustomizerModal.tsx`).
+  - [x] Theme palette trigger in main navbar (`components/navbar/themeTrigger.tsx`).
+  - [x] Full "Appearance & Theme" settings card on Profile page (`components/profile/themeSettingsCard.tsx`).
+- **Target Components**:
+  - `app/globals.css`
+  - `components/theme/themeContext.tsx`, `components/theme/themeCustomizerModal.tsx`
+  - `components/navbar/themeTrigger.tsx`
+  - `components/profile/themeSettingsCard.tsx`
+  - `app/layout.tsx`

@@ -1,4 +1,5 @@
 import AvatarContainer from "@/components/profile/avatarContainer";
+import ThemeSettingsCard from "@/components/profile/themeSettingsCard";
 import SubmitButton from "@/components/submitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -76,6 +77,8 @@ const Profile = async () => {
 
 					<SubmitButton className="mt-4 w-full sm:w-auto self-start px-8">Save Changes</SubmitButton>
 				</form>
+
+				<ThemeSettingsCard />
 			</div>
 		</div>
 	);

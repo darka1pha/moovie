@@ -65,7 +65,7 @@ export default async function Home() {
 			<CategoryRow
 				title="Critically Acclaimed Movies"
 				badge="Top 10"
-				icon={<Star size={20} aria-hidden="true" />}
+				icon={<Star size={20} fill="currentColor" aria-hidden="true" />}
 				items={topRatedMoviesData?.results || []}
 				mediaType="movie"
 				viewAllHref="/movies?sort_by=vote_average.desc"
@@ -95,7 +95,7 @@ export default async function Home() {
 			<CategoryRow
 				title="Highest Rated TV Shows"
 				badge="All-Time Best"
-				icon={<Star size={20} aria-hidden="true" />}
+				icon={<Star size={20} fill="currentColor" aria-hidden="true" />}
 				items={topRatedTvsData?.results || []}
 				mediaType="tv"
 				viewAllHref="/tv?sort_by=vote_average.desc"

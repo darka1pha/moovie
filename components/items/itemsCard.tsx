@@ -39,7 +39,7 @@ const ItemsCard = ({
 			>
 				{/* Floating Top Rating Badge */}
 				<div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center text-xs font-semibold text-fuelYellow border border-white/10 z-10 shadow-md">
-					<Star1 size={13} className="mr-1" color="#efae28" aria-hidden="true" />
+					<Star1 size={13} className="mr-1" color="var(--accent-color)" aria-hidden="true" />
 					<span>{rating}</span>
 				</div>
 
