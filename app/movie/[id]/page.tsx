@@ -7,6 +7,7 @@ import {
 	getMovieCredits,
 	getMovieDetails,
 	getMovieReviews,
+	getMovieVideos,
 	getSimilarMovies,
 } from "@/app/actions/shows";
 import { POSTER_URL } from "@/lib/tmdb/image";
@@ -77,13 +78,15 @@ const MoviePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	let credits: Awaited<ReturnType<typeof getMovieCredits>> | null = null;
 	let reviews: Awaited<ReturnType<typeof getMovieReviews>> | null = null;
 	let similars: Awaited<ReturnType<typeof getSimilarMovies>> | null = null;
+	let videos: Awaited<ReturnType<typeof getMovieVideos>> | null = null;
 
 	try {
-		[data, credits, reviews, similars] = await Promise.all([
+		[data, credits, reviews, similars, videos] = await Promise.all([
 			getMovieDetails({ id }),
 			getMovieCredits({ id }),
 			getMovieReviews({ id }),
 			getSimilarMovies({ id }),
+			getMovieVideos({ id }).catch(() => null),
 		]);
 	} catch {
 		notFound();
@@ -95,7 +98,7 @@ const MoviePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 	return (
 		<div>
-			<Movies id={id} data={data} />
+			<Movies id={id} data={data} videos={videos} />
 			{credits && <Credits data={credits} />}
 			{reviews?.results && reviews.results.length > 0 && <Reviews data={reviews} />}
 			{similars && <SimilarItems data={similars} />}

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Details from "./details";
 import { BACKDROP_URL, POSTER_URL } from "@/lib/tmdb/image";
+import { VideosResponse } from "@/types";
+import WatchTrailerButton from "@/components/trailerModal/watchTrailerButton";
 
 interface ShowHeroProps {
 	id: string;
@@ -12,6 +14,7 @@ interface ShowHeroProps {
 	voteAverage: number;
 	duration?: number;
 	genres: Array<{ name: string }>;
+	videos?: VideosResponse | null;
 }
 
 const ShowHero = async ({
@@ -24,6 +27,7 @@ const ShowHero = async ({
 	voteAverage,
 	duration,
 	genres,
+	videos,
 }: ShowHeroProps) => {
 	const backdropUrl = backdropPath
 		? `${BACKDROP_URL({ quality: "w1280" })}${backdropPath}`
@@ -43,7 +47,7 @@ const ShowHero = async ({
 
 			<div className="relative z-10 flex flex-col items-center md:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto w-full">
 				{/* Poster container */}
-				<div className="w-64 sm:w-80 md:w-96 shrink-0 aspect-[2/3] rounded-2xl border-2 border-battleGrey/30 overflow-hidden shadow-2xl bg-balasticSea relative">
+				<div className="w-64 sm:w-80 md:w-96 shrink-0 aspect-[2/3] rounded-2xl border-2 border-battleGrey/30 overflow-hidden shadow-2xl bg-balasticSea relative group">
 					{posterPath ? (
 						<Image
 							src={`${POSTER_URL({ quality: "w500" })}${posterPath}`}
@@ -58,6 +62,15 @@ const ShowHero = async ({
 							No poster available
 						</div>
 					)}
+
+					{/* Hover Watch Trailer Overlay on Poster */}
+					<WatchTrailerButton
+						id={id}
+						mediaType={mediaType}
+						title={title}
+						initialVideos={videos}
+						variant="poster"
+					/>
 				</div>
 
 				{/* Details */}
@@ -71,6 +84,7 @@ const ShowHero = async ({
 						duration={duration}
 						genres={genres}
 						posterUrl={posterPath}
+						videos={videos}
 					/>
 				</div>
 			</div>

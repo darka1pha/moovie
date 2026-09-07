@@ -1,7 +1,13 @@
-import { TvDetails } from "@/types";
+import { TvDetails, VideosResponse } from "@/types";
 import ShowHero from "./showHero";
 
-const Tvs = async ({ data, id }: { data: TvDetails; id: string }) => {
+interface TvsProps {
+	data: TvDetails;
+	id: string;
+	videos?: VideosResponse | null;
+}
+
+const Tvs = async ({ data, id, videos }: TvsProps) => {
 	const displayTitle = data.original_name ?? "Untitled";
 
 	return (
@@ -15,6 +21,7 @@ const Tvs = async ({ data, id }: { data: TvDetails; id: string }) => {
 			voteAverage={data.vote_average}
 			duration={data.episode_run_time?.[0]}
 			genres={data.genres || []}
+			videos={videos}
 		/>
 	);
 };

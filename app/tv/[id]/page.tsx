@@ -8,6 +8,7 @@ import {
   getTvCredits,
   getTvDetails,
   getTvReviews,
+  getTvVideos,
 } from '@/app/actions/shows';
 import { POSTER_URL } from '@/lib/tmdb/image';
 import { notFound } from 'next/navigation';
@@ -77,13 +78,15 @@ const TvPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   let credits: Awaited<ReturnType<typeof getTvCredits>> | null = null;
   let reviews: Awaited<ReturnType<typeof getTvReviews>> | null = null;
   let similars: Awaited<ReturnType<typeof getSimilarTvs>> | null = null;
+  let videos: Awaited<ReturnType<typeof getTvVideos>> | null = null;
 
   try {
-    [data, credits, reviews, similars] = await Promise.all([
+    [data, credits, reviews, similars, videos] = await Promise.all([
       getTvDetails({ id }),
       getTvCredits({ id }),
       getTvReviews({ id }),
       getSimilarTvs({ id }),
+      getTvVideos({ id }).catch(() => null),
     ]);
   } catch {
     notFound();
@@ -95,7 +98,7 @@ const TvPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div>
-      <Tvs id={id} data={data} />
+      <Tvs id={id} data={data} videos={videos} />
       {credits && <Credits data={credits} />}
       {reviews?.results && reviews.results.length > 0 && <Reviews data={reviews} />}
       {similars && <SimilarItems data={similars} />}

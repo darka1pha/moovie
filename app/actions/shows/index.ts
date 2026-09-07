@@ -5,6 +5,7 @@ import {
 	MovieDetails,
 	ReviewList,
 	TvDetails,
+	VideosResponse,
 } from "@/types";
 import { fetchData } from "../../../lib/services/fetchData";
 import {
@@ -12,10 +13,12 @@ import {
 	MOVIE_DETAILS,
 	MOVIE_REVIEWS,
 	MOVIE_SIMILARS,
+	MOVIE_VIDEOS,
 	TV_CREDITS,
 	TV_DETAILS,
 	TV_REVIEWS,
 	TV_SIMILARS,
+	TV_VIDEOS,
 } from "../urls";
 
 export const getTvDetails = async ({ id }: { id: string }) => {
@@ -55,4 +58,27 @@ export const getSimilarTvs = async ({ id }: { id: string }) => {
 export const getSimilarMovies = async ({ id }: { id: string }) => {
 	const res = await fetchData<IPaginatedData<ListResults>>(MOVIE_SIMILARS(id));
 	return res;
+};
+
+export const getMovieVideos = async ({ id }: { id: string }) => {
+	const res = await fetchData<VideosResponse>(MOVIE_VIDEOS(id));
+	return res;
+};
+
+export const getTvVideos = async ({ id }: { id: string }) => {
+	const res = await fetchData<VideosResponse>(TV_VIDEOS(id));
+	return res;
+};
+
+export const getShowVideos = async ({
+	id,
+	mediaType,
+}: {
+	id: string;
+	mediaType: "movie" | "tv";
+}) => {
+	if (mediaType === "tv") {
+		return getTvVideos({ id });
+	}
+	return getMovieVideos({ id });
 };

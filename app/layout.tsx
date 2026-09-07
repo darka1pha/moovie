@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html className={`bg-[#0d0c11] ${popins.variable}`} lang="en">
-			<body className={`${popins.className} min-h-screen bg-[#0d0c11] text-white antialiased selection:bg-fuelYellow selection:text-black`}>
+			<body cz-shortcut-listen="true" className={`${popins.className} min-h-screen bg-[#0d0c11] text-white antialiased selection:bg-fuelYellow selection:text-black`}>
 				<Navbar />
 				<main id="main-content">
 					{children}

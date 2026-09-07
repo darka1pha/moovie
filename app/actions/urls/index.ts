@@ -90,6 +90,8 @@ export const MOVIE_REVIEWS = (id: string) =>
   appendApiKey(`/movie/${id}/reviews`, { language: 'en-US' });
 export const MOVIE_SIMILARS = (id: string) =>
   appendApiKey(`/movie/${id}/similar`);
+export const MOVIE_VIDEOS = (id: string) =>
+  appendApiKey(`/movie/${id}/videos`, { language: 'en-US' });
 
 export const TV_DETAILS = (id: string) => appendApiKey(`/tv/${id}`);
 export const TV_CREDITS = (id: string) =>
@@ -97,6 +99,8 @@ export const TV_CREDITS = (id: string) =>
 export const TV_REVIEWS = (id: string) =>
   appendApiKey(`/tv/${id}/reviews`, { language: 'en-US' });
 export const TV_SIMILARS = (id: string) => appendApiKey(`/tv/${id}/similar`);
+export const TV_VIDEOS = (id: string) =>
+  appendApiKey(`/tv/${id}/videos`, { language: 'en-US' });
 
 export const MULTI_SEARCH = (query: string, pageParam: number) =>
   appendApiKey('/search/multi', { query, page: pageParam });

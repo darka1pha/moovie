@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Play } from "iconsax-react";
+import WatchTrailerButton from "@/components/trailerModal/watchTrailerButton";
 
 interface Props {
 	imageUrl: string;
@@ -49,7 +50,7 @@ const HeroSlide = ({
 						{overview}
 					</p>
 				</div>
-				<div className="mt-7 flex items-center gap-4">
+				<div className="mt-7 flex flex-wrap items-center gap-3.5">
 					<Link
 						href={destination}
 						aria-label={`Watch ${name} now`}
@@ -58,6 +59,12 @@ const HeroSlide = ({
 						<Play size={16} variant="Bold" color="black" aria-hidden="true" className="transition-transform group-hover:scale-110" />
 						<span>Watch now</span>
 					</Link>
+					<WatchTrailerButton
+						id={id}
+						mediaType={mediaType}
+						title={name}
+						variant="hero"
+					/>
 				</div>
 			</div>
 		</div>

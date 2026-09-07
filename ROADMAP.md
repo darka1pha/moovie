@@ -15,6 +15,7 @@ This document outlines the strategic roadmap, planned architectural enhancements
   - **Audience Reviews**: Community score calculation (average rating), quick filter tabs (All vs. Highest Rated), TMDB/Gravatar avatars, and expandable excerpts.
   - **Similar Titles Carousel**: Smooth native scroll carousel with "Explore All" route links.
 - [x] **Next.js 16 Optimization**: Strict image quality configuration `[75, 80]` in `next.config.ts`.
+- [x] **Cinema Mode & Official Trailer Player**: Direct HD/4K YouTube trailer playback with backdrop-blur, ambient cinema lighting, multi-video playlist switcher, keyboard `Esc` closing, and integration into Homepage Hero and Show Details header & poster.
 
 ---
 
@@ -22,16 +23,16 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ### 🌟 Phase 1: High-Impact "WOW" Features (Immediate Priority)
 
-#### 1. 🎬 Cinema Mode & Official Trailer Player
+#### 1. 🎬 Cinema Mode & Official Trailer Player ✅ (Completed)
 - **Goal**: Allow users to watch official HD/4K trailers and teasers directly inside Moovie without leaving the site.
 - **Scope**:
-  - Integrate TMDB `/movie/{id}/videos` and `/tv/{id}/videos` endpoints.
-  - Prioritize Official Trailers > Teasers > Featurettes on YouTube.
-  - "Watch Trailer" button on the Homepage Hero and Show Details header.
-  - Backdrop-blurred modal with auto-play, sound control, and keyboard `Esc` closing.
+  - [x] Integrate TMDB `/movie/{id}/videos` and `/tv/{id}/videos` endpoints.
+  - [x] Prioritize Official Trailers > Teasers > Featurettes on YouTube.
+  - [x] "Watch Trailer" button on the Homepage Hero and Show Details header & poster hover.
+  - [x] Backdrop-blurred modal with auto-play, ambient lighting glow, and keyboard `Esc` closing.
 - **Target Components**:
-  - `app/actions/shows/index.ts` (`getMovieVideos`, `getTvVideos`)
-  - `components/trailerModal/index.tsx`
+  - `app/actions/shows/index.ts` (`getMovieVideos`, `getTvVideos`, `getShowVideos`)
+  - `components/trailerModal/index.tsx` & `components/trailerModal/watchTrailerButton.tsx`
   - `components/hero/heroSlide.tsx` & `components/show/showHero.tsx`
 
 #### 2. ⚡ Global Spotlight Search (`⌘K` / `Ctrl+K`)
