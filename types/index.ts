@@ -12,6 +12,8 @@ export interface ListResults {
   genre_ids: Array<number>;
   original_title?: string;
   id: number;
+  profile_path?: string | null;
+  known_for_department?: string;
 }
 
 export interface Cast {
@@ -148,4 +150,64 @@ export interface CountryWatchProviders {
 export interface WatchProvidersResponse {
   id: number;
   results: Record<string, CountryWatchProviders>;
-}
+}
+
+export interface PersonDetails {
+  id: number;
+  name: string;
+  biography: string;
+  birthday: string | null;
+  deathday: string | null;
+  place_of_birth: string | null;
+  profile_path: string | null;
+  known_for_department: string;
+  popularity: number;
+  also_known_as: string[];
+  gender: number;
+  imdb_id: string | null;
+  homepage: string | null;
+}
+
+export interface PersonCreditItem {
+  id: number;
+  title?: string;
+  name?: string;
+  original_title?: string;
+  original_name?: string;
+  media_type: 'movie' | 'tv';
+  poster_path: string | null;
+  backdrop_path: string | null;
+  release_date?: string;
+  first_air_date?: string;
+  character?: string;
+  job?: string;
+  department?: string;
+  vote_average: number;
+  vote_count: number;
+  popularity: number;
+  overview: string;
+}
+
+export interface PersonCombinedCredits {
+  id: number;
+  cast: PersonCreditItem[];
+  crew: PersonCreditItem[];
+}
+
+export interface ImageItem {
+  file_path: string;
+  width: number;
+  height: number;
+  aspect_ratio: number;
+  vote_average: number;
+  vote_count: number;
+  iso_639_1?: string | null;
+}
+
+export interface ShowImagesResponse {
+  id: number;
+  backdrops: ImageItem[];
+  posters: ImageItem[];
+  logos: ImageItem[];
+}
+

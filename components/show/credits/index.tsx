@@ -97,7 +97,8 @@ const Credits = ({ data }: CreditComponentProps) => {
       >
         {displayCast.map((person, index) => (
           <CastItem
-            key={`${person.name}-${person.character}-${index}`}
+            key={`${person.id || person.name}-${person.character}-${index}`}
+            id={person.id}
             character={person.character}
             name={person.name}
             profile_path={person.profile_path}

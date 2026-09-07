@@ -114,3 +114,15 @@ export const MOVIE_SEARCH = (query: string, pageParam: number) =>
 
 export const TV_SEARCH = (query: string, pageParam: number) =>
   appendApiKey('/search/tv', { query, page: pageParam });
+
+export const PERSON_DETAILS = (id: string) =>
+  appendApiKey(`/person/${id}`, { language: 'en-US' });
+
+export const PERSON_COMBINED_CREDITS = (id: string) =>
+  appendApiKey(`/person/${id}/combined_credits`, { language: 'en-US' });
+
+export const MOVIE_IMAGES = (id: string) =>
+  appendApiKey(`/movie/${id}/images`);
+
+export const TV_IMAGES = (id: string) =>
+  appendApiKey(`/tv/${id}/images`);

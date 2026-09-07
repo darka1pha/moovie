@@ -65,30 +65,43 @@ This document outlines the strategic roadmap, planned architectural enhancements
 
 ---
 
-### 🎭 Phase 2: Deeper Database & Discovery
+### 🎭 Phase 2: Deeper Database & Discovery ✅ (Completed)
 
-#### 4. 👤 Dedicated Actor & Crew Profiles (`/person/[id]`)
+#### 4. 👤 Dedicated Actor & Crew Profiles (`/person/[id]`) ✅ (Completed)
 - **Goal**: Enable full filmography browsing when clicking any actor or director.
 - **Scope**:
-  - Create route `/person/[id]/page.tsx`.
-  - Fetch TMDB `/person/{id}` and `/person/{id}/combined_credits`.
-  - Display biography, birth date, birthplace, headshot photos, and known-for department.
-  - Filmography timeline sorted by release date with filter by Movies vs. TV.
-  - Link cast items in `components/show/credits/CastItem.tsx` directly to `/person/[id]`.
+  - [x] Create route `/person/[id]/page.tsx`.
+  - [x] Fetch TMDB `/person/{id}` and `/person/{id}/combined_credits`.
+  - [x] Display biography with expand/collapse, birth date, computed age, birthplace, headshot photo, and IMDb link.
+  - [x] Filmography timeline & grid sorted by release date with filter tabs (All / Movies / TV / Crew).
+  - [x] Link cast items in `components/show/credits/CastItem.tsx` directly to `/person/[id]`.
+- **Target Components**:
+  - `app/person/[id]/page.tsx` & `components/person/personView.tsx`
+  - `app/actions/person/index.ts`
+  - `components/show/credits/CastItem.tsx`
 
-#### 5. 🖼️ Media Gallery & Wallpaper Lightbox
+#### 5. 🖼️ Media Gallery & Wallpaper Lightbox ✅ (Completed)
 - **Goal**: Visual immersion with production stills and theatrical posters.
 - **Scope**:
-  - Integrate TMDB `/movie/{id}/images` and `/tv/{id}/images`.
-  - Tabbed gallery: **Backdrops / Wallpapers** and **Posters**.
-  - Interactive full-screen image viewer (lightbox) with next/prev image buttons and download option.
+  - [x] Integrate TMDB `/movie/{id}/images` and `/tv/{id}/images`.
+  - [x] Tabbed gallery: **Backdrops / Wallpapers** and **Posters** with resolution badges.
+  - [x] Interactive full-screen image viewer (lightbox) with arrow navigation, full-res download/open, and keyboard shortcuts (`←`/`→`/`ESC`).
+- **Target Components**:
+  - `components/show/mediaGallery/index.tsx`
+  - `app/actions/shows/index.ts` (`getMovieImages`, `getTvImages`, `getShowImages`)
+  - `app/movie/[id]/page.tsx` & `app/tv/[id]/page.tsx`
 
-#### 6. 🎲 "Surprise Me" Movie Roulette
+#### 6. 🎲 "Surprise Me" Movie Roulette ✅ (Completed)
 - **Goal**: Solve analysis paralysis for indecisive viewers.
 - **Scope**:
-  - Interactive "Roll the Dice" button on the navigation bar.
-  - Modal with optional filters: Mood/Genre, Minimum Rating, and Release Era.
-  - Animated rolling reel effect landing on a top-rated recommendation.
+  - [x] Interactive "Surprise Me" dice button on the navigation bar.
+  - [x] Modal with optional filters: Mood/Genre, Minimum Rating, Release Era, and Media Type.
+  - [x] Animated slot-machine rolling reel effect landing on a top-rated surprise recommendation.
+  - [x] Winning card with "Watch Details" and "Re-Roll" actions.
+- **Target Components**:
+  - `components/roulette/rouletteTrigger.tsx` & `components/roulette/rouletteModal.tsx`
+  - `app/actions/roulette/index.ts`
+  - `components/navbar/index.tsx`
 
 ---
 

@@ -27,15 +27,12 @@ export const searchShows = async ({
 
 		if (!res || !res.results) return [];
 
-		// Filter out people or entries missing titles
+		// Include movies, tv shows, and people
 		const filteredResults = res.results
-			.filter((item) => {
-				if (item.media_type === "person") return false;
-				return Boolean(item.title || item.name);
-			})
+			.filter((item) => Boolean(item.title || item.name))
 			.map((item) => ({
 				...item,
-				media_type: (item.media_type || (item.title ? "movie" : "tv")) as "movie" | "tv",
+				media_type: (item.media_type || (item.title ? "movie" : "tv")) as "movie" | "tv" | "person",
 			}));
 
 		return filteredResults;

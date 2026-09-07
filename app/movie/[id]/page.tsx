@@ -2,10 +2,12 @@ import Movies from "@/components/show/movies";
 import Reviews from "@/components/reviews";
 import SimilarItems from "@/components/similarItems";
 import Credits from "@/components/show/credits";
+import MediaGallery from "@/components/show/mediaGallery";
 import { getDiscovers } from "@/app/actions/home";
 import {
 	getMovieCredits,
 	getMovieDetails,
+	getMovieImages,
 	getMovieReviews,
 	getMovieVideos,
 	getMovieWatchProviders,
@@ -81,15 +83,17 @@ const MoviePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	let similars: Awaited<ReturnType<typeof getSimilarMovies>> | null = null;
 	let videos: Awaited<ReturnType<typeof getMovieVideos>> | null = null;
 	let watchProviders: Awaited<ReturnType<typeof getMovieWatchProviders>> | null = null;
+	let images: Awaited<ReturnType<typeof getMovieImages>> | null = null;
 
 	try {
-		[data, credits, reviews, similars, videos, watchProviders] = await Promise.all([
+		[data, credits, reviews, similars, videos, watchProviders, images] = await Promise.all([
 			getMovieDetails({ id }),
 			getMovieCredits({ id }),
 			getMovieReviews({ id }),
 			getSimilarMovies({ id }),
 			getMovieVideos({ id }).catch(() => null),
 			getMovieWatchProviders({ id }).catch(() => null),
+			getMovieImages({ id }).catch(() => null),
 		]);
 	} catch {
 		notFound();
@@ -99,10 +103,13 @@ const MoviePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 		notFound();
 	}
 
+	const displayTitle = data.title || data.original_title || "Untitled";
+
 	return (
 		<div>
 			<Movies id={id} data={data} videos={videos} watchProviders={watchProviders} />
 			{credits && <Credits data={credits} />}
+			{images && <MediaGallery images={images} title={displayTitle} />}
 			{reviews?.results && reviews.results.length > 0 && <Reviews data={reviews} />}
 			{similars && <SimilarItems data={similars} />}
 		</div>

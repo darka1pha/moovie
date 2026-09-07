@@ -2,12 +2,13 @@ import { POSTER_URL } from "@/lib/tmdb/image";
 import { Cast } from "@/types";
 import { User, Sparkles } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props extends Cast {
 	index?: number;
 }
 
-const CastItem = ({ character, name, profile_path, index }: Props) => {
+const CastItem = ({ id, character, name, profile_path, index }: Props) => {
 	const initials = name
 		? name
 				.split(" ")
@@ -19,8 +20,8 @@ const CastItem = ({ character, name, profile_path, index }: Props) => {
 
 	const isTopBilled = typeof index === "number" && index < 3;
 
-	return (
-		<div className="w-36 sm:w-44 flex-shrink-0 group flex flex-col rounded-2xl bg-gradient-to-b from-[#1b1a22]/90 to-[#121117] border border-white/10 hover:border-fuelYellow/50 overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-fuelYellow/10">
+	const content = (
+		<div className="w-36 sm:w-44 flex-shrink-0 group flex flex-col rounded-2xl bg-gradient-to-b from-[#1b1a22]/90 to-[#121117] border border-white/10 hover:border-fuelYellow/50 overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-fuelYellow/10 cursor-pointer">
 			{/* Portrait Container */}
 			<div className="relative aspect-[3/4] w-full overflow-hidden bg-[#16151a]">
 				{profile_path ? (
@@ -69,6 +70,20 @@ const CastItem = ({ character, name, profile_path, index }: Props) => {
 			</div>
 		</div>
 	);
+
+	if (id) {
+		return (
+			<Link
+				href={`/person/${id}`}
+				className="block flex-shrink-0 outline-none transition-transform active:scale-95"
+				aria-label={`View ${name}'s filmography`}
+			>
+				{content}
+			</Link>
+		);
+	}
+
+	return content;
 };
 
 export default CastItem;

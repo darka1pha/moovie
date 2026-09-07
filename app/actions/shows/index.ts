@@ -4,6 +4,7 @@ import {
 	ListResults,
 	MovieDetails,
 	ReviewList,
+	ShowImagesResponse,
 	TvDetails,
 	VideosResponse,
 	WatchProvidersResponse,
@@ -12,12 +13,14 @@ import { fetchData } from "../../../lib/services/fetchData";
 import {
 	MOVIE_CREDITS,
 	MOVIE_DETAILS,
+	MOVIE_IMAGES,
 	MOVIE_REVIEWS,
 	MOVIE_SIMILARS,
 	MOVIE_VIDEOS,
 	MOVIE_WATCH_PROVIDERS,
 	TV_CREDITS,
 	TV_DETAILS,
+	TV_IMAGES,
 	TV_REVIEWS,
 	TV_SIMILARS,
 	TV_VIDEOS,
@@ -108,4 +111,28 @@ export const getShowWatchProviders = async ({
 	}
 	return getMovieWatchProviders({ id });
 };
+
+export const getMovieImages = async ({ id }: { id: string }) => {
+	const res = await fetchData<ShowImagesResponse>(MOVIE_IMAGES(id));
+	return res;
+};
+
+export const getTvImages = async ({ id }: { id: string }) => {
+	const res = await fetchData<ShowImagesResponse>(TV_IMAGES(id));
+	return res;
+};
+
+export const getShowImages = async ({
+	id,
+	mediaType,
+}: {
+	id: string;
+	mediaType: "movie" | "tv";
+}) => {
+	if (mediaType === "tv") {
+		return getTvImages({ id });
+	}
+	return getMovieImages({ id });
+};
+
 

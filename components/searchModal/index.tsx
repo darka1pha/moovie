@@ -21,13 +21,14 @@ import {
 	CornerDownLeft,
 	Loader2,
 	AlertCircle,
+	User,
 } from "lucide-react";
 import { ListResults } from "@/types";
 import { getPosterUrl } from "@/lib/tmdb/image";
 import { searchShows, getQuickSuggestions } from "@/app/actions/search";
 import { useSearch } from "./searchContext";
 
-type FilterType = "all" | "movie" | "tv";
+type FilterType = "all" | "movie" | "tv" | "person";
 
 export const SearchModal: React.FC = () => {
 	const { isOpen, closeSearch } = useSearch();
@@ -125,10 +126,16 @@ export const SearchModal: React.FC = () => {
 		return source.filter((item) => item.media_type === filter);
 	}, [query, results, suggestions, filter]);
 
-	// Navigate to selected show
+	// Navigate to selected show or person
 	const handleSelect = useCallback(
 		(item: ListResults) => {
 			closeSearch();
+			if (item.media_type === "person") {
+				startTransition(() => {
+					router.push(`/person/${item.id}`);
+				});
+				return;
+			}
 			const mediaType = item.media_type === "tv" ? "tv" : "movie";
 			startTransition(() => {
 				router.push(`/${mediaType}/${item.id}`);
@@ -176,9 +183,9 @@ export const SearchModal: React.FC = () => {
 			} else if (e.key === "Tab") {
 				// Cycle filter tabs
 				e.preventDefault();
-				const filters: FilterType[] = ["all", "movie", "tv"];
+				const filters: FilterType[] = ["all", "movie", "tv", "person"];
 				const nextFilter =
-					filters[(filters.indexOf(filter) + (e.shiftKey ? -1 : 1) + 3) % 3];
+					filters[(filters.indexOf(filter) + (e.shiftKey ? -1 : 1) + 4) % 4];
 				setFilter(nextFilter);
 				setSelectedIndex(0);
 			}
@@ -217,7 +224,7 @@ export const SearchModal: React.FC = () => {
 						type="text"
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
-						placeholder="Search movies, TV shows, genres..."
+						placeholder="Search movies, TV shows, actors, directors..."
 						className="flex-1 bg-transparent text-sm sm:text-base text-white placeholder:text-neutral-500 outline-none"
 						autoComplete="off"
 						autoCorrect="off"
@@ -263,6 +270,7 @@ export const SearchModal: React.FC = () => {
 								{ id: "all", label: "All" },
 								{ id: "movie", label: "Movies" },
 								{ id: "tv", label: "TV Shows" },
+								{ id: "person", label: "People" },
 							] as const
 						).map((tab) => {
 							const isActive = filter === tab.id;
@@ -309,11 +317,20 @@ export const SearchModal: React.FC = () => {
 					{/* Result Items */}
 					{displayedItems.map((item, index) => {
 						const isSelected = index === selectedIndex;
-						const posterUrl = getPosterUrl(item.poster_path, "w92");
+						const isPerson = item.media_type === "person";
+						const isTv = item.media_type === "tv";
+						const posterPath = isPerson
+							? item.profile_path || item.poster_path
+							: item.poster_path;
+						const posterUrl = getPosterUrl(posterPath, "w92");
 						const title = item.title || item.name || "Untitled";
 						const year = (item.release_date || item.first_air_date)?.slice(0, 4);
-						const isTv = item.media_type === "tv";
-						const rating = item.vote_average ? item.vote_average.toFixed(1) : null;
+						const rating = !isPerson && item.vote_average ? item.vote_average.toFixed(1) : null;
+						const subtitle = isPerson
+							? item.known_for_department
+								? `Known for: ${item.known_for_department}`
+								: "Artist / Cast & Crew"
+							: item.overview;
 
 						return (
 							<div
@@ -327,19 +344,31 @@ export const SearchModal: React.FC = () => {
 										: "border border-transparent hover:bg-white/5 text-neutral-300"
 								}`}
 							>
-								{/* Poster Thumbnail */}
-								<div className="relative w-11 h-16 rounded-lg overflow-hidden bg-black/60 border border-white/10 shrink-0">
+								{/* Poster or Person Portrait Thumbnail */}
+								<div
+									className={`relative shrink-0 overflow-hidden bg-black/60 border border-white/10 ${
+										isPerson
+											? "w-12 h-12 rounded-full"
+											: "w-11 h-16 rounded-lg"
+									}`}
+								>
 									{posterUrl ? (
 										<Image
 											src={posterUrl}
 											alt={title}
 											fill
-											sizes="44px"
+											sizes="48px"
 											className="object-cover"
 										/>
 									) : (
-										<div className="w-full h-full flex items-center justify-center text-neutral-600 bg-white/5">
-											{isTv ? <Tv size={16} /> : <Film size={16} />}
+										<div className="w-full h-full flex items-center justify-center text-neutral-500 bg-white/5">
+											{isPerson ? (
+												<User size={20} />
+											) : isTv ? (
+												<Tv size={16} />
+											) : (
+												<Film size={16} />
+											)}
 										</div>
 									)}
 								</div>
@@ -358,16 +387,18 @@ export const SearchModal: React.FC = () => {
 										{/* Media Badge */}
 										<span
 											className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded border ${
-												isTv
+												isPerson
+													? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+													: isTv
 													? "bg-purple-500/15 text-purple-300 border-purple-500/30"
 													: "bg-fuelYellow/15 text-fuelYellow border-fuelYellow/30"
 											}`}
 										>
-											{isTv ? "TV Series" : "Movie"}
+											{isPerson ? "Person" : isTv ? "TV Series" : "Movie"}
 										</span>
 
 										{/* Year */}
-										{year && (
+										{!isPerson && year && (
 											<span className="text-xs text-neutral-400 font-mono">
 												{year}
 											</span>
@@ -382,10 +413,10 @@ export const SearchModal: React.FC = () => {
 										)}
 									</div>
 
-									{/* Overview preview */}
-									{item.overview && (
+									{/* Overview or department preview */}
+									{subtitle && (
 										<p className="mt-1 text-xs text-neutral-400 line-clamp-1">
-											{item.overview}
+											{subtitle}
 										</p>
 									)}
 								</div>

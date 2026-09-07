@@ -4,6 +4,7 @@ import Link from 'next/link';
 import UserProfile from './userProfile';
 import NavLinks from './navLinks';
 import SearchTrigger from './searchTrigger';
+import RouletteTrigger from '@/components/roulette/rouletteTrigger';
 
 const Navbar = () => {
   return (
@@ -24,7 +25,8 @@ const Navbar = () => {
         </Link>
         <NavLinks />
       </div>
-      <div className="flex items-center gap-3 sm:gap-4">
+      <div className="flex items-center gap-2.5 sm:gap-3.5">
+        <RouletteTrigger />
         <SearchTrigger />
         <UserProfile />
       </div>
